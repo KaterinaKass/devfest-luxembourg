@@ -1917,109 +1917,154 @@ header.fixed > div > a:first-child {
   }
 }
 
-/* ---------- Sponsorship packages: metallic, glowing tier buttons with sparkles ---------- */
+/* ---------- Sponsorship packages: animated tier cards, calm metallic buttons ---------- */
+/* buttons: metallic, white text, no text shadow, no movement on hover (prevents pointer jitter) */
+.pkg-btn:hover,
+.pkg-btn:active,
+.pkg-btn-gold {
+  transform: none !important;
+  animation: none !important;
+}
 .pkg-tier {
-  position: relative;
-  overflow: visible !important;
-  isolation: isolate;
-  background-size: 260% 100%, 300% 100% !important;
-  background-repeat: no-repeat;
-  animation: pkgFlow 6s ease-in-out infinite, pkgGlow 2.8s ease-in-out infinite !important;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  color: #fff !important;
+  text-shadow: none !important;
   letter-spacing: 0.01em;
+  background-size: 100% 100% !important;
+  transition: filter 0.2s ease, box-shadow 0.2s ease !important;
 }
 .pkg-tier-bronze {
   --pkg: 205, 127, 50;
-  background-image:
-    linear-gradient(105deg, transparent 38%, rgba(255, 236, 214, 0.65) 50%, transparent 62%),
-    linear-gradient(120deg, #7a3e1d 0%, #b8682f 22%, #f0b27a 45%, #a85a2c 68%, #7a3e1d 100%) !important;
+  background-image: linear-gradient(120deg, #8a4a22 0%, #b8682f 45%, #9a5528 100%) !important;
+  box-shadow: 0 6px 16px -8px rgba(var(--pkg), 0.9);
 }
 .pkg-tier-silver {
-  --pkg: 170, 180, 192;
-  color: #1f2328 !important;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
-  background-image:
-    linear-gradient(105deg, transparent 38%, rgba(255, 255, 255, 0.9) 50%, transparent 62%),
-    linear-gradient(120deg, #8a9199 0%, #c9ced4 22%, #f4f6f8 45%, #a9b0b8 68%, #8a9199 100%) !important;
+  --pkg: 140, 150, 160;
+  background-image: linear-gradient(120deg, #5f666e 0%, #8a929b 45%, #6b737b 100%) !important;
+  box-shadow: 0 6px 16px -8px rgba(var(--pkg), 0.9);
 }
 .pkg-tier-gold {
-  --pkg: 249, 200, 20;
-  background-image:
-    linear-gradient(105deg, transparent 36%, rgba(255, 250, 220, 0.85) 50%, transparent 64%),
-    linear-gradient(120deg, #9c6b00 0%, #e8a100 20%, #ffe27a 42%, #f9d400 58%, #c98a00 78%, #9c6b00 100%) !important;
-}
-@keyframes pkgFlow {
-  0%   { background-position: 160% 0, 0% 50%; }
-  45%  { background-position: -60% 0, 100% 50%; }
-  100% { background-position: -60% 0, 0% 50%; }
-}
-@keyframes pkgGlow {
-  0%, 100% { box-shadow: 0 0 0 1px rgba(var(--pkg), 0.55), 0 6px 18px -6px rgba(var(--pkg), 0.7), 0 0 18px rgba(var(--pkg), 0.25); }
-  50%      { box-shadow: 0 0 0 1px rgba(var(--pkg), 0.8), 0 10px 26px -6px rgba(var(--pkg), 0.9), 0 0 32px rgba(var(--pkg), 0.45); }
+  --pkg: 232, 161, 0;
+  background-image: linear-gradient(120deg, #b07a00 0%, #e0a100 45%, #c08600 100%) !important;
+  box-shadow: 0 6px 18px -8px rgba(var(--pkg), 1);
 }
 .pkg-tier:hover {
-  transform: translateY(-2px) scale(1.015);
-  filter: brightness(1.06) saturate(1.1);
+  filter: brightness(1.08) saturate(1.05);
+  box-shadow: 0 10px 22px -8px rgba(var(--pkg), 1);
 }
-/* sparkles: each pseudo element is one star plus text-shadow copies around a corner */
-.pkg-tier::before,
-.pkg-tier::after {
+
+/* the whole card: calm. Only Gold glows; Bronze and Silver have no glow or drop shadow */
+.pkg-card {
+  --pkg: 205, 127, 50;
+  position: relative;
+  overflow: visible !important;
+}
+.pkg-card:not(.pkg-card-gold) {
+  box-shadow: none !important;
+}
+.pkg-card-silver { --pkg: 150, 160, 172; }
+.pkg-card-gold {
+  --pkg: 232, 170, 0;
+  animation: pkgGoldGlow 5s ease-in-out infinite;
+}
+@keyframes pkgGoldGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(var(--pkg), 0), 0 0 18px 0 rgba(var(--pkg), 0.18); }
+  50%      { box-shadow: 0 0 0 0 rgba(var(--pkg), 0), 0 0 28px 2px rgba(var(--pkg), 0.3); }
+}
+/* header keeps the card's rounded top now that the card no longer clips */
+.pkg-head {
+  position: relative;
+  overflow: hidden;
+  border-radius: 14px 14px 0 0;
+  background-size: 200% 200% !important;
+  animation: pkgHeadFlow 14s ease-in-out infinite;
+}
+/* soft, low-contrast metallic tones */
+.pkg-card-bronze .pkg-head {
+  background-image: linear-gradient(125deg, #a45d2c 0%, #b8703c 40%, #c98550 55%, #a85f2e 100%) !important;
+}
+.pkg-card-silver .pkg-head {
+  background-image: linear-gradient(125deg, #6f777f 0%, #828a93 40%, #949ca4 55%, #737b83 100%) !important;
+}
+.pkg-card-gold .pkg-head {
+  background-image: linear-gradient(125deg, #c48a00 0%, #d99e0a 40%, #e9b52a 55%, #c98d00 100%) !important;
+}
+@keyframes pkgHeadFlow {
+  0%, 100% { background-position: 0% 50%; }
+  50%      { background-position: 100% 50%; }
+}
+/* a gentle light sweep on Gold only */
+.pkg-card-gold .pkg-head::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(105deg, transparent 38%, rgba(255, 248, 215, 0.22) 50%, transparent 62%);
+  transform: translateX(-120%);
+  animation: pkgSweep 9s ease-in-out infinite;
+}
+@keyframes pkgSweep {
+  0%, 70% { transform: translateX(-120%); }
+  95%, 100% { transform: translateX(120%); }
+}
+/* sparkles: small and soft for Bronze/Silver, larger for Gold */
+.pkg-card::before,
+.pkg-card::after {
   content: "✦";
   position: absolute;
-  z-index: 2;
+  z-index: 5;
   pointer-events: none;
   line-height: 1;
-  color: rgb(var(--pkg));
-  animation: pkgTwinkle 2.2s ease-in-out infinite;
+  color: rgba(var(--pkg), 0.7);
+  animation: pkgTwinkle 4.5s ease-in-out infinite;
 }
-.pkg-tier::before {
-  top: -14px;
-  right: 8px;
-  font-size: 17px;
-  text-shadow: -26px 8px 0 rgba(var(--pkg), 0.9), 16px 18px 0 rgba(var(--pkg), 0.75);
-  filter: drop-shadow(0 0 4px rgba(var(--pkg), 0.8));
+.pkg-card::before {
+  top: -9px;
+  right: 18px;
+  font-size: 13px;
+  text-shadow: -24px 8px 0 rgba(var(--pkg), 0.5);
 }
-.pkg-tier::after {
-  bottom: -13px;
+.pkg-card::after {
+  bottom: -9px;
+  left: 16px;
+  font-size: 11px;
+  animation-delay: -2.2s;
+  text-shadow: 22px 4px 0 rgba(var(--pkg), 0.45);
+}
+.pkg-card-gold::before {
+  top: -16px;
+  right: 12px;
+  font-size: 22px;
+  color: #f2c230;
+  text-shadow: -34px 12px 0 rgba(242, 194, 48, 0.8), 20px 22px 0 rgba(242, 194, 48, 0.6);
+}
+.pkg-card-gold::after {
+  bottom: -15px;
   left: 10px;
-  font-size: 15px;
-  animation-delay: -1.1s;
-  text-shadow: 24px 5px 0 rgba(var(--pkg), 0.85), -14px -20px 0 rgba(var(--pkg), 0.7);
-  filter: drop-shadow(0 0 4px rgba(var(--pkg), 0.8));
-}
-.pkg-tier-silver::before {
-  color: #b4bcc6;
-  text-shadow: -26px 8px 0 #d5dae0, 16px 18px 0 #9aa3ad;
-  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.9));
-}
-.pkg-tier-silver::after {
-  color: #b4bcc6;
-  text-shadow: 24px 5px 0 #d5dae0, -14px -20px 0 #9aa3ad;
-  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.9));
-}
-/* gold: more and larger stars — it's the top tier */
-.pkg-tier-gold::before {
-  top: -20px;
-  right: 4px;
-  font-size: 26px;
-  color: #ffd23d;
-  text-shadow: -30px 10px 0 #ffe27a, 18px 20px 0 #f9d400, -64px -2px 0 rgba(255, 210, 61, 0.75);
-  filter: drop-shadow(0 0 6px rgba(255, 200, 20, 0.8));
-}
-.pkg-tier-gold::after {
-  bottom: -19px;
-  left: 4px;
-  font-size: 23px;
-  color: #ffd23d;
-  text-shadow: 30px 6px 0 #ffe27a, -12px -22px 0 #f9d400, 66px -4px 0 rgba(255, 210, 61, 0.7);
-  filter: drop-shadow(0 0 6px rgba(255, 200, 20, 0.8));
+  font-size: 19px;
+  color: #f2c230;
+  text-shadow: 32px 6px 0 rgba(242, 194, 48, 0.75), -10px -26px 0 rgba(242, 194, 48, 0.55);
 }
 @keyframes pkgTwinkle {
-  0%, 100% { opacity: 0.35; transform: scale(0.75) rotate(0deg); }
-  50%      { opacity: 1; transform: scale(1.1) rotate(20deg); }
+  0%, 100% { opacity: 0.45; }
+  50%      { opacity: 1; }
+}
+/* buttons: no glow for Bronze/Silver */
+.pkg-tier-bronze,
+.pkg-tier-silver {
+  box-shadow: none !important;
+}
+.pkg-tier-bronze:hover,
+.pkg-tier-silver:hover {
+  box-shadow: none !important;
+}
+.pkg-tier-bronze { background-image: linear-gradient(120deg, #9a5528 0%, #ad6533 100%) !important; }
+.pkg-tier-silver { background-image: linear-gradient(120deg, #6b737b 0%, #7c848d 100%) !important; }
+.pkg-tier-gold   { background-image: linear-gradient(120deg, #c08600 0%, #d39a08 100%) !important; box-shadow: 0 4px 14px -6px rgba(232, 170, 0, 0.8); }
+.pkg-tier:hover {
+  filter: brightness(1.07);
 }
 @media (prefers-reduced-motion: reduce) {
-  .pkg-tier, .pkg-tier::before, .pkg-tier::after { animation: none !important; }
+  .pkg-card, .pkg-head, .pkg-head::after, .pkg-card::before, .pkg-card::after { animation: none !important; }
 }
 
 /* ---------- Call for Speakers dialog: scroll inside the panel, pinned header/footer ---------- */
