@@ -795,3 +795,31 @@ h4,
     transition: none;
   }
 }
+
+.community-join-decoration {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1.25rem, 3vw, 2rem);
+  width: 100%;
+  margin-top: clamp(3rem, 6vw, 4.5rem);
+}
+
+.community-join-decoration img {
+  height: auto;
+}
+
+.community-join-decoration img:first-child {
+  width: min(82%, 898px);
+}
+
+.community-join-decoration img:last-child {
+  width: min(90%, 1082px);
+}
+
+@media (max-width: 600px) {
+  .community-join-decoration img:first-child,
+  .community-join-decoration img:last-child {
+    width: 100%;
+  }
+}
