@@ -823,3 +823,50 @@ h4,
     width: 100%;
   }
 }
+
+/* Ticket-shaped pass cards: side notches + perforation between header and body. */
+.ticket-card {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.ticket-wrap {
+  filter: drop-shadow(0 0 0.75px rgba(60, 64, 67, 0.45)) drop-shadow(0 4px 12px rgba(0, 0, 0, 0.07));
+}
+
+.ticket-wrap-vip {
+  filter: drop-shadow(0 0 1px #f953c6) drop-shadow(0 0 1px #f953c6) drop-shadow(0 12px 28px rgba(249, 83, 198, 0.38));
+}
+
+.ticket-head {
+  -webkit-mask:
+    radial-gradient(circle at 0 100%, #0000 14px, #000 14.5px) left / 51% 100% no-repeat,
+    radial-gradient(circle at 100% 100%, #0000 14px, #000 14.5px) right / 51% 100% no-repeat;
+  mask:
+    radial-gradient(circle at 0 100%, #0000 14px, #000 14.5px) left / 51% 100% no-repeat,
+    radial-gradient(circle at 100% 100%, #0000 14px, #000 14.5px) right / 51% 100% no-repeat;
+}
+
+.ticket-body {
+  position: relative;
+  -webkit-mask:
+    radial-gradient(circle at 0 0, #0000 14px, #000 14.5px) left / 51% 100% no-repeat,
+    radial-gradient(circle at 100% 0, #0000 14px, #000 14.5px) right / 51% 100% no-repeat;
+  mask:
+    radial-gradient(circle at 0 0, #0000 14px, #000 14.5px) left / 51% 100% no-repeat,
+    radial-gradient(circle at 100% 0, #0000 14px, #000 14.5px) right / 51% 100% no-repeat;
+}
+
+.ticket-body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 22px;
+  right: 22px;
+  border-top: 2px dashed #dadce0;
+  pointer-events: none;
+}
+
+.ticket-wrap-vip .ticket-body::before {
+  border-top-color: rgba(249, 83, 198, 0.4);
+}
