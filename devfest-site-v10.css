@@ -1555,3 +1555,111 @@ h4,
 .cursor-light-pink .cl-spot {
   background: radial-gradient(circle, rgba(255, 220, 243, 0.34) 0%, rgba(249, 83, 198, 0.16) 34%, transparent 66%);
 }
+
+
+/* ---------- Unified gradient buttons: same flow + sheen as "Get my ticket" ---------- */
+/* Download Agenda: the icon moves together with the button */
+.btn-agenda:hover svg {
+  transform: none;
+}
+
+/* Get my ticket: no outline ring; shadow tuned to the blue register block */
+.btn-ticket-cta {
+  box-shadow: 0 8px 22px -8px rgba(8, 30, 92, 0.5);
+}
+.btn-ticket-cta:hover {
+  box-shadow: 0 16px 32px -10px rgba(8, 30, 92, 0.62);
+}
+
+/* Multicolour CTAs (Reserve my place, Apply Now, Submit Proposal) */
+.btn-register,
+.btn-register-no-blue {
+  background: linear-gradient(120deg, #fbbc05 0%, #f9844a 22%, #ea4335 42%, #f953c6 62%, #9b5cf6 80%, #fbbc05 100%) 0 50% / 300% 100% !important;
+  animation: ticketCtaFlow 6s ease-in-out infinite !important;
+  border: none;
+}
+.btn-register-no-blue:hover {
+  filter: none;
+}
+
+/* Pink After-Party buttons and community buttons keep their colours, gain the same motion */
+.grad-flow,
+.community-join-cta {
+  position: relative;
+  overflow: hidden;
+  animation: ticketCtaFlow 6s ease-in-out infinite;
+}
+
+.btn-register::after,
+.grad-flow::after,
+.community-join-cta::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(105deg, transparent 30%, rgba(255, 255, 255, 0.45) 50%, transparent 70%);
+  transform: translateX(-120%);
+  transition: transform 0.7s ease;
+}
+.btn-register:hover::after,
+.grad-flow:hover::after,
+.community-join-cta:hover::after {
+  transform: translateX(120%);
+}
+.btn-register:hover,
+.community-join-cta:hover {
+  transform: translateY(-2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-register,
+  .btn-register-no-blue,
+  .grad-flow,
+  .community-join-cta {
+    animation: none !important;
+  }
+  .btn-register::after,
+  .grad-flow::after,
+  .community-join-cta::after {
+    display: none;
+  }
+}
+
+/* ---------- Cursor light v2: liquid blob like figmamakeathon.com (replaces white spot) ---------- */
+.cl-blob,
+.cl-tail {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  will-change: transform;
+  mix-blend-mode: screen;
+}
+.cl-blob {
+  width: 300px;
+  height: 300px;
+  margin: -150px 0 0 -150px;
+  background: radial-gradient(circle,
+    rgba(var(--cl-rgb, 66, 133, 244), 0.5) 0%,
+    rgba(var(--cl-rgb, 66, 133, 244), 0.2) 20%,
+    rgba(var(--cl-rgb, 66, 133, 244), 0.06) 42%,
+    rgba(255, 255, 255, 0.035) 62%,
+    rgba(255, 255, 255, 0.02) 69%,
+    transparent 71%);
+  filter: blur(2px);
+}
+.cl-tail {
+  width: 340px;
+  height: 340px;
+  margin: -170px 0 0 -170px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.035) 0%, rgba(255, 255, 255, 0.025) 50%, transparent 70%);
+  filter: blur(10px);
+}
+.cursor-light.cl-on .cl-blob,
+.cursor-light.cl-on .cl-tail {
+  opacity: 1;
+}
