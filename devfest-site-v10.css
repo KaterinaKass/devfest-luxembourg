@@ -2159,3 +2159,19 @@ dialog.cfp-dialog > div > div:last-child {
 #why-partner > div > .grid > div:hover {
   transform: translateY(-3px);
 }
+
+/* ---------- Partnership cards: compact illustrative photo in the first column ---------- */
+.partner-photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  max-height: 140px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--ph-accent) 25%, transparent);
+}
+@media (max-width: 767px) {
+  .partner-photo {
+    max-height: 160px;
+  }
+}
