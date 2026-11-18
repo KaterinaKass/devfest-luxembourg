@@ -1240,3 +1240,115 @@ h4,
 .devfest-stat-label {
   opacity: 0.95;
 }
+
+/* ---------- Call for Papers: drifting, colour-shifting background glows ---------- */
+.cfp-glow {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(10px);
+  mix-blend-mode: screen;
+  will-change: transform, opacity;
+}
+
+.cfp-glow-blue {
+  top: -120px;
+  left: 6%;
+  width: 460px;
+  height: 460px;
+  background: radial-gradient(circle, rgba(66, 133, 244, 0.42) 0%, transparent 68%);
+  animation: cfpDriftA 18s ease-in-out infinite alternate, cfpPulse 7s ease-in-out infinite;
+}
+
+.cfp-glow-green {
+  bottom: -140px;
+  right: 4%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(52, 168, 83, 0.36) 0%, transparent 68%);
+  animation: cfpDriftB 20s ease-in-out infinite alternate, cfpPulse 8s ease-in-out -3s infinite;
+}
+
+.cfp-glow-yellow {
+  top: 26%;
+  right: 22%;
+  width: 280px;
+  height: 280px;
+  background: radial-gradient(circle, rgba(251, 188, 5, 0.3) 0%, transparent 68%);
+  animation: cfpDriftC 16s ease-in-out infinite alternate, cfpPulse 6s ease-in-out -1s infinite;
+}
+
+.cfp-glow-red {
+  bottom: -60px;
+  left: 18%;
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(234, 67, 53, 0.3) 0%, transparent 68%);
+  animation: cfpDriftD 22s ease-in-out infinite alternate, cfpPulse 9s ease-in-out -5s infinite;
+}
+
+.cfp-glow-pink {
+  top: 8%;
+  left: 42%;
+  width: 260px;
+  height: 260px;
+  background: radial-gradient(circle, rgba(249, 83, 198, 0.24) 0%, transparent 68%);
+  animation: cfpDriftE 19s ease-in-out infinite alternate, cfpPulse 7s ease-in-out -2s infinite;
+}
+
+@keyframes cfpDriftA {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(260px, 120px) scale(1.15); }
+  100% { transform: translate(420px, 40px) scale(0.95); }
+}
+
+@keyframes cfpDriftB {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-280px, -120px) scale(1.2); }
+  100% { transform: translate(-460px, -40px) scale(1); }
+}
+
+@keyframes cfpDriftC {
+  0% { transform: translate(0, 0) scale(0.9); }
+  100% { transform: translate(-320px, 140px) scale(1.2); }
+}
+
+@keyframes cfpDriftD {
+  0% { transform: translate(0, 0) scale(1.1); }
+  100% { transform: translate(360px, -160px) scale(0.9); }
+}
+
+@keyframes cfpDriftE {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(-220px, 220px) scale(1.15); }
+}
+
+@keyframes cfpPulse {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+@media (max-width: 767px) {
+  .cfp-glow {
+    filter: blur(6px);
+  }
+
+  .cfp-glow-blue,
+  .cfp-glow-green {
+    width: 300px;
+    height: 300px;
+  }
+
+  .cfp-glow-yellow,
+  .cfp-glow-red,
+  .cfp-glow-pink {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cfp-glow {
+    animation: none;
+  }
+}
