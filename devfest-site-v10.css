@@ -1856,3 +1856,261 @@ header.fixed > div > a:first-child {
   .stat-aurora { animation: none; }
   .stat-fx .devfest-stat-card { opacity: 1; translate: none; transform: none; }
 }
+
+/* ---------- After-Party galleries: easier navigation ---------- */
+.gal-stage {
+  cursor: grab;
+}
+.gal-stage:active {
+  cursor: grabbing;
+}
+.gal-arrow {
+  width: 48px !important;
+  height: 48px !important;
+  border-radius: 50% !important;
+  background: rgba(10, 10, 20, 0.55) !important;
+  border: 1px solid rgba(255, 255, 255, 0.22) !important;
+  color: #fff !important;
+  font-size: 26px !important;
+  line-height: 1 !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  transition: background 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease !important;
+  touch-action: manipulation;
+}
+.gal-arrow:hover {
+  background: rgba(249, 83, 198, 0.75) !important;
+  box-shadow: 0 8px 24px rgba(249, 83, 198, 0.45);
+}
+.gal-arrow:active {
+  transform: translateY(-50%) scale(0.92) !important;
+}
+.gal-arrow:focus-visible {
+  outline: 3px solid #f9a8d4;
+  outline-offset: 2px;
+}
+/* invisible bigger hit area around each arrow */
+.gal-arrow::before {
+  content: "";
+  position: absolute;
+  inset: -12px;
+  border-radius: 50%;
+}
+/* dots: same look, much bigger tap target */
+.gal-dot {
+  position: relative;
+}
+.gal-dot::before {
+  content: "";
+  position: absolute;
+  inset: -12px -4px;
+}
+.gal-dot:focus-visible {
+  outline: 2px solid #f9a8d4;
+  outline-offset: 3px;
+}
+@media (max-width: 767px) {
+  .gal-arrow {
+    width: 44px !important;
+    height: 44px !important;
+  }
+}
+
+/* ---------- Sponsorship packages: metallic, glowing tier buttons with sparkles ---------- */
+.pkg-tier {
+  position: relative;
+  overflow: visible !important;
+  isolation: isolate;
+  background-size: 260% 100%, 300% 100% !important;
+  background-repeat: no-repeat;
+  animation: pkgFlow 6s ease-in-out infinite, pkgGlow 2.8s ease-in-out infinite !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  letter-spacing: 0.01em;
+}
+.pkg-tier-bronze {
+  --pkg: 205, 127, 50;
+  background-image:
+    linear-gradient(105deg, transparent 38%, rgba(255, 236, 214, 0.65) 50%, transparent 62%),
+    linear-gradient(120deg, #7a3e1d 0%, #b8682f 22%, #f0b27a 45%, #a85a2c 68%, #7a3e1d 100%) !important;
+}
+.pkg-tier-silver {
+  --pkg: 170, 180, 192;
+  color: #1f2328 !important;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+  background-image:
+    linear-gradient(105deg, transparent 38%, rgba(255, 255, 255, 0.9) 50%, transparent 62%),
+    linear-gradient(120deg, #8a9199 0%, #c9ced4 22%, #f4f6f8 45%, #a9b0b8 68%, #8a9199 100%) !important;
+}
+.pkg-tier-gold {
+  --pkg: 249, 200, 20;
+  background-image:
+    linear-gradient(105deg, transparent 36%, rgba(255, 250, 220, 0.85) 50%, transparent 64%),
+    linear-gradient(120deg, #9c6b00 0%, #e8a100 20%, #ffe27a 42%, #f9d400 58%, #c98a00 78%, #9c6b00 100%) !important;
+}
+@keyframes pkgFlow {
+  0%   { background-position: 160% 0, 0% 50%; }
+  45%  { background-position: -60% 0, 100% 50%; }
+  100% { background-position: -60% 0, 0% 50%; }
+}
+@keyframes pkgGlow {
+  0%, 100% { box-shadow: 0 0 0 1px rgba(var(--pkg), 0.55), 0 6px 18px -6px rgba(var(--pkg), 0.7), 0 0 18px rgba(var(--pkg), 0.25); }
+  50%      { box-shadow: 0 0 0 1px rgba(var(--pkg), 0.8), 0 10px 26px -6px rgba(var(--pkg), 0.9), 0 0 32px rgba(var(--pkg), 0.45); }
+}
+.pkg-tier:hover {
+  transform: translateY(-2px) scale(1.015);
+  filter: brightness(1.06) saturate(1.1);
+}
+/* sparkles: each pseudo element is one star plus text-shadow copies around a corner */
+.pkg-tier::before,
+.pkg-tier::after {
+  content: "✦";
+  position: absolute;
+  z-index: 2;
+  pointer-events: none;
+  line-height: 1;
+  color: rgb(var(--pkg));
+  animation: pkgTwinkle 2.2s ease-in-out infinite;
+}
+.pkg-tier::before {
+  top: -14px;
+  right: 8px;
+  font-size: 17px;
+  text-shadow: -26px 8px 0 rgba(var(--pkg), 0.9), 16px 18px 0 rgba(var(--pkg), 0.75);
+  filter: drop-shadow(0 0 4px rgba(var(--pkg), 0.8));
+}
+.pkg-tier::after {
+  bottom: -13px;
+  left: 10px;
+  font-size: 15px;
+  animation-delay: -1.1s;
+  text-shadow: 24px 5px 0 rgba(var(--pkg), 0.85), -14px -20px 0 rgba(var(--pkg), 0.7);
+  filter: drop-shadow(0 0 4px rgba(var(--pkg), 0.8));
+}
+.pkg-tier-silver::before {
+  color: #b4bcc6;
+  text-shadow: -26px 8px 0 #d5dae0, 16px 18px 0 #9aa3ad;
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.9));
+}
+.pkg-tier-silver::after {
+  color: #b4bcc6;
+  text-shadow: 24px 5px 0 #d5dae0, -14px -20px 0 #9aa3ad;
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.9));
+}
+/* gold: more and larger stars — it's the top tier */
+.pkg-tier-gold::before {
+  top: -20px;
+  right: 4px;
+  font-size: 26px;
+  color: #ffd23d;
+  text-shadow: -30px 10px 0 #ffe27a, 18px 20px 0 #f9d400, -64px -2px 0 rgba(255, 210, 61, 0.75);
+  filter: drop-shadow(0 0 6px rgba(255, 200, 20, 0.8));
+}
+.pkg-tier-gold::after {
+  bottom: -19px;
+  left: 4px;
+  font-size: 23px;
+  color: #ffd23d;
+  text-shadow: 30px 6px 0 #ffe27a, -12px -22px 0 #f9d400, 66px -4px 0 rgba(255, 210, 61, 0.7);
+  filter: drop-shadow(0 0 6px rgba(255, 200, 20, 0.8));
+}
+@keyframes pkgTwinkle {
+  0%, 100% { opacity: 0.35; transform: scale(0.75) rotate(0deg); }
+  50%      { opacity: 1; transform: scale(1.1) rotate(20deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pkg-tier, .pkg-tier::before, .pkg-tier::after { animation: none !important; }
+}
+
+/* ---------- Call for Speakers dialog: scroll inside the panel, pinned header/footer ---------- */
+dialog.cfp-dialog {
+  overflow: hidden !important;
+  background: #0f1117 !important;
+  overscroll-behavior: contain;
+}
+dialog.cfp-dialog > div {
+  max-height: 92vh;
+  overflow-y: auto !important;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.18) transparent;
+  scrollbar-gutter: stable;
+}
+dialog.cfp-dialog > div::-webkit-scrollbar {
+  width: 10px;
+}
+dialog.cfp-dialog > div::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 20px 0;
+}
+dialog.cfp-dialog > div::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.16);
+  border-radius: 10px;
+  border: 3px solid transparent;
+  background-clip: padding-box;
+}
+dialog.cfp-dialog > div::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+/* title + close button stay at the top */
+dialog.cfp-dialog > div > div:first-child {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  background: #0f1117;
+  padding-bottom: 14px !important;
+  box-shadow: 0 10px 14px -12px rgba(0, 0, 0, 0.9);
+}
+/* Cancel / Submit stay at the bottom */
+dialog.cfp-dialog > div > div:last-child {
+  position: sticky;
+  bottom: 0;
+  z-index: 3;
+  background: linear-gradient(to bottom, rgba(15, 17, 23, 0) 0%, #0f1117 28%);
+  padding-top: 28px !important;
+}
+
+/* ---------- Cards with a coloured top strip: strip follows the rounded corner ---------- */
+.top-accent {
+  position: relative;
+  overflow: hidden;
+  border: none !important;
+}
+.top-accent::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--top-accent);
+  pointer-events: none;
+}
+
+/* ---------- Team Participation Partner: no outline, animated top strip ---------- */
+.team-strip {
+  height: 5px !important;
+  animation: teamStripFlow 6s linear infinite;
+}
+@keyframes teamStripFlow {
+  from { background-position: 0% 0; }
+  to   { background-position: 150% 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .team-strip { animation: none; }
+}
+
+/* ---------- Sponsorship page: packages right after the intro ---------- */
+.sponsor-hero {
+  background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%) !important;
+  padding-bottom: 1.5rem !important;
+}
+#packages {
+  padding-top: 2.5rem !important;
+}
+#why-partner > div > .grid > div {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+#why-partner > div > .grid > div:hover {
+  transform: translateY(-3px);
+}
