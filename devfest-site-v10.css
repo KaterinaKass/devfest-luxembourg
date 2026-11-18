@@ -870,3 +870,287 @@ h4,
 .ticket-wrap-vip .ticket-body::before {
   border-top-color: rgba(249, 83, 198, 0.4);
 }
+
+/* ---------- About: stat cards in the site's soft Google card language ---------- */
+.devfest-about::before {
+  display: none;
+}
+
+.devfest-stat-card {
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.1rem;
+  border: 1.5px solid #e8eaed;
+  border-radius: 24px;
+  padding: clamp(1.1rem, 2.4vw, 1.6rem);
+  box-shadow: 0 2px 14px rgba(60, 64, 67, 0.07);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.devfest-stat-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 4px;
+  background: var(--stat-accent);
+}
+
+.devfest-stat-card::after {
+  display: none;
+}
+
+.devfest-stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(60, 64, 67, 0.12);
+}
+
+.devfest-stat-number {
+  font-size: clamp(2.4rem, 4.2vw, 3.6rem);
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+
+.devfest-stat-label {
+  max-width: none;
+  margin-top: 0;
+  color: var(--devfest-muted, #5f6368);
+  font-size: 0.9rem;
+  line-height: 1.3;
+}
+
+/* ---------- About: audience cards with code-symbol motifs ---------- */
+.devfest-audience-card {
+  border: 1.5px solid #e8eaed;
+  border-radius: 24px;
+  box-shadow: 0 2px 14px rgba(60, 64, 67, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.devfest-audience-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(60, 64, 67, 0.1);
+}
+
+.devfest-audience-card::before,
+.devfest-audience-card::after {
+  inset: auto;
+  width: auto;
+  height: auto;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  transform: none;
+  opacity: 1;
+  font-family: "Roboto Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.devfest-audience-card::before {
+  top: 1.35rem;
+  right: 1.5rem;
+  font-size: clamp(2.6rem, 4vw, 3.4rem);
+}
+
+.devfest-audience-card::after {
+  right: 1.5rem;
+  bottom: 1.25rem;
+  font-size: 1.5rem;
+  opacity: 0.28;
+}
+
+.audience-developers::before { content: "{ }"; color: var(--devfest-blue, #4285f4); }
+.audience-developers::after { content: "( )"; color: var(--devfest-blue, #4285f4); }
+.audience-ai::before { content: "</>"; color: #f9ab00; }
+.audience-ai::after { content: "=>"; color: #f9ab00; }
+.audience-enthusiasts::before { content: ";"; color: var(--devfest-green, #34a853); }
+.audience-enthusiasts::after { content: "+"; color: var(--devfest-green, #34a853); }
+
+.devfest-audience-index {
+  border: 1.5px solid #dadce0;
+}
+
+@media (max-width: 767px) {
+  .devfest-stat-card {
+    border-radius: 18px;
+    padding: 0.95rem 0.85rem;
+    box-shadow: 0 2px 10px rgba(60, 64, 67, 0.07);
+  }
+
+  .devfest-stat-number {
+    font-size: 2rem;
+  }
+
+  .devfest-stat-label {
+    font-size: 0.78rem;
+  }
+
+  .devfest-audience-card {
+    border-radius: 20px;
+  }
+}
+
+@media (max-width: 390px) {
+  .devfest-stat-number {
+    font-size: 1.75rem;
+  }
+}
+
+/* ---------- Call for papers heading ---------- */
+.cfp-heading {
+  text-wrap: balance;
+}
+
+/* ---------- "More speakers" block: drifting, colour-shifting glow ---------- */
+.ms-glow {
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(8px);
+  mix-blend-mode: screen;
+}
+
+.ms-glow-blue {
+  top: -90px;
+  right: -40px;
+  background: radial-gradient(circle, rgba(66, 133, 244, 0.55) 0%, transparent 68%);
+  animation: msDriftA 14s ease-in-out infinite alternate, msPulse 6s ease-in-out infinite;
+}
+
+.ms-glow-green {
+  bottom: -110px;
+  left: 40px;
+  background: radial-gradient(circle, rgba(52, 168, 83, 0.45) 0%, transparent 68%);
+  animation: msDriftB 16s ease-in-out infinite alternate, msPulse 7s ease-in-out -2s infinite;
+}
+
+.ms-glow-red {
+  top: -120px;
+  left: 38%;
+  width: 240px;
+  height: 240px;
+  background: radial-gradient(circle, rgba(234, 67, 53, 0.38) 0%, transparent 68%);
+  animation: msDriftC 18s ease-in-out infinite alternate, msPulse 8s ease-in-out -4s infinite;
+}
+
+.ms-glow-yellow {
+  bottom: -130px;
+  right: 22%;
+  width: 240px;
+  height: 240px;
+  background: radial-gradient(circle, rgba(251, 188, 5, 0.32) 0%, transparent 68%);
+  animation: msDriftD 15s ease-in-out infinite alternate, msPulse 9s ease-in-out -1s infinite;
+}
+
+.ms-sheen {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(110deg, transparent 35%, rgba(255, 255, 255, 0.07) 50%, transparent 65%);
+  background-size: 250% 100%;
+  animation: msSheen 7s ease-in-out infinite;
+}
+
+@keyframes msDriftA {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-180px, 60px) scale(1.15); }
+  100% { transform: translate(-320px, 20px) scale(0.95); }
+}
+
+@keyframes msDriftB {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(220px, -50px) scale(1.2); }
+  100% { transform: translate(380px, -10px) scale(1); }
+}
+
+@keyframes msDriftC {
+  0% { transform: translate(0, 0) scale(0.9); }
+  100% { transform: translate(-260px, 70px) scale(1.15); }
+}
+
+@keyframes msDriftD {
+  0% { transform: translate(0, 0) scale(1.1); }
+  100% { transform: translate(-240px, -60px) scale(0.9); }
+}
+
+@keyframes msPulse {
+  0%, 100% { opacity: 0.75; }
+  50% { opacity: 1; }
+}
+
+@keyframes msSheen {
+  0% { background-position: 120% 0; }
+  60%, 100% { background-position: -120% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ms-glow,
+  .ms-sheen {
+    animation: none;
+  }
+
+  .devfest-stat-card,
+  .devfest-audience-card {
+    transition: none;
+  }
+}
+
+.devfest-stat-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (min-width: 640px) {
+  .devfest-stat-grid {
+    gap: 1rem;
+  }
+}
+
+/* Stats as horizontal rows: number + one-line label */
+.devfest-stat-grid {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.9rem;
+}
+
+.devfest-stat-card {
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: clamp(1rem, 2.5vw, 1.75rem);
+  padding: clamp(1rem, 2vw, 1.35rem) clamp(1.25rem, 2.6vw, 1.75rem);
+}
+
+.devfest-stat-card::before {
+  inset: 0 auto 0 0;
+  width: 5px;
+  height: auto;
+}
+
+.devfest-stat-number {
+  min-width: 4.2ch;
+  font-size: clamp(2.6rem, 4.4vw, 3.5rem);
+}
+
+.devfest-stat-label {
+  color: var(--devfest-ink, #202124);
+  font-size: clamp(1rem, 1.5vw, 1.15rem);
+  font-weight: 500;
+}
+
+@media (max-width: 767px) {
+  .devfest-stat-card {
+    padding: 0.9rem 1.1rem;
+  }
+
+  .devfest-stat-number {
+    font-size: 2.3rem;
+  }
+
+  .devfest-stat-label {
+    font-size: 0.95rem;
+  }
+}
