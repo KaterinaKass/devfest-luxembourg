@@ -1500,3 +1500,58 @@ h4,
     font-size: 1.25rem !important;
   }
 }
+
+/* ---------- Cursor-following light on dark blocks ---------- */
+.cl-spot,
+.cl-halo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  will-change: transform;
+}
+
+.cl-spot {
+  width: 240px;
+  height: 240px;
+  margin: -120px 0 0 -120px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.08) 35%, transparent 68%);
+  mix-blend-mode: screen;
+}
+
+.cl-halo {
+  width: 560px;
+  height: 560px;
+  margin: -280px 0 0 -280px;
+  background: radial-gradient(circle, rgba(var(--cl-rgb, 66, 133, 244), 0.32) 0%, rgba(var(--cl-rgb, 66, 133, 244), 0.1) 38%, transparent 66%);
+  mix-blend-mode: screen;
+  filter: blur(6px);
+}
+
+.cursor-light.cl-on .cl-spot,
+.cursor-light.cl-on .cl-halo {
+  opacity: 1;
+}
+
+.cursor-light-pink .cl-spot {
+  background: radial-gradient(circle, rgba(255, 214, 240, 0.24) 0%, rgba(249, 83, 198, 0.1) 38%, transparent 68%);
+}
+
+.cl-spot {
+  width: 280px;
+  height: 280px;
+  margin: -140px 0 0 -140px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.34) 0%, rgba(255, 255, 255, 0.12) 32%, transparent 66%);
+}
+
+.cl-halo {
+  background: radial-gradient(circle, rgba(var(--cl-rgb, 66, 133, 244), 0.45) 0%, rgba(var(--cl-rgb, 66, 133, 244), 0.14) 38%, transparent 66%);
+}
+
+.cursor-light-pink .cl-spot {
+  background: radial-gradient(circle, rgba(255, 220, 243, 0.34) 0%, rgba(249, 83, 198, 0.16) 34%, transparent 66%);
+}
