@@ -1,0 +1,8 @@
+{
+  "name": "devfest-luxembourg",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "npx --yes serve@14.2.4 -l 4173 ."
+  }
+}
