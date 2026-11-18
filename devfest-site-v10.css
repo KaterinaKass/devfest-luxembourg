@@ -1352,3 +1352,99 @@ h4,
     animation: none;
   }
 }
+
+/* ---------- Join us in Luxembourg: one consistent button pair ---------- */
+.btn-ticket-cta,
+.btn-agenda {
+  position: relative;
+  overflow: hidden;
+  min-width: 220px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn-ticket-cta {
+  color: #fff !important;
+  border: none;
+  background: linear-gradient(120deg, #fbbc05 0%, #f9844a 22%, #ea4335 42%, #f953c6 62%, #9b5cf6 80%, #fbbc05 100%) 0 50% / 300% 100%;
+  box-shadow: 0 8px 24px -8px rgba(234, 67, 53, 0.55), inset 0 0 0 1.5px rgba(255, 255, 255, 0.35);
+  animation: ticketCtaFlow 6s ease-in-out infinite;
+}
+
+.btn-ticket-cta::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(105deg, transparent 30%, rgba(255, 255, 255, 0.45) 50%, transparent 70%);
+  transform: translateX(-120%);
+  transition: transform 0.7s ease;
+}
+
+.btn-ticket-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px -8px rgba(234, 67, 53, 0.65), inset 0 0 0 1.5px rgba(255, 255, 255, 0.5);
+}
+
+.btn-ticket-cta:hover::after {
+  transform: translateX(120%);
+}
+
+.btn-agenda {
+  color: #fff !important;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1.5px solid rgba(255, 255, 255, 0.6);
+}
+
+.btn-agenda:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.18);
+  border-color: #fff;
+  box-shadow: 0 10px 24px -10px rgba(16, 37, 84, 0.45);
+}
+
+.btn-agenda svg {
+  transition: transform 0.2s ease;
+}
+
+.btn-agenda:hover svg {
+  transform: translateY(2px);
+}
+
+.btn-ticket-cta:active,
+.btn-agenda:active {
+  transform: translateY(0) scale(0.99);
+}
+
+.btn-ticket-cta:focus-visible,
+.btn-agenda:focus-visible {
+  outline: 3px solid rgba(255, 255, 255, 0.7);
+  outline-offset: 3px;
+}
+
+@keyframes ticketCtaFlow {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-ticket-cta {
+    animation: none;
+  }
+
+  .btn-ticket-cta::after {
+    display: none;
+  }
+}
+
+/* ---------- Venue heading: single line on phones ---------- */
+@media (max-width: 639px) {
+  .venue-br {
+    display: none;
+  }
+
+  .venue-heading {
+    font-size: clamp(1.6rem, 8vw, 2.25rem) !important;
+    white-space: nowrap;
+  }
+}
