@@ -1663,3 +1663,196 @@ h4,
 .cursor-light.cl-on .cl-tail {
   opacity: 1;
 }
+
+/* ---------- Cursor light v3: fluid heat trail on canvas (figmamakeathon.com style) ---------- */
+/* above the decorative glows, below the content layer (which sits at z-index 1+) */
+.cl-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+.cl-blob,
+.cl-tail {
+  display: none;
+}
+
+/* ---------- Header: responsive, logo never squeezed ---------- */
+header.fixed {
+  height: 4.25rem !important;
+}
+header.fixed > div {
+  gap: 1rem;
+}
+header.fixed > div > a:first-child {
+  flex-shrink: 0;
+}
+.nav-logo-img {
+  flex-shrink: 0;
+  max-width: none;
+  height: 2.125rem !important;
+  width: auto !important;
+  object-fit: contain;
+}
+.nav-desktop {
+  flex-shrink: 1;
+  min-width: 0;
+}
+.nav-desktop > a,
+.nav-desktop > button {
+  font-size: 0.875rem;
+}
+
+/* Laptops: tighter links so everything fits on one line */
+@media (min-width: 1100px) and (max-width: 1279px) {
+  .nav-desktop {
+    gap: 0;
+  }
+  .nav-desktop > a,
+  .nav-desktop > button {
+    font-size: 0.8125rem;
+    padding-left: 0.6rem;
+    padding-right: 0.6rem;
+  }
+  .nav-desktop > a.h-10,
+  .nav-desktop .h-10 {
+    height: 2.25rem;
+    padding-left: 0.85rem;
+    padding-right: 0.85rem;
+  }
+  .nav-logo-img {
+    height: 1.875rem !important;
+  }
+}
+
+/* Below 1100px the full menu does not fit: use the burger menu */
+@media (max-width: 1099px) {
+  .nav-desktop {
+    display: none !important;
+  }
+  .nav-burger {
+    display: block !important;
+  }
+  .nav-mobile {
+    display: flex !important;
+  }
+}
+@media (min-width: 1100px) {
+  .nav-mobile {
+    display: none !important;
+  }
+}
+@media (max-width: 480px) {
+  header.fixed {
+    height: 3.75rem !important;
+  }
+  .nav-logo-img {
+    height: 1.75rem !important;
+  }
+}
+
+/* ---------- About stats: aurora, tilt + glare, shared spotlight ---------- */
+.stat-fx {
+  perspective: 900px;
+}
+.stat-fx .devfest-stat-card {
+  isolation: isolate;
+  transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(0);
+  transform-style: preserve-3d;
+  transition: transform 0.35s cubic-bezier(.2,.8,.2,1), box-shadow 0.35s ease, filter 0.35s ease, opacity 0.35s ease;
+  will-change: transform;
+}
+.stat-fx .devfest-stat-card > .devfest-stat-number,
+.stat-fx .devfest-stat-card > .devfest-stat-label {
+  position: relative;
+  z-index: 2;
+}
+/* slow-moving aurora inside the colour block */
+.stat-aurora {
+  position: absolute;
+  inset: -40%;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(35% 45% at 20% 30%, color-mix(in srgb, var(--stat-accent) 55%, #fff) 0%, transparent 70%),
+    radial-gradient(40% 50% at 80% 70%, color-mix(in srgb, var(--stat-accent) 60%, #000) 0%, transparent 70%),
+    radial-gradient(30% 40% at 65% 20%, color-mix(in srgb, var(--stat-accent) 40%, #fbbc05) 0%, transparent 70%);
+  filter: blur(18px);
+  opacity: 0.85;
+  animation: statAurora 14s ease-in-out infinite alternate;
+}
+@keyframes statAurora {
+  0%   { transform: translate3d(-6%, -4%, 0) rotate(0deg) scale(1); }
+  50%  { transform: translate3d(5%, 6%, 0) rotate(25deg) scale(1.12); }
+  100% { transform: translate3d(-3%, 8%, 0) rotate(-15deg) scale(1.05); }
+}
+/* glare that follows the pointer */
+.stat-glare {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  border-radius: inherit;
+  background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.32), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+/* shared spotlight: every card's edge lights up by distance to the pointer */
+.stat-fx .devfest-stat-card::after {
+  display: block !important;
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  width: auto;
+  height: auto;
+  border: none;
+  border-radius: inherit;
+  padding: 2px;
+  background: radial-gradient(220px circle at var(--mx, -999px) var(--my, -999px), rgba(255, 255, 255, 0.95), transparent 70%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+.stat-fx.is-tracking .devfest-stat-card::after {
+  opacity: 1;
+}
+.stat-fx .devfest-stat-card.is-hot .stat-glare {
+  opacity: 1;
+}
+/* siblings react: the hovered card leads, the others step back slightly */
+.stat-fx.is-tracking .devfest-stat-card:not(.is-hot) {
+  filter: saturate(0.85);
+  opacity: 0.9;
+  transform: scale(0.985);
+}
+.stat-fx .devfest-stat-card.is-hot {
+  box-shadow: 0 22px 44px -16px var(--stat-accent);
+}
+/* staggered entrance */
+.stat-fx .devfest-stat-card {
+  opacity: 0;
+  translate: 0 14px;
+}
+.stat-fx.stat-in .devfest-stat-card {
+  opacity: 1;
+  translate: 0 0;
+  transition: transform 0.35s cubic-bezier(.2,.8,.2,1), box-shadow 0.35s ease, filter 0.35s ease, opacity 0.6s ease, translate 0.7s cubic-bezier(.2,.8,.2,1);
+}
+.stat-fx.stat-in .devfest-stat-card:nth-child(2) { transition-delay: 0s, 0s, 0s, 0.12s, 0.12s; }
+.stat-fx.stat-in .devfest-stat-card:nth-child(3) { transition-delay: 0s, 0s, 0s, 0.24s, 0.24s; }
+.stat-fx.stat-in.is-tracking .devfest-stat-card:not(.is-hot) {
+  opacity: 0.9;
+}
+.devfest-stat-number {
+  font-variant-numeric: tabular-nums;
+}
+@media (prefers-reduced-motion: reduce) {
+  .stat-aurora { animation: none; }
+  .stat-fx .devfest-stat-card { opacity: 1; translate: none; transform: none; }
+}
