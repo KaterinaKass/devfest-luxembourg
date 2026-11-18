@@ -1205,3 +1205,38 @@ h4,
     font-size: 0.75rem;
   }
 }
+
+/* About heading: more breathing room between lines */
+.devfest-about .devfest-section-heading {
+  line-height: 1.12;
+}
+
+@media (max-width: 767px) {
+  .devfest-about .devfest-section-heading {
+    line-height: 1.2;
+  }
+}
+
+/* About stats: solid colour blocks with white type */
+.devfest-stat-card {
+  border: none;
+  background: var(--stat-accent);
+  box-shadow: 0 10px 28px -12px var(--stat-accent);
+}
+
+.devfest-stat-card::before {
+  display: none;
+}
+
+.devfest-stat-card:hover {
+  box-shadow: 0 16px 36px -12px var(--stat-accent);
+}
+
+.devfest-stat-number,
+.devfest-stat-label {
+  color: #fff;
+}
+
+.devfest-stat-label {
+  opacity: 0.95;
+}
