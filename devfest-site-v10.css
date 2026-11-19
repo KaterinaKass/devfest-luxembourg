@@ -2927,3 +2927,65 @@ dialog.cfp-dialog > div > div:last-child {
   box-shadow: 0 0 0 3px #f9a800;
 }
 
+/* Early Bird: round "hungry" bird, a bit further left; beak chomps, eyes look around */
+.eb-bird {
+  right: 52px !important;
+  top: -46px !important;
+  width: 72px !important;
+  height: 66px !important;
+  transform: translateY(48px) rotate(-4deg);
+}
+.eb-ticket:hover .eb-bird {
+  transform: translateY(-4px) rotate(4deg);
+}
+.eb-ticket:hover .eb-bird-body {
+  animation: ebHop 1.6s ease-in-out 0.45s infinite;
+  transform-origin: 36px 62px;
+}
+.eb-ticket:hover .eb-beak-bottom {
+  animation: ebChomp 0.55s ease-in-out 0.5s infinite alternate;
+  transform-box: fill-box;
+  transform-origin: 50% 0%;
+}
+.eb-ticket:hover .eb-pupils {
+  animation: ebLook 3s ease-in-out 0.5s infinite;
+}
+@keyframes ebChomp {
+  from { transform: translateY(0) scaleY(1); }
+  to   { transform: translateY(3px) scaleY(1.25); }
+}
+@keyframes ebLook {
+  0%, 30%  { transform: translate(0, 0); }
+  40%, 65% { transform: translate(-2.5px, -1px); }
+  75%, 100% { transform: translate(1.5px, 1px); }
+}
+.eb-note {
+  right: -12px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .eb-ticket:hover .eb-beak-bottom,
+  .eb-ticket:hover .eb-pupils { animation: none; }
+}
+
+/* ---------- After-Party thumbnails: opaque (glow stays behind) and better spaced ---------- */
+.ap-thumbs {
+  gap: 12px !important;
+  margin-top: 16px;
+}
+.ap-thumbs > div {
+  opacity: 1 !important;
+  border-radius: 12px !important;
+  background: #080b12;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+.ap-thumbs > div > img {
+  opacity: 0.4;
+  transition: opacity 0.3s ease, transform 0.35s ease;
+}
+.ap-thumbs > div:hover > img {
+  opacity: 0.75;
+  transform: scale(1.06);
+}
+.ap-thumbs > div.is-current > img {
+  opacity: 1;
+}

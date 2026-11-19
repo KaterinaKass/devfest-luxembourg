@@ -40,17 +40,25 @@
 
 // Early Bird ticket: a little morning bird peeks over the top-right corner on hover.
 (function () {
+  // an original, round "hungry" cartoon bird: googly eyes and a beak that chomps
   var BIRD =
-    '<svg viewBox="0 0 64 60" width="64" height="60" aria-hidden="true">' +
-      '<g class="eb-bird-body" stroke="#1e1e1e" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">' +
-        '<path d="M14 40c0-14 9-24 21-24s19 9 19 20c0 11-9 19-22 19-10 0-18-6-18-15z" fill="#fbbc05"/>' +
-        '<path d="M24 44c3 5 9 7 15 6" fill="none"/>' +
-        '<path class="eb-bird-wing" d="M30 36c5-1 11 2 12 8-6 2-11 0-12-8z" fill="#f9a800"/>' +
-        '<path d="M53 30l9 3-9 4z" fill="#ea4335"/>' +
-        '<path d="M33 16c-1-5 2-9 6-10-1 4 1 7 3 9" fill="none"/>' +
+    '<svg viewBox="0 0 72 66" width="72" height="66" aria-hidden="true">' +
+      '<g class="eb-bird-body" stroke="#1e1e1e" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round">' +
+        '<path d="M30 10c-2-6 2-9 6-8-2 3 0 5 2 6 1-4 5-6 8-4-3 2-3 4-2 6" fill="#f9a800"/>' +
+        '<circle cx="36" cy="38" r="24" fill="#fbbc05"/>' +
+        '<path d="M20 50c5 6 12 8 19 7" fill="none" stroke-width="2"/>' +
+        '<ellipse class="eb-bird-wing" cx="15" cy="42" rx="6" ry="9" fill="#f9a800"/>' +
+        '<circle cx="28" cy="31" r="7.5" fill="#fff"/>' +
+        '<circle cx="45" cy="31" r="7.5" fill="#fff"/>' +
+        '<path class="eb-beak-top" d="M30 41c4-3 10-3 14 0l-7 5z" fill="#ea4335"/>' +
+        '<path class="eb-beak-bottom" d="M31 44c4 3 9 3 12 0l-6 5z" fill="#c5221f"/>' +
       '</g>' +
-      '<circle class="eb-bird-eye" cx="45" cy="28" r="2.6" fill="#1e1e1e"/>' +
-      '<circle cx="45.9" cy="27.1" r="0.8" fill="#fff"/>' +
+      '<g class="eb-pupils" fill="#1e1e1e">' +
+        '<circle cx="30" cy="32" r="3.4"/><circle cx="47" cy="32" r="3.4"/>' +
+      '</g>' +
+      '<circle cx="31" cy="31" r="1" fill="#fff"/><circle cx="48" cy="31" r="1" fill="#fff"/>' +
+      '<ellipse cx="22" cy="42" rx="3.5" ry="2.2" fill="#ff8fb1" opacity="0.8"/>' +
+      '<ellipse cx="51" cy="42" rx="3.5" ry="2.2" fill="#ff8fb1" opacity="0.8"/>' +
     '</svg>' +
     '<span class="eb-note eb-note-1">♪</span><span class="eb-note eb-note-2">♫</span>';
 
