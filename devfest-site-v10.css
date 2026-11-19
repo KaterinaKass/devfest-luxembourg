@@ -2290,3 +2290,81 @@ dialog.cfp-dialog > div > div:last-child {
 .stat-fx .devfest-stat-card.is-hot {
   filter: saturate(1.12) brightness(1.02);
 }
+
+/* ---------- Call for Speakers dialog: animated microphone badge ---------- */
+.cfp-mic {
+  position: relative;
+  isolation: isolate;
+  background: linear-gradient(120deg, #4285f4 0%, #34a853 25%, #fbbc05 50%, #ea4335 75%, #4285f4 100%);
+  background-size: 300% 300%;
+  animation: cfpMicFlow 6s ease-in-out infinite, cfpMicGlow 2.4s ease-in-out infinite;
+}
+/* soft halo behind the badge */
+.cfp-mic::before {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  z-index: -1;
+  border-radius: 22px;
+  background: inherit;
+  background-size: 300% 300%;
+  filter: blur(12px);
+  opacity: 0.55;
+  animation: cfpMicFlow 6s ease-in-out infinite;
+}
+/* "sound waves" rippling out of the badge */
+.cfp-mic::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.55);
+  animation: cfpMicWave 2.4s ease-out infinite;
+  pointer-events: none;
+}
+.cfp-mic-icon {
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.25));
+  animation: cfpMicTalk 2.4s ease-in-out infinite;
+}
+@keyframes cfpMicFlow {
+  0%, 100% { background-position: 0% 50%; }
+  50%      { background-position: 100% 50%; }
+}
+@keyframes cfpMicGlow {
+  0%, 100% { box-shadow: 0 6px 18px -6px rgba(66, 133, 244, 0.6); }
+  50%      { box-shadow: 0 10px 28px -6px rgba(234, 67, 53, 0.65); }
+}
+@keyframes cfpMicWave {
+  0%   { transform: scale(1); opacity: 0.7; }
+  100% { transform: scale(1.45); opacity: 0; }
+}
+@keyframes cfpMicTalk {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  20%      { transform: scale(1.08) rotate(-6deg); }
+  40%      { transform: scale(1) rotate(0deg); }
+  60%      { transform: scale(1.06) rotate(5deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cfp-mic, .cfp-mic::before, .cfp-mic::after, .cfp-mic-icon { animation: none !important; }
+}
+
+/* ---------- Ticket cards: lift on hover, like the community cards ---------- */
+/* the wrapper keeps the hover area still (no flicker at the edge); the card inside moves */
+.ticket-wrap {
+  transition: filter 0.22s ease;
+}
+.ticket-wrap > .ticket-card {
+  transition: transform 0.22s ease;
+}
+.ticket-wrap:hover > .ticket-card {
+  transform: translateY(-6px);
+}
+.ticket-wrap:not(.ticket-wrap-vip):hover {
+  filter: drop-shadow(0 0 0.75px rgba(60, 64, 67, 0.45)) drop-shadow(0 18px 30px rgba(60, 64, 67, 0.16));
+}
+.ticket-wrap-vip:hover {
+  filter: drop-shadow(0 0 1px #f953c6) drop-shadow(0 0 1px #f953c6) drop-shadow(0 20px 36px rgba(249, 83, 198, 0.5));
+}
+@media (prefers-reduced-motion: reduce) {
+  .ticket-wrap:hover > .ticket-card { transform: none; }
+}
