@@ -3659,8 +3659,6 @@ dialog.cfp-dialog > div > div:last-child {
 html.is-scrolling *,
 html.is-scrolling *::before,
 html.is-scrolling *::after { animation-play-state: paused !important; }
-/* the ticket cards' shadow filter: rasterize once on its own layer */
-.ticket-wrap { will-change: filter; }
 /* Early Bird chick: grumpy first, then it smiles and winks (and keeps smiling while hovered) */
 .eb-note { display: none !important; }
 .eb-ticket:hover .eb-chick-wink { animation: ebChickTilt 2.6s ease-in-out 0.5s both, ebChickSmile 2.6s ease 0.5s both; }
@@ -3741,3 +3739,11 @@ html.kbd-nav .cfp-close:focus-visible { outline: 2px solid rgba(255, 255, 255, 0
 @media (prefers-reduced-motion: reduce) {
   .eb-ticket:hover .eb-bird { animation: none; }
 }
+
+/* Agenda plenary blocks (Opening, Panel, Closing, After-Party): the same thin, soft border
+   as the session cards, so it no longer wraps thickly around the colour stripe */
+.agenda-plenary { border: 1px solid rgba(66, 133, 244, 0.18) !important; }
+.agenda-plenary[style*="249, 83, 198"], .agenda-plenary[style*="249,83,198"] { border-color: rgba(249, 83, 198, 0.2) !important; }
+
+/* key-art ticker keeps running while the page scrolls (cheap transform-only animation) */
+html.is-scrolling .keyart-band .keyart-track { animation-play-state: running !important; }
