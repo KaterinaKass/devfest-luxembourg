@@ -74,7 +74,7 @@
 // Section eyebrow labels ("About DevFest", "Speakers", "Venue", ...): one consistent,
 // calm pill style with a small glowing dot, in each label's own colour.
 (function () {
-  var OVERRIDE = { venue: "#f9a800", lieu: "#f9a800", tickets: "#e5398e", billets: "#e5398e" };
+  var OVERRIDE = { venue: "#f9a800", lieu: "#f9a800", tickets: "#34a853", billets: "#34a853" };
   function mark() {
     [].forEach.call(document.querySelectorAll("section span.rounded-full"), function (s) {
       if (s.dataset.eyebrow || s.children.length || s.classList.contains("cfp-badge")) return;

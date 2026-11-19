@@ -3912,3 +3912,6 @@ div:has(> div > .ms-eyebrow) form button { padding-left: 24px !important; paddin
   div:has(> .venue-photo) .eyebrow { align-self: flex-start !important; }
   div:has(> .venue-photo) .space-y-4 > * { justify-content: flex-start !important; text-align: left !important; }
 }
+
+/* Tickets ("Choose your pass"): very light grey band to separate it from the Venue section */
+#tickets { background: #f6f7f9 !important; }
