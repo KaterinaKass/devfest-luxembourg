@@ -70,3 +70,24 @@
   document.addEventListener("DOMContentLoaded", scan);
   scan();
 })();
+
+// Section eyebrow labels ("About DevFest", "Speakers", "Venue", ...): one consistent,
+// calm pill style with a small glowing dot, in each label's own colour.
+(function () {
+  var OVERRIDE = { venue: "#f9a800", lieu: "#f9a800", tickets: "#e5398e", billets: "#e5398e" };
+  function mark() {
+    [].forEach.call(document.querySelectorAll("section span.rounded-full"), function (s) {
+      if (s.dataset.eyebrow || s.children.length || s.classList.contains("cfp-badge")) return;
+      var next = s.nextElementSibling;
+      if (!next || !/^H[12]$/.test(next.tagName)) return;
+      var key = s.textContent.trim().toLowerCase();
+      var col = OVERRIDE[key] || s.style.color || getComputedStyle(s).color;
+      s.dataset.eyebrow = "1";
+      s.classList.add("eyebrow");
+      s.style.setProperty("--eb", col);
+    });
+  }
+  new MutationObserver(mark).observe(document.documentElement, { childList: true, subtree: true });
+  document.addEventListener("DOMContentLoaded", mark);
+  mark();
+})();
