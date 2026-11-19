@@ -4078,3 +4078,7 @@ img.hero-soft-circle { opacity: 0.75 !important; }
   img.hero-soft-braces { opacity: 0.13 !important; }
   img.hero-soft-circle { opacity: 0.72 !important; }
 }
+
+/* hero pink circle: a little lower again */
+@media (min-width: 768px) { div:has(> img.hero-soft-circle) { top: 16% !important; } }
+@media (max-width: 767px) { div:has(> img.hero-soft-circle) { top: 16% !important; } }
