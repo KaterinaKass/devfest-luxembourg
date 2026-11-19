@@ -3827,3 +3827,9 @@ html.is-scrolling .keyart-band .keyart-track { animation-play-state: running !im
   }
   .nav-mobile > div:last-child { margin-top: 16px !important; }
 }
+
+/* animated glyph row now closes "More about DevFest" (moved from Join Our Communities) */
+.more-glyphs { margin: clamp(2.5rem, 5vw, 4rem) auto 0 !important; padding-bottom: clamp(2.5rem, 5vw, 4rem); }
+@media (max-width: 600px) {
+  .more-glyphs .cj-glyphs { width: calc(100% - 40px) !important; margin-inline: auto; }
+}
