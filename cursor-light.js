@@ -117,7 +117,8 @@
   }
 
   function resize(s) {
-    var r = s.el.getBoundingClientRect(), dpr = Math.min(window.devicePixelRatio || 1, 2);
+    // the glow is soft, so 1x resolution looks the same and keeps the page responsive
+    var r = s.el.getBoundingClientRect(), dpr = 1;
     s.w = r.width; s.h = r.height;
     var W = Math.max(1, Math.round(r.width * dpr)), H = Math.max(1, Math.round(r.height * dpr));
     if (s.canvas.width !== W || s.canvas.height !== H) { s.canvas.width = W; s.canvas.height = H; }

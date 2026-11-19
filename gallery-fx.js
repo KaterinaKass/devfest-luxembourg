@@ -12,6 +12,11 @@
     if (stage.dataset.galFx) return;
     stage.dataset.galFx = "1";
     var fade = stage.classList.contains("gal-stage-fade");
+    // load and decode every photo up front so switching never lands on an empty frame
+    [].forEach.call(stage.querySelectorAll("img"), function (im) {
+      im.loading = "eager";
+      if (im.decode) im.decode().catch(function () {});
+    });
     var down = null, lastWheel = 0;
 
     stage.addEventListener("pointerenter", function (e) { if (e.pointerType === "mouse") stage.setAttribute("data-gal-hover", ""); });

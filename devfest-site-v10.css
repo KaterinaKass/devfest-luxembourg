@@ -1883,8 +1883,9 @@ header.fixed > div > a:first-child {
   background: rgba(249, 83, 198, 0.75) !important;
   box-shadow: 0 8px 24px rgba(249, 83, 198, 0.45);
 }
+/* no size change on press: a shrinking button can lose the click if the pointer is near its edge */
 .gal-arrow:active {
-  transform: translateY(-50%) scale(0.92) !important;
+  filter: brightness(0.9);
 }
 .gal-arrow:focus-visible {
   outline: 3px solid #f9a8d4;
