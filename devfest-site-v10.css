@@ -3638,3 +3638,18 @@ dialog.cfp-dialog > div > div:last-child {
 @media (prefers-reduced-motion: reduce) {
   .eb-ticket:hover .eb-chick, .eb-ticket:hover .eb-chick-wink { animation: none; }
 }
+
+/* Partnership photos: gentle zoom inside their rounded frame on hover.
+   The image scales up while clip-path shrinks by the same factor, so the visible box stays put. */
+.partner-photo {
+  clip-path: inset(0 round 12px);
+  transition: transform 0.6s cubic-bezier(.2, .8, .2, 1), clip-path 0.6s cubic-bezier(.2, .8, .2, 1);
+}
+.partner-photo:hover {
+  transform: scale(1.07);
+  clip-path: inset(3.27% round 11.2px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .partner-photo { transition: none; }
+  .partner-photo:hover { transform: none; clip-path: inset(0 round 12px); }
+}
