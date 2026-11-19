@@ -155,3 +155,32 @@
   document.addEventListener("DOMContentLoaded", scan);
   scan();
 })();
+
+// "What to Expect" artwork: split into photo + frame layers so the photo can zoom gently
+// inside its shape on hover while the outline and line icons stay still.
+(function () {
+  var NAMES = ["technical-content", "community-connections", "hands-on-learning"];
+  function setup() {
+    [].forEach.call(document.querySelectorAll(".devfest-expect-artwork > img"), function (img) {
+      var src = img.getAttribute("src") || "";
+      var name = NAMES.filter(function (n) { return src.indexOf("/" + n + ".png") !== -1 || src.indexOf("/" + n + "-frame.png") !== -1; })[0];
+      var box = img.parentElement;
+      if (!name || box.dataset.exZoom) return;
+      box.dataset.exZoom = "1";
+      box.classList.add("ex-zoom");
+      var base = "/images/devfest-global/" + name;
+      var wrap = document.createElement("div");
+      wrap.className = "ex-layers";
+      wrap.setAttribute("aria-hidden", "true");
+      wrap.innerHTML =
+        '<div class="ex-photo-wrap" style="-webkit-mask-image:url(' + base + '-mask.png);mask-image:url(' + base + '-mask.png)">' +
+          '<img class="ex-photo" src="' + base + '-photo.webp" alt="" decoding="async">' +
+        '</div>' +
+        '<img class="ex-frame" src="' + base + '-frame.png" alt="" decoding="async">';
+      box.appendChild(wrap);
+    });
+  }
+  new MutationObserver(setup).observe(document.documentElement, { childList: true, subtree: true });
+  document.addEventListener("DOMContentLoaded", setup);
+  setup();
+})();
