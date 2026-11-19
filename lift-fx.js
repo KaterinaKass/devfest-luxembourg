@@ -213,7 +213,8 @@
   var SPOTS = [
     { sec: "speakers", img: "devfest-sticker-braces", side: "l" },
     { sec: "tickets", img: "devfest-sticker-badge", side: "r" },
-    { sec: "organizers", img: "devfest-sticker-round", side: "r" }
+    { sec: "organizers", img: "devfest-sticker-round", side: "r" },
+    { sec: "speakers", img: "devfest-sticker-blue", side: "r", key: "speakers-r" }
   ];
   function setup() {
     SPOTS.forEach(function (s) {
