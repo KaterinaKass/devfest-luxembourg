@@ -3905,3 +3905,10 @@ div:has(> div > .ms-eyebrow) form button { padding-left: 24px !important; paddin
   div:has(> div > .ms-eyebrow) form input,
   div:has(> div > .ms-eyebrow) form button { width: 100% !important; }
 }
+
+/* Venue on phones/tablets: everything left-aligned (label, heading, text, icon rows) */
+@media (max-width: 1023px) {
+  div:has(> .venue-photo) > div:not(.venue-photo) > * { text-align: left !important; align-self: stretch; }
+  div:has(> .venue-photo) .eyebrow { align-self: flex-start !important; }
+  div:has(> .venue-photo) .space-y-4 > * { justify-content: flex-start !important; text-align: left !important; }
+}
