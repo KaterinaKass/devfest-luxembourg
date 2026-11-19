@@ -2914,18 +2914,28 @@ dialog.cfp-dialog > div > div:last-child {
   color: inherit;
 }
 .partner-link > div:first-child {
-  transition: transform 0.22s ease, box-shadow 0.22s ease;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  transition: transform 0.25s ease;
 }
-.partner-link:hover > div:first-child {
-  transform: translateY(-4px);
-  box-shadow: 0 14px 28px -12px rgba(0, 0, 0, 0.6), 0 0 0 2px #f9a800;
+/* hover: a translucent magenta wash over the tile (like the brand-guide photo duotone);
+   multiply keeps the logo readable underneath, no outline */
+.partner-link > div:first-child::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: #c13fd0;
+  mix-blend-mode: multiply;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
 }
-.partner-link:focus-visible {
-  outline: none;
-}
-.partner-link:focus-visible > div:first-child {
-  box-shadow: 0 0 0 3px #f9a800;
-}
+.partner-link:hover > div:first-child { transform: translateY(-2px); }
+.partner-link:hover > div:first-child::after,
+.partner-link:focus-visible > div:first-child::after { opacity: 0.72; }
+.partner-link:focus-visible { outline: none; }
 
 /* Early Bird: round "hungry" bird, a bit further left; beak chomps, eyes look around */
 .eb-bird {
