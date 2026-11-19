@@ -2906,3 +2906,22 @@ dialog.cfp-dialog > div > div:last-child {
   position: relative;
   z-index: 1;
 }
+
+/* ---------- Community partners: every logo links to the partner's site ---------- */
+.partner-link {
+  text-decoration: none;
+  color: inherit;
+}
+.partner-link > div:first-child {
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+.partner-link:hover > div:first-child {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 28px -12px rgba(0, 0, 0, 0.6), 0 0 0 2px #f9a800;
+}
+.partner-link:focus-visible {
+  outline: none;
+}
+.partner-link:focus-visible > div:first-child {
+  box-shadow: 0 0 0 3px #f9a800;
+}
