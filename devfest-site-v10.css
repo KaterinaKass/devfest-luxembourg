@@ -3870,3 +3870,38 @@ html.is-scrolling .keyart-band .keyart-track { animation-play-state: running !im
     gap: 10px !important;
   }
 }
+
+/* ---------- More speakers block: responsive layout, finger-friendly controls ---------- */
+.ms-eyebrow { white-space: nowrap !important; width: fit-content; max-width: 100%; }
+div:has(> div > .ms-eyebrow) h3 { text-wrap: balance; }
+div:has(> div > .ms-eyebrow) form input,
+div:has(> div > .ms-eyebrow) form button {
+  height: 52px !important;
+  font-size: 16px !important;          /* 16px+ keeps iOS from zooming into the field */
+  border-radius: 999px;
+}
+div:has(> div > .ms-eyebrow) form button { padding-left: 24px !important; padding-right: 24px !important; white-space: nowrap; justify-content: center; }
+
+/* below 1100px: one column — text first, then the form across the full width */
+@media (max-width: 1099px) {
+  div:has(> div > .ms-eyebrow) {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 26px !important;
+  }
+  div:has(> div > .ms-eyebrow) > div:first-child { width: 100%; }
+  div:has(> div > .ms-eyebrow) form {
+    width: 100% !important;
+    flex-direction: row !important;
+    gap: 12px !important;
+  }
+  div:has(> div > .ms-eyebrow) form input { flex: 1 1 auto; width: auto !important; min-width: 0; }
+  div:has(> div > .ms-eyebrow) form button { flex: 0 0 auto; align-self: stretch !important; }
+  .ms-avatars { flex-wrap: nowrap !important; }
+}
+/* phones: field and button stacked, each full width */
+@media (max-width: 559px) {
+  div:has(> div > .ms-eyebrow) form { flex-direction: column !important; }
+  div:has(> div > .ms-eyebrow) form input,
+  div:has(> div > .ms-eyebrow) form button { width: 100% !important; }
+}
