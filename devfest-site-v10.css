@@ -3401,7 +3401,9 @@ dialog.cfp-dialog > div > div:last-child {
 /* ---------- Hero floating glyphs: crisp vector Bold Glyphs from the DevFest brand kit ---------- */
 .hero-glyph {
   display: block;
-  filter: drop-shadow(0 8px 14px rgba(30, 30, 30, 0.08));
+  /* pale, like a watermark: decorates without pulling the eye from the title */
+  opacity: 0.3 !important;
+  filter: saturate(0.85);
 }
 /* phones: the hero is too tight, the glyphs would sit on the logo and buttons */
 @media (max-width: 767px) {
@@ -3441,4 +3443,52 @@ dialog.cfp-dialog > div > div:last-child {
 }
 @media (prefers-reduced-motion: reduce) {
   .keyart-track { animation: none; }
+}
+
+/* ---------- Header scales fluidly on large screens (1280px → 2560px+) ---------- */
+@media (min-width: 1280px) {
+  header.fixed { height: clamp(68px, calc(2.5vw + 32px), 100px) !important; }
+  header.fixed > div { max-width: clamp(1152px, 72vw, 1840px); }
+  .nav-logo-img { height: clamp(34px, calc(1.6vw + 11px), 54px) !important; }
+  .nav-desktop { gap: clamp(4px, 0.3vw, 10px); }
+  .nav-desktop > a,
+  .nav-desktop > button,
+  .nav-desktop > div button.h-10 {
+    font-size: clamp(14px, calc(0.4vw + 8.3px), 18.5px);
+    padding: 0.57em 0.86em;
+  }
+  .nav-desktop > a.h-10,
+  .nav-desktop .h-10 {
+    height: 2.85em;
+    padding-left: 1.15em;
+    padding-right: 1.15em;
+  }
+  .nav-desktop > div button.h-10 > svg:first-child { width: 1.43em; height: 1em; }
+}
+/* tablets (burger menu): a slightly larger logo and bar */
+@media (min-width: 768px) and (max-width: 1099px) {
+  header.fixed { height: 4.5rem !important; }
+  .nav-logo-img { height: 2.375rem !important; }
+}
+
+/* ---------- Who is it for?: photo zooms gently inside its shape on hover ---------- */
+.aud-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 268px;
+  overflow: visible;
+}
+.aud-svg image {
+  transform-box: view-box;
+  transform-origin: 50% 50%;
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.aud-zoom:hover .aud-svg image,
+.devfest-expect-card:hover .aud-svg image { transform: scale(1.07); }
+@media (prefers-reduced-motion: reduce) {
+  .aud-svg image { transition: none; }
+}
+@media (max-width: 767px) {
+  .aud-svg { max-width: 465px; margin: 0 auto; }
 }

@@ -255,3 +255,36 @@
   document.addEventListener("DOMContentLoaded", setup);
   setup();
 })();
+
+// "Who is it for?" artwork: inline the SVGs so the photo can zoom gently inside its
+// shape on hover while the outline and line icons stay put.
+(function () {
+  var n = 0;
+  function setup() {
+    [].forEach.call(document.querySelectorAll('.devfest-expect-artwork > img[src*="/audience-"]'), function (img) {
+      if (img.dataset.audFx) return;
+      img.dataset.audFx = "1";
+      fetch(img.getAttribute("src")).then(function (r) { return r.text(); }).then(function (txt) {
+        if (!img.isConnected) return;
+        var id = "audc" + (++n);
+        // clip a wrapper group instead of the image itself, so scaling the image keeps the shape fixed
+        txt = txt.replace('id="c"', 'id="' + id + '"')
+          .replace(/(<image\b[^>]*?)\sclip-path="url\(#c\)"([^>]*\/>)/, '<g clip-path="url(#' + id + ')">$1$2</g>');
+        var box = document.createElement("div");
+        box.innerHTML = txt;
+        var svg = box.querySelector("svg");
+        if (!svg) return;
+        svg.removeAttribute("width"); svg.removeAttribute("height");
+        svg.setAttribute("role", "img");
+        svg.setAttribute("aria-label", img.alt || "");
+        svg.classList.add("aud-svg");
+        img.style.display = "none";
+        img.parentElement.classList.add("aud-zoom");
+        img.parentElement.insertBefore(svg, img);
+      }).catch(function () {});
+    });
+  }
+  new MutationObserver(setup).observe(document.documentElement, { childList: true, subtree: true });
+  document.addEventListener("DOMContentLoaded", setup);
+  setup();
+})();
