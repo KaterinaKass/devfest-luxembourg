@@ -3747,3 +3747,12 @@ html.kbd-nav .cfp-close:focus-visible { outline: 2px solid rgba(255, 255, 255, 0
 
 /* key-art ticker keeps running while the page scrolls (cheap transform-only animation) */
 html.is-scrolling .keyart-band .keyart-track { animation-play-state: running !important; }
+
+/* Venue on phones/tablets: "Venue" label first, then the photo, then the heading and details */
+@media (max-width: 1023px) {
+  div:has(> .venue-photo) { display: flex !important; flex-direction: column; gap: 0 !important; }
+  div:has(> .venue-photo) > div:not(.venue-photo) { display: contents; }
+  div:has(> .venue-photo) .eyebrow { order: 0; align-self: flex-start; margin-bottom: 1rem !important; }
+  div:has(> .venue-photo) > .venue-photo { order: 1; margin-bottom: 1.75rem; }
+  div:has(> .venue-photo) > div:not(.venue-photo) > :not(.eyebrow) { order: 2; }
+}
