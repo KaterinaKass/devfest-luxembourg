@@ -3492,3 +3492,24 @@ dialog.cfp-dialog > div > div:last-child {
 @media (max-width: 767px) {
   .aud-svg { max-width: 465px; margin: 0 auto; }
 }
+
+/* ---------- Larger header logo at every size (overrides the earlier sizes) ---------- */
+.nav-logo-img { height: 2.5rem !important; }                       /* 40px */
+@media (min-width: 1100px) and (max-width: 1279px) {
+  .nav-logo-img { height: 2.375rem !important; }                   /* 38px, menu stays on one line */
+}
+@media (min-width: 1280px) {
+  header.fixed { height: clamp(74px, calc(2.5vw + 38px), 106px) !important; }
+  .nav-logo-img { height: clamp(42px, calc(1.6vw + 19px), 62px) !important; }
+}
+@media (min-width: 768px) and (max-width: 1099px) {
+  header.fixed { height: 4.75rem !important; }
+  .nav-logo-img { height: 2.75rem !important; }                    /* 44px on tablets */
+}
+@media (max-width: 767px) {
+  .nav-logo-img { height: 2.25rem !important; }                    /* 36px */
+}
+@media (max-width: 480px) {
+  header.fixed { height: 4rem !important; }
+  .nav-logo-img { height: 2.125rem !important; }                   /* 34px on phones */
+}

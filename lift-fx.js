@@ -176,10 +176,10 @@
       wrap.className = "ex-layers";
       wrap.setAttribute("aria-hidden", "true");
       wrap.innerHTML =
-        '<div class="ex-photo-wrap" style="-webkit-mask-image:url(' + base + '-mask.png);mask-image:url(' + base + '-mask.png)">' +
-          '<img class="ex-photo" src="' + base + '-photo.webp" alt="" decoding="async">' +
+        '<div class="ex-photo-wrap" style="-webkit-mask-image:url(' + base + '-mask.png?v=3);mask-image:url(' + base + '-mask.png?v=3)">' +
+          '<img class="ex-photo" src="' + base + '-photo.webp?v=2" alt="" decoding="async">' +
         '</div>' +
-        '<img class="ex-frame" src="' + base + '-frame.png" alt="" decoding="async">';
+        '<img class="ex-frame" src="' + base + '-frame.png?v=2" alt="" decoding="async">';
       box.appendChild(wrap);
     });
   }
