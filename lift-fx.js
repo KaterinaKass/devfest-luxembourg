@@ -206,3 +206,32 @@
   document.addEventListener("DOMContentLoaded", setup);
   setup();
 })();
+
+// DevFest brand stickers: tucked into the empty space beside three centred section
+// headings (desktop only), slightly tilted like real laptop stickers; they wobble on hover.
+(function () {
+  var SPOTS = [
+    { sec: "speakers", img: "devfest-sticker-braces", side: "l" },
+    { sec: "tickets", img: "devfest-sticker-badge", side: "r" },
+    { sec: "organizers", img: "devfest-sticker-round", side: "r" }
+  ];
+  function setup() {
+    SPOTS.forEach(function (s) {
+      var h = document.querySelector("#" + s.sec + " h2");
+      var box = h && h.parentElement;
+      if (!box || box.querySelector(".site-sticker")) return;
+      box.classList.add("sticker-host");
+      var im = document.createElement("img");
+      im.className = "site-sticker site-sticker-" + s.sec + " is-" + s.side;
+      im.src = "/images/stickers/" + s.img + ".webp";
+      im.alt = "";
+      im.setAttribute("aria-hidden", "true");
+      im.decoding = "async";
+      im.loading = "lazy";
+      box.appendChild(im);
+    });
+  }
+  new MutationObserver(setup).observe(document.documentElement, { childList: true, subtree: true });
+  document.addEventListener("DOMContentLoaded", setup);
+  setup();
+})();

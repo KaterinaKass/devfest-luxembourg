@@ -3373,3 +3373,27 @@ dialog.cfp-dialog > div > div:last-child {
 @media (prefers-reduced-motion: reduce) {
   .partner-icon, .partner-icon .material-icons { transition: none; animation: none !important; }
 }
+
+/* ---------- DevFest brand stickers beside section headings (desktop only) ---------- */
+.sticker-host { position: relative; }
+.site-sticker {
+  position: absolute;
+  z-index: 1;
+  height: auto;
+  pointer-events: auto;
+  user-select: none;
+  -webkit-user-drag: none;
+  filter: drop-shadow(0 10px 18px rgba(30, 30, 30, 0.14)) drop-shadow(0 2px 3px rgba(30, 30, 30, 0.1));
+  transform: rotate(var(--rot));
+  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.site-sticker:hover { transform: rotate(calc(var(--rot) * -0.6)) scale(1.06); }
+.site-sticker-speakers { --rot: -9deg; width: 150px; top: -6px; left: calc(50% - 560px); }
+.site-sticker-tickets { --rot: 7deg; width: 175px; top: -2px; left: calc(50% + 390px); }
+.site-sticker-organizers { --rot: 10deg; width: 135px; top: -18px; left: calc(50% + 400px); }
+@media (max-width: 1199px), (hover: none) {
+  .site-sticker { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .site-sticker { transition: none; }
+}
