@@ -3837,3 +3837,9 @@ html.is-scrolling .keyart-band .keyart-track { animation-play-state: running !im
 /* Code of Conduct contact text: on desktop "respond discreetly…" starts a new line; phones wrap naturally */
 .coc-br { display: none; }
 @media (min-width: 1024px) { .coc-br { display: inline; } }
+
+/* Hero floating glyphs: fainter, and visible on phones too (smaller, behind the content) */
+.hero-glyph { opacity: 0.2 !important; }
+@media (max-width: 767px) {
+  .hero-glyph { display: block !important; opacity: 0.16 !important; transform: scale(0.72); transform-origin: center; }
+}
