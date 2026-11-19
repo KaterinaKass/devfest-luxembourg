@@ -2628,7 +2628,7 @@ dialog.cfp-dialog > div > div:last-child {
   color: #fff !important;
   border: 1.5px solid transparent !important;
   background:
-    linear-gradient(#141a24, #141a24) padding-box,
+    linear-gradient(rgba(20, 26, 36, 0.5), rgba(20, 26, 36, 0.5)) padding-box,
     linear-gradient(90deg, #4285f4, #ea4335, #fbbc05, #34a853, #4285f4) border-box !important;
   background-size: 100% 100%, 300% 100% !important;
   animation: cfpBadgeBorder 6s linear infinite;
@@ -3018,4 +3018,39 @@ dialog.cfp-dialog > div > div:last-child {
 /* About stats: digits no longer touch (was -0.05em) */
 .devfest-stat-number {
   letter-spacing: 0 !important;
+}
+
+/* View speakers: understated ghost button with a thin Google-colour gradient outline */
+.cfp-secondary {
+  border: 1.5px solid transparent !important;
+  background:
+    linear-gradient(#141920, #141920) padding-box,
+    linear-gradient(110deg, rgba(66, 133, 244, 0.55), rgba(234, 67, 53, 0.45), rgba(251, 188, 5, 0.45), rgba(52, 168, 83, 0.55)) border-box !important;
+  color: rgba(255, 255, 255, 0.88) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.01em;
+  box-shadow: none;
+  transition: color 0.2s ease, box-shadow 0.25s ease, gap 0.25s ease !important;
+}
+.cfp-secondary::after {
+  content: "→";
+  display: inline-block;
+  width: 0;
+  opacity: 0;
+  overflow: hidden;
+  transform: translateX(-4px);
+  transition: width 0.25s ease, opacity 0.25s ease, transform 0.25s ease, margin 0.25s ease;
+}
+.cfp-secondary:hover {
+  color: #fff !important;
+  background:
+    linear-gradient(#18202a, #18202a) padding-box,
+    linear-gradient(110deg, #4285f4, #ea4335, #fbbc05, #34a853) border-box !important;
+  box-shadow: 0 8px 22px -12px rgba(66, 133, 244, 0.6);
+}
+.cfp-secondary:hover::after {
+  width: 1em;
+  opacity: 1;
+  margin-left: 2px;
+  transform: translateX(0);
 }
