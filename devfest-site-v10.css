@@ -3772,3 +3772,23 @@ html.is-scrolling .keyart-band .keyart-track { animation-play-state: running !im
 @media (max-width: 767px) {
   .ms-eyebrow { margin-bottom: 18px !important; font-size: 11.5px !important; letter-spacing: 0.12em; }
 }
+
+/* Hero on phones: "Luxembourg" fills the content width, so it is wider than the DevFest logo
+   (as on desktop). 14.6vw keeps it inside the 24px side padding on every phone width. */
+@media (max-width: 639px) {
+  section h2.lux-animated { font-size: clamp(40px, 14.6vw, 110px) !important; }
+}
+
+/* Venue photo: Safari doesn't clip the blended hover wash to the rounded corners;
+   round the wash itself and clip the box explicitly */
+.venue-photo { isolation: isolate; }
+.venue-photo::after { border-radius: inherit; }
+@supports (-webkit-touch-callout: none) {
+  .venue-photo, .partner-link > div:first-child { -webkit-mask-image: -webkit-radial-gradient(white, black); }
+}
+
+/* Tickets on iPhone: Safari doesn't clip the masked coloured header to the card's rounded
+   corners unless the card is its own stacking context (only Early Bird had one). Give every
+   card one, and round the header's top corners itself as well. */
+.ticket-wrap > .ticket-card { position: relative; z-index: 1; isolation: isolate; }
+.ticket-head { border-top-left-radius: 16px; border-top-right-radius: 16px; }
