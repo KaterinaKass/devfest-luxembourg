@@ -4034,3 +4034,7 @@ img.hero-soft-braces { opacity: 0.2 !important; }
 @media (min-width: 1280px) and (max-width: 1699px) {
   header.fixed > div { max-width: calc(100vw - 64px) !important; }
 }
+
+/* hero pink circle: a touch lower, away from the header */
+@media (min-width: 768px) { div:has(> img.hero-soft-circle) { top: 12.5% !important; } }
+@media (max-width: 767px) { div:has(> img.hero-soft-circle) { top: 13.5% !important; } }
