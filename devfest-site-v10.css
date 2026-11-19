@@ -3183,3 +3183,50 @@ dialog.cfp-dialog > div > div:last-child {
   .venue-photo > img, .venue-photo > div { transition: none; }
   .venue-photo:hover > img { transform: none; }
 }
+
+/* Early Bird: pops up grumpy (frowning brows, staring at you), then relaxes and winks */
+.eb-ticket:hover .eb-beak-bottom,
+.eb-ticket:hover .eb-pupils {
+  animation: none !important;
+}
+.eb-brow {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.eb-wink {
+  opacity: 0;
+}
+.eb-eye-r {
+  transform-box: fill-box;
+  transform-origin: 50% 60%;
+}
+.eb-ticket:hover .eb-brow-l {
+  animation: ebBrowL 2.6s ease-in-out 0.35s both;
+}
+.eb-ticket:hover .eb-brow-r {
+  animation: ebBrowR 2.6s ease-in-out 0.35s both;
+}
+.eb-ticket:hover .eb-eye-r {
+  animation: ebWinkEye 2.6s ease-in-out 0.35s both;
+}
+.eb-ticket:hover .eb-wink {
+  animation: ebWinkLine 2.6s ease-in-out 0.35s both;
+}
+@keyframes ebBrowL {
+  0%, 45%  { transform: translateY(1px) rotate(0deg); }
+  60%, 100% { transform: translateY(-3px) rotate(-16deg); }
+}
+@keyframes ebBrowR {
+  0%, 45%  { transform: translateY(1px) rotate(0deg); }
+  60%, 100% { transform: translateY(-4px) rotate(22deg); }
+}
+@keyframes ebWinkEye {
+  0%, 62%  { transform: scaleY(1); opacity: 1; }
+  66%, 84% { transform: scaleY(0.1); opacity: 0; }
+  90%, 100% { transform: scaleY(1); opacity: 1; }
+}
+@keyframes ebWinkLine {
+  0%, 63% { opacity: 0; }
+  66%, 84% { opacity: 1; }
+  88%, 100% { opacity: 0; }
+}
