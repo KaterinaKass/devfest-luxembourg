@@ -122,7 +122,8 @@
     var W = Math.max(1, Math.round(r.width * dpr)), H = Math.max(1, Math.round(r.height * dpr));
     if (s.canvas.width !== W || s.canvas.height !== H) { s.canvas.width = W; s.canvas.height = H; }
     // radius scales with block height like the reference (150px per 500px of height)
-    s.radiusPx = 150 * (r.height / 500);
+    // short blocks get a reasonable minimum so the trail stays visible
+    s.radiusPx = 150 * (Math.max(r.height, 460) / 500);
   }
 
   function frame(s, dt) {

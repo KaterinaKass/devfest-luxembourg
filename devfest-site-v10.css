@@ -1795,7 +1795,9 @@ header.fixed > div > a:first-child {
   z-index: 1;
   pointer-events: none;
   border-radius: inherit;
-  background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.32), transparent 60%);
+  /* tinted glow in the card's own colour: adds depth instead of washing it out */
+  background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 50%), color-mix(in srgb, var(--stat-accent) 55%, #fff6c8) 0%, transparent 62%);
+  mix-blend-mode: soft-light;
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -1811,7 +1813,7 @@ header.fixed > div > a:first-child {
   border: none;
   border-radius: inherit;
   padding: 2px;
-  background: radial-gradient(220px circle at var(--mx, -999px) var(--my, -999px), rgba(255, 255, 255, 0.95), transparent 70%);
+  background: radial-gradient(220px circle at var(--mx, -999px) var(--my, -999px), color-mix(in srgb, var(--stat-accent) 45%, #fff), transparent 70%);
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
@@ -1827,8 +1829,6 @@ header.fixed > div > a:first-child {
 }
 /* siblings react: the hovered card leads, the others step back slightly */
 .stat-fx.is-tracking .devfest-stat-card:not(.is-hot) {
-  filter: saturate(0.85);
-  opacity: 0.9;
   transform: scale(0.985);
 }
 .stat-fx .devfest-stat-card.is-hot {
@@ -1847,7 +1847,7 @@ header.fixed > div > a:first-child {
 .stat-fx.stat-in .devfest-stat-card:nth-child(2) { transition-delay: 0s, 0s, 0s, 0.12s, 0.12s; }
 .stat-fx.stat-in .devfest-stat-card:nth-child(3) { transition-delay: 0s, 0s, 0s, 0.24s, 0.24s; }
 .stat-fx.stat-in.is-tracking .devfest-stat-card:not(.is-hot) {
-  opacity: 0.9;
+  opacity: 1;
 }
 .devfest-stat-number {
   font-variant-numeric: tabular-nums;
@@ -2174,4 +2174,119 @@ dialog.cfp-dialog > div > div:last-child {
   .partner-photo {
     max-height: 160px;
   }
+}
+
+/* ---------- More speakers block: avatar row, live eyebrow, subscribe CTA ---------- */
+.ms-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.ms-eyebrow::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #34a853;
+  box-shadow: 0 0 0 0 rgba(52, 168, 83, 0.7);
+  animation: msLiveDot 1.8s ease-out infinite;
+}
+@keyframes msLiveDot {
+  0%   { box-shadow: 0 0 0 0 rgba(52, 168, 83, 0.7); }
+  100% { box-shadow: 0 0 0 9px rgba(52, 168, 83, 0); }
+}
+.ms-avatars {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  row-gap: 8px;
+  margin-top: 18px;
+  padding-left: 10px;
+}
+.ms-av {
+  width: 42px;
+  height: 42px;
+  margin-left: -10px;
+  border-radius: 50%;
+  border: 2.5px solid #16213e;
+  object-fit: cover;
+  object-position: center top;
+  background: #1f2a4a;
+  flex-shrink: 0;
+  position: relative;
+  z-index: calc(20 - var(--i));
+  animation: msAvIn 0.6s cubic-bezier(.2, .8, .2, 1) both, msAvFloat 4.5s ease-in-out infinite;
+  animation-delay: calc(var(--i) * 70ms), calc(var(--i) * -0.4s);
+  transition: transform 0.2s ease;
+}
+.ms-avatars:hover .ms-av {
+  margin-left: -4px;
+}
+.ms-av:hover {
+  transform: translateY(-4px) scale(1.08);
+  z-index: 30;
+}
+@keyframes msAvIn {
+  from { opacity: 0; scale: 0.8; }
+  to   { opacity: 1; scale: 1; }
+}
+@keyframes msAvFloat {
+  0%, 100% { translate: 0 0; }
+  50%      { translate: 0 -2px; }
+}
+/* the speakers still to come */
+.ms-av-q {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 900;
+  font-size: 16px;
+  background: linear-gradient(110deg, #26355f 30%, #3a4c82 50%, #26355f 70%);
+  background-size: 250% 100%;
+  animation: msAvIn 0.6s cubic-bezier(.2, .8, .2, 1) both, msShimmer 2.2s linear infinite;
+  animation-delay: calc(var(--i) * 70ms), calc(var(--i) * 0.25s);
+}
+@keyframes msShimmer {
+  from { background-position: 100% 0; }
+  to   { background-position: -150% 0; }
+}
+.ms-av-more {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  min-width: 52px;
+  padding: 0 12px;
+  border-radius: 999px;
+  color: #fff;
+  font-weight: 900;
+  font-size: 13px;
+  background: linear-gradient(120deg, #fbbc05 0%, #ea4335 45%, #f953c6 75%, #9b5cf6 100%);
+}
+.ms-avatars .ms-av-more {
+  margin-left: 6px;
+}
+/* subscribe: same flowing gradient as the site CTAs, arrow nudges forward on hover */
+.ms-subscribe {
+  height: 2.75rem;
+  padding-left: 1.4rem !important;
+  padding-right: 1.25rem !important;
+}
+.ms-subscribe .ms-arrow {
+  transition: transform 0.25s ease;
+}
+.ms-subscribe:hover .ms-arrow {
+  transform: translateX(4px);
+}
+#speaker-updates-email {
+  height: 2.75rem;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ms-av, .ms-av-q, .ms-eyebrow::before { animation: none !important; }
+}
+
+/* hovered stat card gets a touch richer, never paler */
+.stat-fx .devfest-stat-card.is-hot {
+  filter: saturate(1.12) brightness(1.02);
 }
