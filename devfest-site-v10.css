@@ -3513,3 +3513,8 @@ dialog.cfp-dialog > div > div:last-child {
   header.fixed { height: 4rem !important; }
   .nav-logo-img { height: 2.125rem !important; }                   /* 34px on phones */
 }
+
+/* View speakers: same arrow as Apply Now (static SVG), no growing on hover */
+.cfp-secondary::after { content: none !important; display: none !important; }
+.cfp-secondary { transition: color 0.2s ease, box-shadow 0.25s ease !important; }
+

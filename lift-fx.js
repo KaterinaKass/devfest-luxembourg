@@ -177,7 +177,7 @@
       wrap.setAttribute("aria-hidden", "true");
       wrap.innerHTML =
         '<div class="ex-photo-wrap" style="-webkit-mask-image:url(' + base + '-mask.png?v=3);mask-image:url(' + base + '-mask.png?v=3)">' +
-          '<img class="ex-photo" src="' + base + '-photo.webp?v=2" alt="" decoding="async">' +
+          '<img class="ex-photo" src="' + base + '-photo.webp?v=4" alt="" decoding="async">' +
         '</div>' +
         '<img class="ex-frame" src="' + base + '-frame.png?v=2" alt="" decoding="async">';
       box.appendChild(wrap);
@@ -219,10 +219,11 @@
     SPOTS.forEach(function (s) {
       var h = document.querySelector("#" + s.sec + " h2");
       var box = h && h.parentElement;
-      if (!box || box.querySelector(".site-sticker")) return;
+      var cls = "site-sticker-" + (s.key || s.sec);
+      if (!box || box.querySelector("." + cls)) return;
       box.classList.add("sticker-host");
       var im = document.createElement("img");
-      im.className = "site-sticker site-sticker-" + s.sec + " is-" + s.side;
+      im.className = "site-sticker " + cls + " is-" + s.side;
       im.src = "/images/stickers/" + s.img + ".webp";
       im.alt = "";
       im.setAttribute("aria-hidden", "true");
