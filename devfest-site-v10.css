@@ -3653,3 +3653,23 @@ dialog.cfp-dialog > div > div:last-child {
   .partner-photo { transition: none; }
   .partner-photo:hover { transform: none; clip-path: inset(0 round 12px); }
 }
+
+/* ---------- Scroll performance ---------- */
+/* looping animations pause while the page scrolls (class set by lift-fx.js) */
+html.is-scrolling *,
+html.is-scrolling *::before,
+html.is-scrolling *::after { animation-play-state: paused !important; }
+/* the ticket cards' shadow filter: rasterize once on its own layer */
+.ticket-wrap { will-change: filter; }
+/* Early Bird chick: grumpy first, then it smiles and winks (and keeps smiling while hovered) */
+.eb-note { display: none !important; }
+.eb-ticket:hover .eb-chick-wink { animation: ebChickTilt 2.6s ease-in-out 0.5s both, ebChickSmile 2.6s ease 0.5s both; }
+@keyframes ebChickSmile {
+  0%, 42% { opacity: 0; }
+  50%, 100% { opacity: 1; }
+}
+@keyframes ebChickTilt {
+  0%, 42%  { transform: rotate(0deg); }
+  55%      { transform: rotate(-7deg) translateY(-3px); }
+  75%, 100% { transform: rotate(-4deg) translateY(-1px); }
+}

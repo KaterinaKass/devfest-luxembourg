@@ -44,8 +44,7 @@
   var BIRD =
     // the user's own chick drawing: an open-eye frame and a wink frame stacked on top of each other
     '<img class="eb-chick" src="/images/early-bird/chick.webp" alt="" width="192" height="260" decoding="async">' +
-    '<img class="eb-chick eb-chick-wink" src="/images/early-bird/chick-wink.webp" alt="" width="192" height="260" decoding="async">' +
-    '<span class="eb-note eb-note-1">♪</span><span class="eb-note eb-note-2">♫</span>';
+    '<img class="eb-chick eb-chick-wink" src="/images/early-bird/chick-wink.webp?v=2" alt="" width="192" height="260" decoding="async">';
 
   function setup() {
     [].forEach.call(document.querySelectorAll(".ticket-wrap"), function (w) {
@@ -337,4 +336,17 @@
   new MutationObserver(setup).observe(document.documentElement, { childList: true, subtree: true });
   document.addEventListener("DOMContentLoaded", setup);
   setup();
+})();
+
+// Smooth scrolling: while the page is actively scrolling, pause looping decorative
+// animations (sparkles, glows, gradient flows). Several of them sit inside drop-shadow
+// filters (ticket cards), which forces a full repaint of the filtered block every frame.
+// They resume ~180ms after scrolling stops, so the effect is invisible.
+(function () {
+  var root = document.documentElement, t = 0, on = false;
+  window.addEventListener("scroll", function () {
+    if (!on) { on = true; root.classList.add("is-scrolling"); }
+    clearTimeout(t);
+    t = setTimeout(function () { on = false; root.classList.remove("is-scrolling"); }, 180);
+  }, { passive: true });
 })();
