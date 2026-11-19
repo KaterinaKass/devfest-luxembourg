@@ -2888,3 +2888,21 @@ dialog.cfp-dialog > div > div:last-child {
   .eb-ticket:hover .eb-note-2 { animation: none; }
 }
 
+/* ---------- Join us in Luxembourg: interactive code-glyph field ---------- */
+.code-fx {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.code-fx-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+.code-fx > *:not(.code-fx-canvas) {
+  position: relative;
+  z-index: 1;
+}

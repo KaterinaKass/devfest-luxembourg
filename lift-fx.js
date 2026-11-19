@@ -72,3 +72,78 @@
   setup();
 })();
 
+// "Join us in Luxembourg" (blue register block): a field of code glyphs that wakes up
+// around the pointer — glyphs near the cursor light up in Google colours, grow and
+// scramble like a terminal, then settle back into a faint grid.
+(function () {
+  if (!window.matchMedia || !window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var GLYPHS = "{}<>/;=()[]#*+-&|!?:01".split("");
+  var COLORS = ["#ffffff", "#fbbc05", "#34a853", "#ea4335", "#8ab4f8"];
+  var STEP = 30, RADIUS = 150;
+
+  function setup(box) {
+    if (box.dataset.codeFx) return;
+    box.dataset.codeFx = "1";
+    box.classList.add("code-fx");
+    var c = document.createElement("canvas");
+    c.className = "code-fx-canvas";
+    c.setAttribute("aria-hidden", "true");
+    box.insertBefore(c, box.firstChild);
+    var ctx = c.getContext("2d"), cells = [], W = 0, H = 0, mx = -9999, my = -9999, on = false, energy = 0, raf = 0;
+
+    function build() {
+      var r = box.getBoundingClientRect(), dpr = Math.min(window.devicePixelRatio || 1, 2);
+      W = r.width; H = r.height;
+      c.width = Math.round(W * dpr); c.height = Math.round(H * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      cells = [];
+      for (var y = STEP / 2; y < H; y += STEP) for (var x = STEP / 2; x < W; x += STEP) {
+        cells.push({ x: x, y: y, g: GLYPHS[(Math.random() * GLYPHS.length) | 0], heat: 0, col: COLORS[(Math.random() * COLORS.length) | 0] });
+      }
+    }
+    function frame() {
+      raf = 0;
+      ctx.clearRect(0, 0, W, H);
+      ctx.textAlign = "center"; ctx.textBaseline = "middle";
+      var alive = false;
+      energy += ((on ? 1 : 0) - energy) * 0.08;
+      for (var i = 0; i < cells.length; i++) {
+        var k = cells[i], dx = k.x - mx, dy = k.y - my, d = Math.sqrt(dx * dx + dy * dy);
+        var target = on ? Math.max(0, 1 - d / RADIUS) : 0;
+        k.heat += (target - k.heat) * 0.18;
+        if (k.heat > 0.02) {
+          alive = true;
+          if (Math.random() < k.heat * 0.18) k.g = GLYPHS[(Math.random() * GLYPHS.length) | 0];
+          if (Math.random() < 0.01) k.col = COLORS[(Math.random() * COLORS.length) | 0];
+        }
+        var a = 0.07 * energy + k.heat * 0.85;
+        if (a < 0.01) continue;
+        var size = 13 + k.heat * 9;
+        // glyphs drift slightly away from the cursor, like a magnetic field
+        var push = k.heat * 8, ox = d ? (dx / d) * push : 0, oy = d ? (dy / d) * push : 0;
+        ctx.globalAlpha = Math.min(1, a);
+        ctx.fillStyle = k.heat > 0.15 ? k.col : "#ffffff";
+        ctx.font = "700 " + size.toFixed(1) + "px ui-monospace, SFMono-Regular, Menlo, monospace";
+        ctx.fillText(k.g, k.x + ox, k.y + oy);
+      }
+      ctx.globalAlpha = 1;
+      if (alive || energy > 0.01) raf = requestAnimationFrame(frame);
+    }
+    function kick() { if (!raf) raf = requestAnimationFrame(frame); }
+    box.addEventListener("pointerenter", function () { if (!cells.length) build(); on = true; kick(); });
+    box.addEventListener("pointermove", function (e) {
+      var r = box.getBoundingClientRect(); mx = e.clientX - r.left; my = e.clientY - r.top; kick();
+    });
+    box.addEventListener("pointerleave", function () { on = false; mx = my = -9999; kick(); });
+    window.addEventListener("resize", function () { cells = []; });
+  }
+  function scan() {
+    var sec = document.getElementById("register");
+    var box = sec && sec.querySelector(".rounded-3xl");
+    if (box) setup(box);
+  }
+  new MutationObserver(scan).observe(document.documentElement, { childList: true, subtree: true });
+  document.addEventListener("DOMContentLoaded", scan);
+  scan();
+})();
