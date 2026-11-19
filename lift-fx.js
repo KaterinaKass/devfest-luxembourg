@@ -163,28 +163,48 @@
   scan();
 })();
 
-// "What to Expect" artwork: split into photo + frame layers so the photo can zoom gently
-// inside its shape on hover while the outline and line icons stay still.
+// "What to Expect" artwork: drawn as inline vector SVG, like the "Who is it for?" images —
+// a clean stroked shape, the photo clipped inside it (zooms gently on hover), vector icons.
 (function () {
-  var NAMES = ["technical-content", "community-connections", "hands-on-learning"];
+  var K = ' fill="none" stroke="#202124" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"';
+  var ART = {
+    "technical-content": {
+      shape: "M346,1.5 H444 Q462.5,1.5 462.5,19 V146 Q462.5,164 444,164 H346 Q328,164 328,182 V248 Q328,266.5 310,266.5 H19 Q1.5,266.5 1.5,248 V86 Q1.5,68 19,68 H310 Q328,68 328,50 V19 Q328,1.5 346,1.5 Z",
+      icons: '<path d="M38,36 A17.6,22 0 0 1 73.2,36 A17.6,22 0 0 1 108.4,36 A17.6,22 0 0 1 143.6,36 A17.6,22 0 0 1 178.8,36"' + K + '/>' +
+             '<path d="M209,24 H295 M281,11 Q287,24 295,24 Q287,24 281,37"' + K + '/>' +
+             '<path d="M379,189 H368 V251 H379 M419,189 H430 V251 H419 M399,198 V240 M378,219 H420 M384,204 L414,234 M414,204 L384,234"' + K + '/>'
+    },
+    "community-connections": {
+      shape: "M19,1.5 H321 Q339,1.5 339,19 V91 Q339,109 357,109 H444 Q462.5,109 462.5,127 V248 Q462.5,266.5 444,266.5 H19 Q1.5,266.5 1.5,248 V19 Q1.5,1.5 19,1.5 Z",
+      icons: '<path d="M388,6 H414 L394,78 H368 Z M420,6 H446 L426,78 H400 Z"' + K + '/>'
+    },
+    "hands-on-learning": {
+      shape: "M108,1.5 H444 Q462.5,1.5 462.5,19 V127 Q462.5,145 444,145 H304 Q286,145 286,163 V248 Q286,266.5 268,266.5 H19 Q1.5,266.5 1.5,248 V207 Q1.5,189 19,189 H72 Q90,189 90,171 V19 Q90,1.5 108,1.5 Z",
+      icons: '<circle cx="42" cy="56" r="15"' + K + '/>' +
+             '<path d="M33,86 Q58,80 57,104 Q56,124 33,142 L28,136 Q42,122 40,110 Q28,108 28,96 Q28,88 33,86 Z"' + K + '/>' +
+             '<path d="M360.5,199.2 A21,21 0 0 1 399.5,199.2 A21,21 0 1 1 399.5,214.8 A21,21 0 0 1 360.5,214.8 A21,21 0 1 1 360.5,199.2 Z"' + K + '/>'
+    }
+  };
+  var n = 0;
   function setup() {
     [].forEach.call(document.querySelectorAll(".devfest-expect-artwork > img"), function (img) {
       var src = img.getAttribute("src") || "";
-      var name = NAMES.filter(function (n) { return src.indexOf("/" + n + ".png") !== -1 || src.indexOf("/" + n + "-frame.png") !== -1; })[0];
+      var name = Object.keys(ART).filter(function (k) { return src.indexOf("/" + k) !== -1; })[0];
       var box = img.parentElement;
       if (!name || box.dataset.exZoom) return;
       box.dataset.exZoom = "1";
-      box.classList.add("ex-zoom");
-      var base = "/images/devfest-global/" + name;
-      var wrap = document.createElement("div");
-      wrap.className = "ex-layers";
-      wrap.setAttribute("aria-hidden", "true");
-      wrap.innerHTML =
-        '<div class="ex-photo-wrap" style="-webkit-mask-image:url(' + base + '-mask.png?v=3);mask-image:url(' + base + '-mask.png?v=3)">' +
-          '<img class="ex-photo" src="' + base + '-photo.webp?v=4" alt="" decoding="async">' +
-        '</div>' +
-        '<img class="ex-frame" src="' + base + '-frame.png?v=2" alt="" decoding="async">';
-      box.appendChild(wrap);
+      var a = ART[name], id = "exc" + (++n);
+      var html =
+        '<svg class="aud-svg ex-svg" viewBox="0 0 464 268" role="img" aria-label="' + (img.alt || "") + '">' +
+          '<defs><clipPath id="' + id + '"><path d="' + a.shape + '"/></clipPath></defs>' +
+          '<g clip-path="url(#' + id + ')"><image href="/images/devfest-global/' + name + '-photo.webp?v=4" x="0" y="0" width="464" height="268" preserveAspectRatio="xMidYMid slice"/></g>' +
+          '<path d="' + a.shape + '"' + K + '/>' + a.icons +
+        '</svg>';
+      var tmp = document.createElement("div");
+      tmp.innerHTML = html;
+      img.style.display = "none";
+      box.classList.add("aud-zoom", "ex-vector");
+      box.insertBefore(tmp.firstChild, img);
     });
   }
   new MutationObserver(setup).observe(document.documentElement, { childList: true, subtree: true });

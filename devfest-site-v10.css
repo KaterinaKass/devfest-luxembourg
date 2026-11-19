@@ -3590,3 +3590,10 @@ dialog.cfp-dialog > div > div:last-child {
 .cj-heart { animation: cjBeat 1.6s ease-in-out infinite; }
 @keyframes cjBeat { 0%, 60%, 100% { transform: scale(1); } 15% { transform: scale(1.14); } 30% { transform: scale(0.97); } 45% { transform: scale(1.08); } }
 @media (prefers-reduced-motion: reduce) { .cj-glyphs * { animation: none !important; } }
+
+/* What to Expect: vector artwork (same construction as "Who is it for?") */
+.ex-vector { display: flex !important; }
+.ex-vector > .ex-svg { width: 100%; max-width: 465px; }
+/* Download Agenda: lighter frosting — the code glyphs stay visible, just softened */
+.btn-agenda { -webkit-backdrop-filter: blur(3px) !important; backdrop-filter: blur(3px) !important; }
+.btn-agenda:hover { -webkit-backdrop-filter: blur(4px) !important; backdrop-filter: blur(4px) !important; }
