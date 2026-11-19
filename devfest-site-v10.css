@@ -2479,3 +2479,65 @@ dialog.cfp-dialog > div > div:last-child {
 @media (prefers-reduced-motion: reduce) {
   .pkg-card.is-lifted { transform: none; }
 }
+
+/* ---------- Contact / partnership forms: flowing submit button, refined close button ---------- */
+.form-submit-flow {
+  position: relative;
+  overflow: hidden;
+  animation: ticketCtaFlow 6s ease-in-out infinite;
+}
+.form-submit-flow::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(105deg, transparent 30%, rgba(255, 255, 255, 0.4) 50%, transparent 70%);
+  transform: translateX(-120%);
+  transition: transform 0.7s ease;
+}
+.form-submit-flow:hover::after {
+  transform: translateX(120%);
+}
+.form-submit-flow:hover {
+  filter: brightness(1.05) saturate(1.08);
+}
+.form-close {
+  position: relative;
+  background: #fff !important;
+  color: #5f6368 !important;
+  border: 1.5px solid #e8eaed;
+  box-shadow: 0 1px 2px rgba(60, 64, 67, 0.08);
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.form-close svg {
+  transition: transform 0.35s cubic-bezier(.2, .9, .25, 1.3);
+}
+.form-close:hover {
+  background: #1a1a1a !important;
+  color: #fff !important;
+  border-color: #1a1a1a;
+  box-shadow: 0 6px 16px -6px rgba(0, 0, 0, 0.45);
+}
+.form-close:hover svg {
+  transform: rotate(90deg);
+}
+.form-close:active {
+  filter: brightness(0.9);
+}
+.form-close:focus-visible {
+  outline: 3px solid rgba(66, 133, 244, 0.45);
+  outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .form-submit-flow { animation: none; }
+  .form-close svg { transition: none; }
+}
+/* No Table Needed "Contact us": same living gradient + a clear hover */
+.nt-cta {
+  transition: box-shadow 0.2s ease, filter 0.2s ease;
+  box-shadow: 0 3px 10px -4px var(--nt);
+}
+.nt-cta:hover {
+  box-shadow: 0 8px 18px -6px var(--nt);
+  filter: brightness(1.07) saturate(1.1);
+}
