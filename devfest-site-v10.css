@@ -3397,3 +3397,48 @@ dialog.cfp-dialog > div > div:last-child {
 @media (prefers-reduced-motion: reduce) {
   .site-sticker { transition: none; }
 }
+
+/* ---------- Hero floating glyphs: crisp vector Bold Glyphs from the DevFest brand kit ---------- */
+.hero-glyph {
+  display: block;
+  filter: drop-shadow(0 8px 14px rgba(30, 30, 30, 0.08));
+}
+/* phones: the hero is too tight, the glyphs would sit on the logo and buttons */
+@media (max-width: 767px) {
+  .hero-glyph { display: none; }
+}
+
+/* ---------- Key art ticker band (hero → About) ---------- */
+.keyart-band {
+  position: relative;
+  overflow: hidden;
+  background: #f0f0f0;
+  border-top: 1px solid rgba(30, 30, 30, 0.06);
+  border-bottom: 1px solid rgba(30, 30, 30, 0.06);
+  padding: 14px 0;
+}
+.keyart-track {
+  display: flex;
+  width: max-content;
+  animation: keyart-scroll 160s linear infinite;
+  will-change: transform;
+}
+.keyart-track img {
+  display: block;
+  height: 64px;
+  width: auto;
+  margin-right: 56px;
+  flex: none;
+}
+@keyframes keyart-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@media (max-width: 767px) {
+  .keyart-band { padding: 10px 0; }
+  .keyart-track img { height: 40px; margin-right: 36px; }
+  .keyart-track { animation-duration: 120s; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .keyart-track { animation: none; }
+}

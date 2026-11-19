@@ -235,3 +235,23 @@
   document.addEventListener("DOMContentLoaded", setup);
   setup();
 })();
+
+// Horizontal DevFest key art as a slow, endless ticker band between the hero and About.
+(function () {
+  var SRC = "/images/devfest-global/key-art-horizontal.webp";
+  function setup() {
+    var about = document.getElementById("about");
+    if (!about || document.querySelector(".keyart-band")) return;
+    var band = document.createElement("div");
+    band.className = "keyart-band";
+    band.setAttribute("aria-hidden", "true");
+    var half = "";
+    for (var i = 0; i < 4; i++) half += '<img src="' + SRC + '" alt="" width="2048" height="250" decoding="async">';
+    // two identical halves: the track moves by exactly one half, so the loop is seamless
+    band.innerHTML = '<div class="keyart-track">' + half + half + "</div>";
+    about.parentNode.insertBefore(band, about);
+  }
+  new MutationObserver(setup).observe(document.documentElement, { childList: true, subtree: true });
+  document.addEventListener("DOMContentLoaded", setup);
+  setup();
+})();
