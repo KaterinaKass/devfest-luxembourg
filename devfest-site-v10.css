@@ -3336,3 +3336,30 @@ dialog.cfp-dialog > div > div:last-child {
 .nav-fx > .is-active::after {
   display: none !important;
 }
+
+/* Partnership cards: card stays still; the icon tile comes alive on hover */
+.partner-icon {
+  cursor: default;
+  transition: transform 0.35s cubic-bezier(.2, .9, .25, 1.4), box-shadow 0.3s ease, background-color 0.3s ease;
+}
+.partner-icon .material-icons {
+  transition: transform 0.35s cubic-bezier(.2, .9, .25, 1.4), color 0.3s ease;
+}
+.partner-icon:hover {
+  transform: rotate(-8deg) scale(1.1);
+  background: var(--pi) !important;
+  box-shadow: 0 10px 22px -8px var(--pi);
+}
+.partner-icon:hover .material-icons {
+  color: #fff !important;
+  animation: partnerIconPop 0.6s ease;
+}
+@keyframes partnerIconPop {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.25) rotate(8deg); }
+  70%  { transform: scale(0.95) rotate(-4deg); }
+  100% { transform: scale(1) rotate(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .partner-icon, .partner-icon .material-icons { transition: none; animation: none !important; }
+}
