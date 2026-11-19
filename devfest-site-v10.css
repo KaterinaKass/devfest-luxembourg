@@ -3725,3 +3725,19 @@ html.kbd-nav .cfp-close:focus-visible { outline: 2px solid rgba(255, 255, 255, 0
 
 /* Partnership card photos: show the whole picture (no height cap that cropped it) */
 .partner-photo { max-height: none !important; aspect-ratio: 16 / 10; height: auto; }
+
+/* Early Bird chick: pops up, grumpy → smile + wink, then slides back down behind the card on
+   its own, even if the pointer stays on the ticket. Hover again to see it again. */
+.eb-bird, .eb-ticket .eb-bird { transition: none !important; transform: translateY(70px) rotate(6deg); }
+.eb-ticket:hover .eb-bird { transform: translateY(74px) rotate(6deg); }
+.eb-ticket:hover .eb-bird { animation: ebChickPeek 4.4s cubic-bezier(.2, .9, .25, 1.2) both; }
+@keyframes ebChickPeek {
+  0%       { transform: translateY(70px) rotate(6deg); }
+  11%      { transform: translateY(0) rotate(-3deg); }
+  80%      { transform: translateY(0) rotate(-3deg); }
+  86%      { transform: translateY(-4px) rotate(-1deg); }
+  100%     { transform: translateY(74px) rotate(6deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .eb-ticket:hover .eb-bird { animation: none; }
+}
