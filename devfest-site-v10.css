@@ -3977,3 +3977,16 @@ div:has(> div > .ms-eyebrow) form button { padding-left: 24px !important; paddin
     background: linear-gradient(120deg, #f953c6 0%, #e85fc6 18%, #b91d73 50%, #e85fc6 82%, #f953c6 100%) 0 50% / 170% 100% !important;
   }
 }
+
+/* Hero on phones: the original pale braces (top-left) and pale pink circle (top-right) */
+.hero-glyph-old { display: none; }
+@media (max-width: 767px) {
+  .hero-glyph-old { display: block; opacity: 0.9; transform: scale(0.72); transform-origin: center; }
+  img.hero-glyph[src*="braces"], img.hero-glyph[src*="half-ring"] { display: none !important; }
+}
+
+/* Hero on phones: the hash moves up into the free space left of the date/venue/time pills,
+   so it is no longer hidden behind "Become a Partner" */
+@media (max-width: 767px) {
+  div:has(> img.hero-glyph[src*="hash"]) { top: 36% !important; left: -3% !important; }
+}
