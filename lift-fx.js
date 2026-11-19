@@ -184,3 +184,22 @@
   document.addEventListener("DOMContentLoaded", setup);
   setup();
 })();
+
+// Venue photo: zoom + a warm yellow-orange light that follows the pointer.
+(function () {
+  function setup() {
+    var img = document.querySelector('img[src*="venue-chamber-of-commerce"]');
+    var box = img && img.parentElement;
+    if (!box || box.dataset.venueFx) return;
+    box.dataset.venueFx = "1";
+    box.classList.add("venue-photo");
+    box.addEventListener("pointermove", function (e) {
+      var r = box.getBoundingClientRect();
+      box.style.setProperty("--vx", ((e.clientX - r.left) / r.width * 100).toFixed(1) + "%");
+      box.style.setProperty("--vy", ((e.clientY - r.top) / r.height * 100).toFixed(1) + "%");
+    });
+  }
+  new MutationObserver(setup).observe(document.documentElement, { childList: true, subtree: true });
+  document.addEventListener("DOMContentLoaded", setup);
+  setup();
+})();

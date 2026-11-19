@@ -3140,3 +3140,46 @@ dialog.cfp-dialog > div > div:last-child {
 .partner-link img[alt="Digital Learning Hub"] {
   max-height: 66px !important;
 }
+
+/* ---------- Venue photo: gentle zoom + warm light following the pointer ---------- */
+.venue-photo {
+  isolation: isolate;
+  transition: box-shadow 0.4s ease, transform 0.4s ease;
+}
+.venue-photo > img {
+  transition: transform 0.8s cubic-bezier(.2, .8, .2, 1), filter 0.5s ease;
+}
+.venue-photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(420px circle at var(--vx, 50%) var(--vy, 40%), rgba(251, 188, 5, 0.55), rgba(249, 132, 74, 0.35) 40%, transparent 70%),
+    linear-gradient(135deg, rgba(251, 188, 5, 0.25), rgba(234, 67, 53, 0.2));
+  mix-blend-mode: soft-light;
+  opacity: 0;
+  transition: opacity 0.45s ease;
+}
+.venue-photo > div {
+  z-index: 2;
+  transition: transform 0.45s ease;
+}
+.venue-photo:hover > img {
+  transform: scale(1.06);
+  filter: saturate(1.15);
+}
+.venue-photo:hover::after {
+  opacity: 1;
+}
+.venue-photo:hover {
+  box-shadow: 0 28px 60px -24px rgba(249, 132, 74, 0.55), 0 0 0 2px rgba(251, 188, 5, 0.55) !important;
+}
+.venue-photo:hover > div {
+  transform: translateY(-4px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .venue-photo > img, .venue-photo > div { transition: none; }
+  .venue-photo:hover > img { transform: none; }
+}
