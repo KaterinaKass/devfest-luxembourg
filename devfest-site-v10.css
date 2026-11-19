@@ -2465,3 +2465,17 @@ dialog.cfp-dialog > div > div:last-child {
 #speaker-updates-email::placeholder {
   color: rgba(255, 255, 255, 0.55);
 }
+
+/* Sponsorship tier cards lift like the ticket cards (hover decided in lift-fx.js) */
+.pkg-card {
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+.pkg-card.is-lifted {
+  transform: translateY(-6px);
+}
+.pkg-card:not(.pkg-card-gold).is-lifted {
+  box-shadow: 0 18px 30px -14px rgba(60, 64, 67, 0.22) !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  .pkg-card.is-lifted { transform: none; }
+}
