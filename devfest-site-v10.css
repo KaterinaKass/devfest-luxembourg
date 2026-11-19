@@ -3597,3 +3597,6 @@ dialog.cfp-dialog > div > div:last-child {
 /* Download Agenda: lighter frosting — the code glyphs stay visible, just softened */
 .btn-agenda { -webkit-backdrop-filter: blur(3px) !important; backdrop-filter: blur(3px) !important; }
 .btn-agenda:hover { -webkit-backdrop-filter: blur(4px) !important; backdrop-filter: blur(4px) !important; }
+/* Venue photo hover: same translucent magenta wash as the partner logos */
+.venue-photo::after { background: #c13fd0 !important; mix-blend-mode: multiply !important; }
+.venue-photo:hover::after { opacity: 0.72; }
