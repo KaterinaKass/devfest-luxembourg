@@ -2369,3 +2369,79 @@ dialog.cfp-dialog > div > div:last-child {
 @media (prefers-reduced-motion: reduce) {
   .ticket-wrap:hover > .ticket-card { transform: none; }
 }
+
+/* VIP ticket: the card had transform locked by .vip-card-border; let it lift like the others */
+.ticket-wrap-vip > .ticket-card.vip-card-border {
+  transition: transform 0.22s ease, box-shadow 0.2s ease !important;
+}
+.ticket-wrap-vip:hover > .ticket-card.vip-card-border {
+  transform: translateY(-6px) !important;
+}
+.ticket-wrap-vip > [class*="sparkle-"] {
+  transition: translate 0.22s ease;
+}
+.ticket-wrap-vip:hover > [class*="sparkle-"] {
+  translate: 0 -6px;
+}
+
+/* ---------- Header menu: gliding pill + active underline ---------- */
+.nav-fx {
+  position: relative;
+  isolation: isolate;
+}
+.nav-pill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  border-radius: 999px;
+  pointer-events: none;
+  opacity: 0;
+  background: rgba(60, 64, 67, 0.07);
+  transition: transform 0.35s cubic-bezier(.2, .9, .25, 1.15), width 0.35s cubic-bezier(.2, .9, .25, 1.15), background-color 0.25s ease, opacity 0.2s ease;
+}
+.nav-pill[data-mode="active"] {
+  background: rgba(66, 133, 244, 0.1);
+}
+.nav-pill.no-anim {
+  transition: none;
+}
+/* the pill replaces the per-link hover background set by the app */
+.nav-fx > a:not(.grad-flow),
+.nav-fx > button {
+  background: transparent !important;
+  position: relative;
+  transition: color 0.2s ease;
+}
+.nav-fx > a:not(.grad-flow):hover,
+.nav-fx > button:hover {
+  color: #1a1a1a !important;
+}
+/* current section: blue text + a short Google-colour underline */
+.nav-fx > .is-active {
+  color: #1a73e8 !important;
+}
+.nav-fx > .is-active::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 3px;
+  width: 18px;
+  height: 3px;
+  border-radius: 3px;
+  translate: -50% 0;
+  background: linear-gradient(90deg, #4285f4 0 25%, #ea4335 25% 50%, #fbbc05 50% 75%, #34a853 75% 100%);
+  animation: navUnderline 0.35s cubic-bezier(.2, .9, .25, 1.2) both;
+}
+@keyframes navUnderline {
+  from { width: 0; opacity: 0; }
+  to   { width: 18px; opacity: 1; }
+}
+.nav-fx > .is-active:hover::after {
+  width: 26px;
+  transition: width 0.25s ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-pill { transition: opacity 0.2s ease; }
+  .nav-fx > .is-active::after { animation: none; }
+}
