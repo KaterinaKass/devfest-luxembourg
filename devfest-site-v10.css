@@ -3843,3 +3843,30 @@ html.is-scrolling .keyart-band .keyart-track { animation-play-state: running !im
 @media (max-width: 767px) {
   .hero-glyph { display: block !important; opacity: 0.16 !important; transform: scale(0.72); transform-origin: center; }
 }
+
+/* ---------- Hero info: three separate pills (row on desktop, stacked on phones) ---------- */
+.hero-meta {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  padding: 0 !important;
+  gap: 10px !important;
+  border-radius: 0 !important;
+}
+.hero-meta > div,
+.hero-meta > div:first-child {
+  background: rgba(255, 255, 255, 0.92) !important;
+  border: 1px solid #e8eaed;
+  border-radius: 999px !important;
+  box-shadow: 0 6px 18px -10px rgba(60, 64, 67, 0.28);
+  padding: 5px 16px 5px 5px !important;
+  white-space: nowrap;
+}
+@media (max-width: 560px) {
+  .hero-meta {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 10px !important;
+  }
+}
