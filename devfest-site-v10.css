@@ -3792,3 +3792,38 @@ html.is-scrolling .keyart-band .keyart-track { animation-play-state: running !im
    card one, and round the header's top corners itself as well. */
 .ticket-wrap > .ticket-card { position: relative; z-index: 1; isolation: isolate; }
 .ticket-head { border-top-left-radius: 16px; border-top-right-radius: 16px; }
+
+/* ---------- Mobile menu: clean list like the reference ---------- */
+@media (max-width: 1099px) {
+  .nav-mobile {
+    background: #fff !important;
+    padding: 6px 24px 22px !important;
+    gap: 0 !important;
+    box-shadow: 0 18px 30px -20px rgba(32, 33, 36, 0.25);
+    max-height: calc(100dvh - 64px);
+    overflow-y: auto;
+  }
+  .nav-mobile > a:not(.rounded-full),
+  .nav-mobile > button {
+    min-height: 52px !important;
+    padding: 0 !important;
+    font-size: 17px !important;
+    font-weight: 500 !important;
+    color: #202124;
+    border-bottom: 1px solid #ececef;
+    display: flex !important;
+    align-items: center;
+  }
+  /* After-Party: centred label, richer magenta gradient */
+  .nav-mobile > a.rounded-full {
+    justify-content: center !important;
+    align-items: center;
+    min-height: 52px !important;
+    margin-top: 18px !important;
+    font-size: 17px !important;
+    font-weight: 700 !important;
+    background: linear-gradient(110deg, #e45fc4 0%, #c8449f 50%, #a8306e 100%) !important;
+    box-shadow: 0 10px 22px -12px rgba(168, 48, 110, 0.7);
+  }
+  .nav-mobile > div:last-child { margin-top: 16px !important; }
+}
