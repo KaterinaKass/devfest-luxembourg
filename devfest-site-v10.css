@@ -3927,3 +3927,47 @@ div:has(> div > .ms-eyebrow) form button { padding-left: 24px !important; paddin
 @media (prefers-reduced-motion: reduce) {
   .nav-mobile > a.rounded-full { animation: none !important; }
 }
+
+/* ---------- Optical centring of pill labels (section eyebrows, "More coming soon", After-Party) ----------
+   Google Sans carries extra space above the capitals, so caps sit high in the line box (most visibly
+   in Safari/iOS). text-box trims the line to cap-height…baseline, so equal padding centres the letters
+   exactly in every engine that supports it; older browsers keep the previous look. */
+@supports (text-box: trim-both cap alphabetic) {
+  .eyebrow,
+  .ms-eyebrow {
+    display: inline-block !important;
+    text-box: trim-both cap alphabetic;
+    line-height: 1 !important;
+    padding-top: 9px !important;
+    padding-bottom: 9px !important;
+    white-space: nowrap;
+  }
+  .eyebrow::before,
+  .ms-eyebrow::before {
+    display: inline-block;
+    vertical-align: calc(0.5cap - 3px);
+    margin-right: 8px;
+  }
+  /* After-Party: desktop header button */
+  .nav-desktop > a.grad-flow {
+    display: inline-block !important;
+    height: auto !important;
+    line-height: 1 !important;
+    text-box: trim-both cap alphabetic;
+    padding-top: calc((2.85em - 1cap) / 2) !important;
+    padding-bottom: calc((2.85em - 1cap) / 2) !important;
+  }
+}
+@supports (text-box: trim-both cap alphabetic) {
+  @media (max-width: 1099px) {
+    .nav-mobile > a.rounded-full {
+      display: block !important;
+      text-align: center;
+      min-height: 0 !important;
+      line-height: 1 !important;
+      text-box: trim-both cap alphabetic;
+      padding-top: calc((52px - 1cap) / 2) !important;
+      padding-bottom: calc((52px - 1cap) / 2) !important;
+    }
+  }
+}
