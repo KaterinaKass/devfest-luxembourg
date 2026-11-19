@@ -3915,3 +3915,15 @@ div:has(> div > .ms-eyebrow) form button { padding-left: 24px !important; paddin
 
 /* Tickets ("Choose your pass"): very light grey band to separate it from the Venue section */
 #tickets { background: #f6f7f9 !important; }
+
+/* Mobile menu After-Party: the same flowing pink gradient as the desktop button */
+@media (max-width: 1099px) {
+  .nav-mobile > a.rounded-full {
+    background: linear-gradient(120deg, #f953c6 0%, #ff6fd8 25%, #b91d73 55%, #f953c6 100%) 0 50% / 300% 100% !important;
+    animation: ticketCtaFlow 6s ease-in-out infinite !important;
+    box-shadow: 0 10px 22px -12px rgba(249, 83, 198, 0.7);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-mobile > a.rounded-full { animation: none !important; }
+}
