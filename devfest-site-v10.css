@@ -3833,3 +3833,7 @@ html.is-scrolling .keyart-band .keyart-track { animation-play-state: running !im
 @media (max-width: 600px) {
   .more-glyphs .cj-glyphs { width: calc(100% - 40px) !important; margin-inline: auto; }
 }
+
+/* Code of Conduct contact text: on desktop "respond discreetly…" starts a new line; phones wrap naturally */
+.coc-br { display: none; }
+@media (min-width: 1024px) { .coc-br { display: inline; } }
