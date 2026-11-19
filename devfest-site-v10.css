@@ -4009,3 +4009,28 @@ img.hero-glyph[src*="hero-glyphs/braces.svg"], img.hero-glyph[src*="half-ring"] 
 img.hero-soft-braces { opacity: 0.2 !important; }
 @media (max-width: 767px) { img.hero-soft-braces { opacity: 0.16 !important; } }
 @media (min-width: 768px) { div:has(> img.hero-soft-braces) { top: 15% !important; } }
+
+/* eyebrows with several parts ("Partner with us · No sponsorship fee"): keep the gaps around the dot
+   now that the pill is inline-block for optical centring */
+.eyebrow > span + span { margin-left: 0.55em; }
+
+/* ---------- Header menu on laptops (MacBook Air etc.): larger, more readable, more air ---------- */
+@media (min-width: 1100px) and (max-width: 1279px) {
+  header.fixed > div { max-width: calc(100vw - 40px) !important; padding-left: 0 !important; padding-right: 0 !important; }
+  .nav-desktop { gap: 2px !important; }
+  .nav-desktop > a,
+  .nav-desktop > button,
+  .nav-desktop > div button.h-10 { font-size: 14.5px !important; padding-left: 0.62em !important; padding-right: 0.62em !important; }
+}
+@media (min-width: 1280px) {
+  header.fixed > div { max-width: min(calc(100vw - 64px), clamp(1152px, 76vw, 1840px)) !important; }
+  .nav-desktop { gap: clamp(4px, 0.45vw, 12px) !important; }
+  .nav-desktop > a,
+  .nav-desktop > button,
+  .nav-desktop > div button.h-10 { font-size: clamp(15.5px, calc(0.3vw + 11.6px), 19px) !important; padding-left: 0.75em !important; padding-right: 0.75em !important; }
+}
+/* laptops: header spans the screen (minus margins) so the larger menu fits; items never shrink */
+.nav-desktop > * { flex-shrink: 0 !important; }
+@media (min-width: 1280px) and (max-width: 1699px) {
+  header.fixed > div { max-width: calc(100vw - 64px) !important; }
+}
