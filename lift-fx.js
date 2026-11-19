@@ -26,3 +26,14 @@
   });
   window.addEventListener("scroll", function () { if (lastX >= 0 && !raf) raf = requestAnimationFrame(update); }, { passive: true });
 })();
+
+// Venue heading: a warm pink-orange glow follows the pointer through the letters.
+(function () {
+  if (!window.matchMedia || !window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+  document.addEventListener("pointermove", function (e) {
+    var h = e.target && e.target.closest ? e.target.closest(".venue-heading") : null;
+    if (!h) return;
+    h.style.setProperty("--hx", e.clientX + "px");
+    h.style.setProperty("--hy", e.clientY + "px");
+  }, { passive: true });
+})();

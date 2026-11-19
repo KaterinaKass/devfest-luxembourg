@@ -2722,3 +2722,82 @@ dialog.cfp-dialog > div > div:last-child {
   color: rgba(255, 255, 255, 0.7) !important;
   animation-duration: 0.6s, 3.6s !important;
 }
+
+/* ---------- Schedule: larger, clearer room headers (Grand Auditorium / Cozy Circle) ---------- */
+.agenda-track-head {
+  gap: 14px !important;
+  padding-top: 10px !important;
+  padding-bottom: 12px !important;
+}
+.agenda-track-head > div:not(:empty),
+.agenda-track-button {
+  gap: 14px !important;
+  padding: 14px 18px !important;
+  border-radius: 16px !important;
+  background-color: #fff !important;
+  box-shadow: 0 6px 18px -12px rgba(60, 64, 67, 0.35);
+}
+.agenda-track-head > div:not(:empty) > div:first-child,
+.agenda-track-button > span.material-icons {
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: 12px !important;
+  flex-shrink: 0;
+}
+.agenda-track-head > div:not(:empty) > div:first-child .material-icons {
+  font-size: 24px !important;
+}
+.agenda-track-head > div:not(:empty) p:first-child,
+.agenda-track-button p:first-child {
+  font-size: 15px !important;
+  letter-spacing: 0.04em;
+  line-height: 1.15 !important;
+}
+.agenda-track-head > div:not(:empty) p + p,
+.agenda-track-button p + p {
+  font-size: 13px !important;
+  margin-top: 4px !important;
+}
+/* mobile room buttons: give the icon a tinted tile */
+.agenda-track-button > span.material-icons {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px !important;
+  background: color-mix(in srgb, currentColor 14%, transparent);
+}
+.agenda-track-button {
+  padding: 12px 14px !important;
+}
+
+/* ---------- Venue heading: playful gradient glow that follows the pointer ---------- */
+@property --hr {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0px;
+}
+.venue-heading {
+  --hr: 0px;
+  cursor: default;
+  transition: --hr 0.45s ease;
+}
+.venue-heading:hover {
+  --hr: 170px;
+}
+.venue-heading,
+.venue-heading > span {
+  color: transparent !important;
+  -webkit-background-clip: text;
+  background-clip: text;
+  background-attachment: fixed;
+}
+.venue-heading {
+  background-image:
+    radial-gradient(var(--hr) circle at var(--hx, -999px) var(--hy, -999px), #ff4fa3 0%, #ff7a45 45%, rgba(255, 122, 69, 0) 100%),
+    linear-gradient(#1a1a1a, #1a1a1a);
+}
+.venue-heading > span {
+  background-image:
+    radial-gradient(var(--hr) circle at var(--hx, -999px) var(--hy, -999px), #ff4fa3 0%, #ff7a45 45%, rgba(255, 122, 69, 0) 100%),
+    linear-gradient(#fbbc05, #fbbc05);
+}
