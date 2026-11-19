@@ -350,3 +350,10 @@
     t = setTimeout(function () { on = false; root.classList.remove("is-scrolling"); }, 180);
   }, { passive: true });
 })();
+
+// Focus rings only for keyboard navigation (touch/mouse focus never shows them).
+(function () {
+  var root = document.documentElement;
+  document.addEventListener("keydown", function (e) { if (e.key === "Tab") root.classList.add("kbd-nav"); });
+  document.addEventListener("pointerdown", function () { root.classList.remove("kbd-nav"); }, { passive: true });
+})();

@@ -3682,3 +3682,46 @@ html.is-scrolling *::after { animation-play-state: paused !important; }
   0%, 42% { opacity: 1; }
   50%, 100% { opacity: 0; }
 }
+
+/* About stat cards: Safari ignores rounded-corner clipping under preserve-3d, so the blurred
+   aurora leaked out at the corners on iPhone. Flat 3D context + explicit clip keeps corners round. */
+.stat-fx .devfest-stat-card { transform-style: flat !important; }
+.stat-aurora { border-radius: inherit; }
+@supports (-webkit-touch-callout: none) {
+  .stat-fx .devfest-stat-card { -webkit-mask-image: -webkit-radial-gradient(white, black); }
+}
+
+/* Submit Your Session close button: bigger cross; focus ring only for keyboard users
+   (iPhone focuses the button when the dialog opens, which drew a thick blue ring) */
+.cfp-close svg { width: 16px !important; height: 16px !important; }
+.cfp-close:focus-visible { outline: none !important; }
+html.kbd-nav .cfp-close:focus-visible { outline: 2px solid rgba(255, 255, 255, 0.55) !important; outline-offset: 3px; }
+
+/* More speakers: on phones keep the avatar row on one line, with a single "?" before +17 */
+@media (max-width: 767px) {
+  .ms-avatars { flex-wrap: nowrap !important; }
+  .ms-avatars .ms-av-q ~ .ms-av-q { display: none !important; }
+}
+
+/* Phones: "More about DevFest" on one line, no spinning asterisks; avatar row a bit tighter */
+@media (max-width: 767px) {
+  .devfest-more-asterisk { display: none !important; }
+  .devfest-more-title-row { display: block !important; width: 100% !important; }
+  .devfest-more-title-row h2 {
+    font-size: clamp(1.6rem, 8.4vw, 2.4rem) !important;
+    white-space: nowrap;
+    text-align: center !important;
+    letter-spacing: -0.035em;
+  }
+  .ms-avatars .ms-av + .ms-av { margin-left: -12px !important; }
+}
+
+/* Partnership headline on phones: one phrase per line, as large as the longest phrase allows */
+@media (max-width: 767px) {
+  .partner-headline { font-size: 8.6vw !important; line-height: 1.08 !important; text-wrap: initial; }
+  .partner-headline .ph-line { display: block; white-space: nowrap; }
+  .partner-headline .lux-animated.ph-line { white-space: normal; text-wrap: balance; }
+}
+
+/* Partnership card photos: show the whole picture (no height cap that cropped it) */
+.partner-photo { max-height: none !important; aspect-ratio: 16 / 10; height: auto; }
