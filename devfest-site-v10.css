@@ -3990,3 +3990,16 @@ div:has(> div > .ms-eyebrow) form button { padding-left: 24px !important; paddin
 @media (max-width: 767px) {
   div:has(> img.hero-glyph[src*="hash"]) { top: 36% !important; left: -3% !important; }
 }
+
+/* Hero: soft pale braces + pink circle (vector, same stroke weight as the other glyphs)
+   on every screen size, floating a little above the DevFest logo */
+.hero-glyph-old { display: block !important; opacity: 0.95 !important; }
+img.hero-glyph[src*="hero-glyphs/braces.svg"], img.hero-glyph[src*="half-ring"] { display: none !important; }
+@media (min-width: 768px) {
+  .hero-glyph-old { transform: none; }
+  div:has(> img.hero-soft-braces) { top: 9% !important; }
+  div:has(> img.hero-soft-circle) { top: 9% !important; right: max(2%, calc((50% - 310px) / 2 - 48px)) !important; left: auto !important; }
+}
+@media (max-width: 767px) {
+  div:has(> img.hero-soft-braces), div:has(> img.hero-soft-circle) { top: 11% !important; }
+}
