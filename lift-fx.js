@@ -42,31 +42,9 @@
 (function () {
   // an original round cartoon bird (our own design): pops up grumpy, stares at you, then winks
   var BIRD =
-    // original DevFest bird: red round body, Google-colour crest, a "</>" on the tummy
-    '<svg viewBox="0 0 72 66" width="72" height="66" aria-hidden="true">' +
-      '<g class="eb-bird-body" stroke="#1e1e1e" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">' +
-        '<path d="M31 13c-3-4-3-8 0-10 3 2 3 6 0 10z" fill="#4285f4"/>' +
-        '<path d="M36 12c0-5 2-9 5-10 2 3 0 7-5 10z" fill="#fbbc05"/>' +
-        '<path d="M40 14c2-4 6-6 9-5 0 3-4 5-9 5z" fill="#34a853"/>' +
-        '<circle cx="36" cy="38" r="24" fill="#ea4335"/>' +
-        '<ellipse cx="37" cy="51" rx="13" ry="8" fill="#ffe3dc"/>' +
-        '<path class="eb-bird-wing" d="M13 36c-5 2-6 10-1 14 3-3 4-9 1-14z" fill="#c5221f"/>' +
-        '<circle cx="28" cy="31" r="7.5" fill="#fff"/>' +
-        '<path class="eb-beak-top" d="M30 40c4-3 10-3 14 0l-7 5z" fill="#fbbc05"/>' +
-        '<path class="eb-beak-bottom" d="M31 43c4 3 9 3 12 0l-6 5z" fill="#f29900"/>' +
-      '</g>' +
-      '<path d="M33.5 50.5l-2.5 2 2.5 2M36 55.5l2-6M40.5 50.5l2.5 2-2.5 2" fill="none" stroke="#c5221f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
-      '<circle cx="28.5" cy="32" r="3.4" fill="#1e1e1e"/><circle cx="29.5" cy="31" r="1" fill="#fff"/>' +
-      '<g class="eb-eye-r">' +
-        '<circle cx="45" cy="31" r="7.5" fill="#fff" stroke="#1e1e1e" stroke-width="2.4"/>' +
-        '<circle cx="44.5" cy="32" r="3.4" fill="#1e1e1e"/><circle cx="45.5" cy="31" r="1" fill="#fff"/>' +
-      '</g>' +
-      '<path class="eb-wink" d="M38.5 32q6.5 4 13 0" fill="none" stroke="#1e1e1e" stroke-width="2.4" stroke-linecap="round"/>' +
-      '<path class="eb-brow eb-brow-l" d="M22 22.5l10 3.5" fill="none" stroke="#1e1e1e" stroke-width="3.2" stroke-linecap="round"/>' +
-      '<path class="eb-brow eb-brow-r" d="M51 22.5l-10 3.5" fill="none" stroke="#1e1e1e" stroke-width="3.2" stroke-linecap="round"/>' +
-      '<ellipse cx="21" cy="41" rx="3.5" ry="2.2" fill="#ff8fb1" opacity="0.85"/>' +
-      '<ellipse cx="52" cy="41" rx="3.5" ry="2.2" fill="#ff8fb1" opacity="0.85"/>' +
-    '</svg>' +
+    // the user's own chick drawing: an open-eye frame and a wink frame stacked on top of each other
+    '<img class="eb-chick" src="/images/early-bird/chick.webp" alt="" width="192" height="260" decoding="async">' +
+    '<img class="eb-chick eb-chick-wink" src="/images/early-bird/chick-wink.webp" alt="" width="192" height="260" decoding="async">' +
     '<span class="eb-note eb-note-1">♪</span><span class="eb-note eb-note-2">♫</span>';
 
   function setup() {

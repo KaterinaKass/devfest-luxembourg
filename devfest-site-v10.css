@@ -3600,3 +3600,41 @@ dialog.cfp-dialog > div > div:last-child {
 /* Venue photo hover: same translucent magenta wash as the partner logos */
 .venue-photo::after { background: #c13fd0 !important; mix-blend-mode: multiply !important; }
 .venue-photo:hover::after { opacity: 0.72; }
+
+/* ---------- Early Bird: the user's chick peeks over the ticket, stares, then winks ---------- */
+.eb-bird {
+  right: 46px !important;
+  top: -62px !important;
+  width: 84px !important;
+  height: 114px !important;
+  transform: translateY(70px) rotate(6deg);
+  transition: transform 0.5s cubic-bezier(.2, .9, .25, 1.3);
+}
+.eb-ticket:hover .eb-bird { transform: translateY(0) rotate(-3deg); }
+.eb-chick {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: top center;
+  filter: drop-shadow(0 6px 10px rgba(30, 30, 30, 0.18));
+  transform-origin: 50% 90%;
+}
+.eb-chick-wink { opacity: 0; }
+.eb-ticket:hover .eb-chick { animation: ebChickTilt 2.8s ease-in-out 0.5s both; }
+.eb-ticket:hover .eb-chick-wink { animation: ebChickTilt 2.8s ease-in-out 0.5s both, ebChickWink 2.8s steps(1, end) 0.5s both; }
+@keyframes ebChickTilt {
+  0%, 40%  { transform: rotate(0deg); }
+  55%, 85% { transform: rotate(-6deg) translateY(-2px); }
+  100%     { transform: rotate(0deg); }
+}
+@keyframes ebChickWink {
+  0%   { opacity: 0; }
+  56%  { opacity: 1; }
+  82%  { opacity: 0; }
+  100% { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .eb-ticket:hover .eb-chick, .eb-ticket:hover .eb-chick-wink { animation: none; }
+}
