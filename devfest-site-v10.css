@@ -2218,14 +2218,16 @@ dialog.cfp-dialog > div > div:last-child {
   z-index: calc(20 - var(--i));
   animation: msAvIn 0.6s cubic-bezier(.2, .8, .2, 1) both, msAvFloat 4.5s ease-in-out infinite;
   animation-delay: calc(var(--i) * 70ms), calc(var(--i) * -0.4s);
-  transition: transform 0.2s ease;
+  transition: transform 0.3s cubic-bezier(.2, .9, .25, 1.35), box-shadow 0.25s ease, filter 0.25s ease;
 }
-.ms-avatars:hover .ms-av {
-  margin-left: -4px;
-}
+/* hover: the row stays put; the avatar under the pointer pops forward with a logo-yellow ring */
 .ms-av:hover {
-  transform: translateY(-4px) scale(1.08);
+  transform: scale(1.22);
   z-index: 30;
+  box-shadow: 0 0 0 2px #16213e, 0 0 0 4px #f9a800, 0 8px 22px rgba(249, 168, 0, 0.45);
+}
+.ms-avatars:hover .ms-av:not(:hover) {
+  filter: brightness(0.75) saturate(0.85);
 }
 @keyframes msAvIn {
   from { opacity: 0; scale: 0.8; }
@@ -2450,4 +2452,16 @@ dialog.cfp-dialog > div > div:last-child {
 /* first stat card (blue): a green-teal spark instead of yellow */
 .stat-fx .devfest-stat-card:nth-child(1) {
   --aurora-spark: #2fd3a0;
+}
+
+/* email field in the More speakers block: opaque, so the cursor glow stays behind it */
+#speaker-updates-email {
+  background: #222b47 !important;
+  color: #fff !important;
+}
+#speaker-updates-email:focus {
+  background: #283257 !important;
+}
+#speaker-updates-email::placeholder {
+  color: rgba(255, 255, 255, 0.55);
 }
