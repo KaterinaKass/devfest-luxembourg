@@ -12,11 +12,25 @@
     if (stage.dataset.galFx) return;
     stage.dataset.galFx = "1";
     var fade = stage.classList.contains("gal-stage-fade");
-    // load and decode every photo up front so switching never lands on an empty frame
-    [].forEach.call(stage.querySelectorAll("img"), function (im) {
-      im.loading = "eager";
-      if (im.decode) im.decode().catch(function () {});
-    });
+    // warm up the photos only when the gallery gets close to the screen, one at a time in
+    // idle time, so scrolling never stalls on decoding a dozen large images at once
+    var warm = function () {
+      var imgs = [].slice.call(stage.querySelectorAll("img"));
+      var idle = window.requestIdleCallback || function (f) { return setTimeout(f, 120); };
+      (function next() {
+        var im = imgs.shift();
+        if (!im) return;
+        im.loading = "eager";
+        var p = im.decode ? im.decode() : Promise.resolve();
+        p.catch(function () {}).then(function () { idle(next); });
+      })();
+    };
+    if ("IntersectionObserver" in window) {
+      var io = new IntersectionObserver(function (es) {
+        if (es[0].isIntersecting) { io.disconnect(); warm(); }
+      }, { rootMargin: "400px 0px" });
+      io.observe(stage);
+    } else warm();
     var down = null, lastWheel = 0;
 
     stage.addEventListener("pointerenter", function (e) { if (e.pointerType === "mouse") stage.setAttribute("data-gal-hover", ""); });
@@ -72,7 +86,16 @@
     go(s, e.key === "ArrowLeft" ? "prev" : "next");
   });
 
-  function scan() { [].forEach.call(document.querySelectorAll(".gal-stage"), bind); }
+  // pause the section's looping glow animations while it is off screen
+  function watchSection() {
+    var sec = document.getElementById("afterparty");
+    if (!sec || sec.dataset.apIo || !("IntersectionObserver" in window)) return;
+    sec.dataset.apIo = "1";
+    new IntersectionObserver(function (es) {
+      sec.classList.toggle("is-offscreen", !es[0].isIntersecting);
+    }).observe(sec);
+  }
+  function scan() { [].forEach.call(document.querySelectorAll(".gal-stage"), bind); watchSection(); }
   new MutationObserver(scan).observe(document.documentElement, { childList: true, subtree: true });
   document.addEventListener("DOMContentLoaded", scan);
   scan();

@@ -42,26 +42,30 @@
 (function () {
   // an original round cartoon bird (our own design): pops up grumpy, stares at you, then winks
   var BIRD =
+    // original DevFest bird: red round body, Google-colour crest, a "</>" on the tummy
     '<svg viewBox="0 0 72 66" width="72" height="66" aria-hidden="true">' +
-      '<g class="eb-bird-body" stroke="#1e1e1e" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round">' +
-        '<path d="M30 10c-2-6 2-9 6-8-2 3 0 5 2 6 1-4 5-6 8-4-3 2-3 4-2 6" fill="#f9a800"/>' +
-        '<circle cx="36" cy="38" r="24" fill="#fbbc05"/>' +
-        '<path d="M20 50c5 6 12 8 19 7" fill="none" stroke-width="2"/>' +
-        '<ellipse class="eb-bird-wing" cx="15" cy="42" rx="6" ry="9" fill="#f9a800"/>' +
+      '<g class="eb-bird-body" stroke="#1e1e1e" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">' +
+        '<path d="M31 13c-3-4-3-8 0-10 3 2 3 6 0 10z" fill="#4285f4"/>' +
+        '<path d="M36 12c0-5 2-9 5-10 2 3 0 7-5 10z" fill="#fbbc05"/>' +
+        '<path d="M40 14c2-4 6-6 9-5 0 3-4 5-9 5z" fill="#34a853"/>' +
+        '<circle cx="36" cy="38" r="24" fill="#ea4335"/>' +
+        '<ellipse cx="37" cy="51" rx="13" ry="8" fill="#ffe3dc"/>' +
+        '<path class="eb-bird-wing" d="M13 36c-5 2-6 10-1 14 3-3 4-9 1-14z" fill="#c5221f"/>' +
         '<circle cx="28" cy="31" r="7.5" fill="#fff"/>' +
-        '<path class="eb-beak-top" d="M30 41c4-3 10-3 14 0l-7 5z" fill="#ea4335"/>' +
-        '<path class="eb-beak-bottom" d="M31 44c4 3 9 3 12 0l-6 5z" fill="#c5221f"/>' +
+        '<path class="eb-beak-top" d="M30 40c4-3 10-3 14 0l-7 5z" fill="#fbbc05"/>' +
+        '<path class="eb-beak-bottom" d="M31 43c4 3 9 3 12 0l-6 5z" fill="#f29900"/>' +
       '</g>' +
+      '<path d="M33.5 50.5l-2.5 2 2.5 2M36 55.5l2-6M40.5 50.5l2.5 2-2.5 2" fill="none" stroke="#c5221f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
       '<circle cx="28.5" cy="32" r="3.4" fill="#1e1e1e"/><circle cx="29.5" cy="31" r="1" fill="#fff"/>' +
       '<g class="eb-eye-r">' +
-        '<circle cx="45" cy="31" r="7.5" fill="#fff" stroke="#1e1e1e" stroke-width="2.6"/>' +
+        '<circle cx="45" cy="31" r="7.5" fill="#fff" stroke="#1e1e1e" stroke-width="2.4"/>' +
         '<circle cx="44.5" cy="32" r="3.4" fill="#1e1e1e"/><circle cx="45.5" cy="31" r="1" fill="#fff"/>' +
       '</g>' +
-      '<path class="eb-wink" d="M38.5 32q6.5 4 13 0" fill="none" stroke="#1e1e1e" stroke-width="2.6" stroke-linecap="round"/>' +
-      '<path class="eb-brow eb-brow-l" d="M20 21l14 5" fill="none" stroke="#1e1e1e" stroke-width="4" stroke-linecap="round"/>' +
-      '<path class="eb-brow eb-brow-r" d="M52 21l-14 5" fill="none" stroke="#1e1e1e" stroke-width="4" stroke-linecap="round"/>' +
-      '<ellipse cx="22" cy="42" rx="3.5" ry="2.2" fill="#ff8fb1" opacity="0.8"/>' +
-      '<ellipse cx="51" cy="42" rx="3.5" ry="2.2" fill="#ff8fb1" opacity="0.8"/>' +
+      '<path class="eb-wink" d="M38.5 32q6.5 4 13 0" fill="none" stroke="#1e1e1e" stroke-width="2.4" stroke-linecap="round"/>' +
+      '<path class="eb-brow eb-brow-l" d="M22 22.5l10 3.5" fill="none" stroke="#1e1e1e" stroke-width="3.2" stroke-linecap="round"/>' +
+      '<path class="eb-brow eb-brow-r" d="M51 22.5l-10 3.5" fill="none" stroke="#1e1e1e" stroke-width="3.2" stroke-linecap="round"/>' +
+      '<ellipse cx="21" cy="41" rx="3.5" ry="2.2" fill="#ff8fb1" opacity="0.85"/>' +
+      '<ellipse cx="52" cy="41" rx="3.5" ry="2.2" fill="#ff8fb1" opacity="0.85"/>' +
     '</svg>' +
     '<span class="eb-note eb-note-1">♪</span><span class="eb-note eb-note-2">♫</span>';
 
@@ -285,6 +289,52 @@
         img.parentElement.insertBefore(svg, img);
       }).catch(function () {});
     });
+  }
+  new MutationObserver(setup).observe(document.documentElement, { childList: true, subtree: true });
+  document.addEventListener("DOMContentLoaded", setup);
+  setup();
+})();
+
+// "Join Our Communities": the line-glyph row at the bottom becomes an inline SVG so each
+// symbol can move on its own (waves sway, globe spins, arrow nudges, asterisk turns...).
+// Animations run only while the row is on screen.
+(function () {
+  function arc(x0, w, y, dir, n) { // n half-circles, dir 0 = down (U), 1 = up (n)
+    var d = "M" + x0 + " " + y, r = w / 2;
+    for (var i = 0; i < n; i++) d += "A" + r + " " + (r * 1.22) + " 0 0 " + dir + " " + (x0 + w * (i + 1)) + " " + y;
+    return d;
+  }
+  function arcs(x0, w, y, dir, n, cls) {
+    var out = "", r = w / 2;
+    for (var i = 0; i < n; i++) {
+      var a = x0 + w * i;
+      out += '<path class="' + cls + '" style="--i:' + i + '" d="M' + a + " " + y + "A" + r + " " + (r * 1.22) + " 0 0 " + dir + " " + (a + w) + " " + y + '"/>';
+    }
+    return out;
+  }
+  var SVG =
+    '<svg class="cj-glyphs" viewBox="-4 -4 1090 74" aria-hidden="true" fill="none" stroke="#202020" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">' +
+      '<g class="cj-waves">' + arcs(1, 51.25, 17, 0, 4, "cj-wave") + '</g>' +
+      '<g class="cj-globe"><circle cx="291" cy="32" r="31"/><ellipse class="cj-meridian" cx="291" cy="32" rx="14" ry="31"/>' +
+        '<path d="M260 32H322M264.5 17H317.5M264.5 47H317.5"/></g>' +
+      '<g class="cj-arrow"><path d="M383 32H528M506 10Q512 29 529 32Q512 35 506 55"/></g>' +
+      '<g class="cj-star"><path d="M612.5 0V65M580 32.5H645M589.5 9.5L635.5 55.5M635.5 9.5L589.5 55.5"/></g>' +
+      '<g class="cj-bumps">' + arcs(697, 51.3, 49, 1, 3, "cj-bump") + '</g>' +
+      '<g class="cj-parens"><path class="cj-pl" d="M924 3Q896 32 924 61"/><path class="cj-pr" d="M949 3Q977 32 949 61"/></g>' +
+      '<g class="cj-heart"><path d="M1048 7L1021 33L1048 59M1061 4Q1081 4 1080 18Q1079 33 1063 33Q1080 33 1080 48Q1080 63 1061 63"/></g>' +
+    '</svg>';
+  function setup() {
+    var img = document.querySelector('.community-join-decoration img[src*="faq-bottom"]');
+    if (!img || img.dataset.cj) return;
+    img.dataset.cj = "1";
+    var box = document.createElement("div");
+    box.innerHTML = SVG;
+    var svg = box.firstChild;
+    img.parentNode.insertBefore(svg, img);
+    img.style.display = "none";
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (es) { svg.classList.toggle("is-on", es[0].isIntersecting); }).observe(svg);
+    } else svg.classList.add("is-on");
   }
   new MutationObserver(setup).observe(document.documentElement, { childList: true, subtree: true });
   document.addEventListener("DOMContentLoaded", setup);

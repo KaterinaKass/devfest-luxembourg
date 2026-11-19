@@ -164,6 +164,8 @@
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 
     s.prev[0] = s.pos[0]; s.prev[1] = s.pos[1];
+    // pointer resting (e.g. while the page scrolls under it): count still time so the loop can sleep
+    s.still = moving ? 0 : (s.still || 0) + dt;
     // keep running ~6s after the pointer leaves so the trail can fade out
     s.idle = s.inside ? 0 : s.idle + dt;
   }
@@ -174,7 +176,8 @@
     var running = false;
     for (var i = 0; i < sims.length; i++) {
       var s = sims[i];
-      if (s.inside || s.idle < 6) { frame(s, dt); running = true; }
+      // render only while the trail is alive: pointer moved in the last 2.5s, or fading after leaving
+      if ((s.inside && (s.still || 0) < 2.5) || (!s.inside && s.idle < 6)) { frame(s, dt); running = true; }
     }
     if (running) raf = requestAnimationFrame(loop); else last = 0;
   }
@@ -195,6 +198,7 @@
     var r = el.getBoundingClientRect();
     active.pos[0] = (e.clientX - r.left) / r.width;
     active.pos[1] = 1 - (e.clientY - r.top) / r.height;
+    active.still = 0;
     if (!raf) raf = requestAnimationFrame(loop);
   }, { passive: true });
 

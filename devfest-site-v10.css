@@ -3554,3 +3554,39 @@ dialog.cfp-dialog > div > div:last-child {
 .venue-photo:hover { box-shadow: none !important; }
 .venue-photo:hover > img { transform: none !important; filter: none !important; }
 .venue-photo:hover > div { transform: none !important; }
+
+/* ---------- After-Party: lighter rendering for smooth scrolling ---------- */
+/* the two background glows were radial gradients blurred by 80px (very costly to repaint);
+   a wider gradient alone gives the same soft light */
+#afterparty div[style*="blur(80px)"] {
+  filter: none !important;
+  transform: scale(1.35);
+}
+/* one GPU layer per photo (14 large layers) is not needed; the slider promotes on its own */
+.gal-stage img { will-change: auto !important; }
+/* keep the section in its own paint/layout scope */
+#afterparty { contain: paint; }
+#afterparty.is-offscreen * { animation-play-state: paused !important; }
+
+/* ---------- Join Our Communities: animated line glyphs ---------- */
+.cj-glyphs { display: block; width: min(90%, 1082px); height: auto; overflow: visible; }
+@media (max-width: 600px) { .cj-glyphs { width: 100%; } }
+.cj-glyphs g, .cj-glyphs path, .cj-glyphs ellipse { transform-box: fill-box; transform-origin: center; }
+.cj-glyphs * { animation-play-state: paused; }
+.cj-glyphs.is-on * { animation-play-state: running; }
+.cj-wave { animation: cjWave 2.4s ease-in-out infinite; animation-delay: calc(var(--i) * -0.3s); }
+@keyframes cjWave { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
+.cj-meridian { animation: cjSpin 3.2s ease-in-out infinite; }
+@keyframes cjSpin { 0%, 100% { transform: scaleX(1); } 50% { transform: scaleX(0.08); } }
+.cj-arrow { animation: cjNudge 2.2s ease-in-out infinite; }
+@keyframes cjNudge { 0%, 100% { transform: translateX(0); } 55% { transform: translateX(12px); } }
+.cj-star { animation: cjTurn 9s linear infinite; }
+@keyframes cjTurn { to { transform: rotate(360deg); } }
+.cj-bump { animation: cjWave 2.4s ease-in-out infinite reverse; animation-delay: calc(var(--i) * -0.4s); }
+.cj-pl { animation: cjOpenL 2.6s ease-in-out infinite; }
+.cj-pr { animation: cjOpenR 2.6s ease-in-out infinite; }
+@keyframes cjOpenL { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(-5px); } }
+@keyframes cjOpenR { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(5px); } }
+.cj-heart { animation: cjBeat 1.6s ease-in-out infinite; }
+@keyframes cjBeat { 0%, 60%, 100% { transform: scale(1); } 15% { transform: scale(1.14); } 30% { transform: scale(0.97); } 45% { transform: scale(1.08); } }
+@media (prefers-reduced-motion: reduce) { .cj-glyphs * { animation: none !important; } }
