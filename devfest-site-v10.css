@@ -4054,3 +4054,19 @@ img.hero-soft-braces { opacity: 0.2 !important; }
 
 /* labels authored as blocks (e.g. Code of Conduct header) stay on their own line; centring kept */
 .eyebrow.block { display: block !important; width: fit-content !important; }
+
+/* Code of Conduct: "Contact the organizing team" — flowing blue gradient like the other CTAs */
+.coc-contact-btn {
+  background: linear-gradient(120deg, #4285f4 0%, #8ab4f8 28%, #4285f4 52%, #1a5fd0 78%, #4285f4 100%) 0 50% / 300% 100%;
+  animation: ticketCtaFlow 6s ease-in-out infinite;
+  box-shadow: 0 8px 20px -10px rgba(66, 133, 244, 0.7);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.coc-contact-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px -12px rgba(66, 133, 244, 0.85);
+}
+.coc-contact-btn .material-icons { transition: transform 0.3s cubic-bezier(.2, .9, .25, 1.3); }
+.coc-contact-btn:hover .material-icons { transform: translateX(-1px) rotate(-8deg) scale(1.1); }
+.coc-contact-btn:active { transform: translateY(0) scale(0.99); }
+@media (prefers-reduced-motion: reduce) { .coc-contact-btn { animation: none; } }
