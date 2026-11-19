@@ -3673,3 +3673,12 @@ html.is-scrolling *::after { animation-play-state: paused !important; }
   55%      { transform: rotate(-7deg) translateY(-3px); }
   75%, 100% { transform: rotate(-4deg) translateY(-1px); }
 }
+/* chick: one shadow on the container (no doubled outline), and the grumpy frame fades out
+   exactly as the smiling one fades in, so no second layer shows during the head tilt */
+.eb-bird { filter: drop-shadow(0 6px 10px rgba(30, 30, 30, 0.18)); }
+.eb-chick { filter: none !important; }
+.eb-ticket:hover .eb-chick:not(.eb-chick-wink) { animation: ebChickTilt 2.6s ease-in-out 0.5s both, ebChickGrumpyOut 2.6s ease 0.5s both; }
+@keyframes ebChickGrumpyOut {
+  0%, 42% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}

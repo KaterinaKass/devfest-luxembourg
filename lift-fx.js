@@ -44,7 +44,7 @@
   var BIRD =
     // the user's own chick drawing: an open-eye frame and a wink frame stacked on top of each other
     '<img class="eb-chick" src="/images/early-bird/chick.webp" alt="" width="192" height="260" decoding="async">' +
-    '<img class="eb-chick eb-chick-wink" src="/images/early-bird/chick-wink.webp?v=2" alt="" width="192" height="260" decoding="async">';
+    '<img class="eb-chick eb-chick-wink" src="/images/early-bird/chick-wink.webp?v=3" alt="" width="192" height="260" decoding="async">';
 
   function setup() {
     [].forEach.call(document.querySelectorAll(".ticket-wrap"), function (w) {
