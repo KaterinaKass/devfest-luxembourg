@@ -1778,7 +1778,7 @@ header.fixed > div > a:first-child {
   background:
     radial-gradient(35% 45% at 20% 30%, color-mix(in srgb, var(--stat-accent) 55%, #fff) 0%, transparent 70%),
     radial-gradient(40% 50% at 80% 70%, color-mix(in srgb, var(--stat-accent) 60%, #000) 0%, transparent 70%),
-    radial-gradient(30% 40% at 65% 20%, color-mix(in srgb, var(--stat-accent) 40%, #fbbc05) 0%, transparent 70%);
+    radial-gradient(30% 40% at 65% 20%, color-mix(in srgb, var(--stat-accent) 40%, var(--aurora-spark, #fbbc05)) 0%, transparent 70%);
   filter: blur(18px);
   opacity: 0.85;
   animation: statAurora 14s ease-in-out infinite alternate;
@@ -2430,7 +2430,8 @@ dialog.cfp-dialog > div > div:last-child {
   height: 3px;
   border-radius: 3px;
   translate: -50% 0;
-  background: linear-gradient(90deg, #4285f4 0 25%, #ea4335 25% 50%, #fbbc05 50% 75%, #34a853 75% 100%);
+  /* same yellow as the braces in the DevFest logo */
+  background: #f9a800;
   animation: navUnderline 0.35s cubic-bezier(.2, .9, .25, 1.2) both;
 }
 @keyframes navUnderline {
@@ -2444,4 +2445,9 @@ dialog.cfp-dialog > div > div:last-child {
 @media (prefers-reduced-motion: reduce) {
   .nav-pill { transition: opacity 0.2s ease; }
   .nav-fx > .is-active::after { animation: none; }
+}
+
+/* first stat card (blue): a green-teal spark instead of yellow */
+.stat-fx .devfest-stat-card:nth-child(1) {
+  --aurora-spark: #2fd3a0;
 }
