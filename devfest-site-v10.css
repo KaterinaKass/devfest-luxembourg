@@ -2692,3 +2692,33 @@ dialog.cfp-dialog > div > div:last-child {
 @media (prefers-reduced-motion: reduce) {
   .cfp-badge, .cfp-badge::before { animation: none; }
 }
+
+/* ---------- More speakers block: refinements ---------- */
+.ms-eyebrow {
+  gap: 12px !important;
+}
+/* hover: a single orange ring (the avatar's own border turns orange, no dark ring) */
+.ms-av:hover {
+  border-color: #f9a800 !important;
+  box-shadow: 0 6px 18px rgba(249, 168, 0, 0.4) !important;
+}
+/* "+17": a round badge like the avatars, calm navy with logo-yellow text */
+.ms-avatars .ms-av-more {
+  width: 42px !important;
+  min-width: 0 !important;
+  height: 42px;
+  padding: 0 !important;
+  border-radius: 50% !important;
+  margin-left: -10px !important;
+  background: #26355f !important;
+  color: #f9c84a !important;
+  font-size: 12px !important;
+  letter-spacing: -0.02em;
+}
+/* "?" placeholders: soft, slow shimmer */
+.ms-av-q {
+  background: linear-gradient(110deg, #26355f 35%, #2d3c68 50%, #26355f 65%) !important;
+  background-size: 250% 100% !important;
+  color: rgba(255, 255, 255, 0.7) !important;
+  animation-duration: 0.6s, 3.6s !important;
+}
