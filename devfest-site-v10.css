@@ -4003,3 +4003,9 @@ img.hero-glyph[src*="hero-glyphs/braces.svg"], img.hero-glyph[src*="half-ring"] 
 @media (max-width: 767px) {
   div:has(> img.hero-soft-braces), div:has(> img.hero-soft-circle) { top: 11% !important; }
 }
+
+/* Soft braces: grey, same outline colour and opacity as the hash glyph;
+   on desktop it floats level with the DevFest logo */
+img.hero-soft-braces { opacity: 0.2 !important; }
+@media (max-width: 767px) { img.hero-soft-braces { opacity: 0.16 !important; } }
+@media (min-width: 768px) { div:has(> img.hero-soft-braces) { top: 15% !important; } }
