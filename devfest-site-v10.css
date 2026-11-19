@@ -3971,3 +3971,9 @@ div:has(> div > .ms-eyebrow) form button { padding-left: 24px !important; paddin
     }
   }
 }
+/* mobile After-Party: show the same pink → deep magenta range as the narrow desktop button */
+@media (max-width: 1099px) {
+  .nav-mobile > a.rounded-full {
+    background: linear-gradient(120deg, #f953c6 0%, #e85fc6 18%, #b91d73 50%, #e85fc6 82%, #f953c6 100%) 0 50% / 170% 100% !important;
+  }
+}
