@@ -4082,3 +4082,14 @@ img.hero-soft-circle { opacity: 0.75 !important; }
 /* hero pink circle: a little lower again */
 @media (min-width: 768px) { div:has(> img.hero-soft-circle) { top: 16% !important; } }
 @media (max-width: 767px) { div:has(> img.hero-soft-circle) { top: 16% !important; } }
+
+/* Partnership "Contact us to build a custom partnership" (mobile): the one-line label overflowed
+   and squashed the arrow, so the text sat off-centre. Scale it to fit so both sides are equal. */
+@media (max-width: 480px) {
+  button.btn-register.w-full.h-14 {
+    padding: 0 12px !important;
+    gap: 0 !important;
+    font-size: min(16px, 4vw) !important;
+  }
+  button.btn-register.w-full.h-14 svg { display: none; }
+}
