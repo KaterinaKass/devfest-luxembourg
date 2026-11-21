@@ -4206,3 +4206,70 @@ a.btn-agenda > svg { flex-shrink: 0; margin-right: 12px; }
 .lang-seg-opt svg { flex-shrink: 0; }
 .lang-seg-opt:focus-visible { outline: 2px solid #4285f4; outline-offset: 2px; }
 @media (prefers-reduced-motion: reduce) { .lang-seg-pill { transition: none; } }
+
+/* Schedule on phones: All / Auditorium / Cozy Circle tabs (segmented, sliding pill, sticky).
+   Shared items (doors, keynote, breaks) stay in every tab; room tabs hide the other room. */
+.room-tabs {
+  position: sticky;
+  top: 72px;
+  z-index: 6;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  padding: 4px;
+  margin-bottom: 20px;
+  border-radius: 999px;
+  background: rgba(232, 234, 237, 0.92);
+  -webkit-backdrop-filter: saturate(1.4) blur(10px);
+  backdrop-filter: saturate(1.4) blur(10px);
+  box-shadow: inset 0 0 0 1px rgba(60, 64, 67, 0.08), 0 6px 18px -10px rgba(60, 64, 67, 0.35);
+  isolation: isolate;
+}
+.room-tabs-pill {
+  position: absolute;
+  z-index: -1;
+  top: 4px; bottom: 4px; left: 4px;
+  width: calc((100% - 8px) / 2);
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(60, 64, 67, 0.12), 0 4px 14px rgba(60, 64, 67, 0.12);
+  transition: transform 0.38s cubic-bezier(.3, 1.4, .5, 1);
+}
+.room-tabs[data-active="Cozy Circle"] .room-tabs-pill { transform: translateX(100%); }
+.room-tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  height: 44px;
+  padding: 0 8px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  color: #5f6368;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.room-tab .material-icons { font-size: 16px; }
+.room-tab.is-on { font-weight: 700; color: #1a1a1a; }
+.room-tab.is-on[data-k="Auditorium"] { color: #4285f4; }
+.room-tab.is-on[data-k="Cozy Circle"] { color: #9c27b0; }
+.room-tab:focus-visible { outline: 2px solid #4285f4; outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { .room-tabs-pill { transition: none; } }
+
+@media (max-width: 767px) {
+  .agenda-section[data-room="Auditorium"] .agenda-session-card[data-room="Cozy Circle"],
+  .agenda-section[data-room="Cozy Circle"] .agenda-session-card[data-room="Auditorium"] { display: none; }
+}
+@media (min-width: 768px) { .room-tabs { display: none !important; } }
+
+/* Room tabs + language switch: flat (no shadows), same style as the menu; text always fits */
+.room-tabs { box-shadow: inset 0 0 0 1px rgba(60, 64, 67, 0.08) !important; background: #eceef0 !important; -webkit-backdrop-filter: none !important; backdrop-filter: none !important; }
+.room-tabs-pill, .lang-seg-pill { box-shadow: inset 0 0 0 1px rgba(60, 64, 67, 0.1) !important; }
+.room-tab { min-width: 0; font-size: clamp(12px, 3.9vw, 15px) !important; padding: 0 10px !important; }
+.room-tab > span:last-child { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+@media (max-width: 399px) { .room-tab .material-icons { display: none; } }
