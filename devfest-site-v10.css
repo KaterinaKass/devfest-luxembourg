@@ -4093,3 +4093,6 @@ img.hero-soft-circle { opacity: 0.75 !important; }
   }
   button.btn-register.w-full.h-14 svg { display: none; }
 }
+
+/* No Table cards: the CTA is now one full-width button labelled "Contact us for details" */
+.nt-cta { width: 100%; justify-content: center; }
