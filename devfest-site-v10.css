@@ -4273,3 +4273,7 @@ a.btn-agenda > svg { flex-shrink: 0; margin-right: 12px; }
 .room-tab { min-width: 0; font-size: clamp(12px, 3.9vw, 15px) !important; padding: 0 10px !important; }
 .room-tab > span:last-child { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
 @media (max-width: 399px) { .room-tab .material-icons { display: none; } }
+
+/* Register CTA (between Schedule and Venue): less empty space below the card */
+#register { padding-bottom: 40px !important; }
+@media (min-width: 768px) { #register { padding-bottom: 56px !important; } }
