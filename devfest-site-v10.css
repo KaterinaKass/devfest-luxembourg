@@ -4116,3 +4116,19 @@ img.hero-soft-circle { opacity: 0.75 !important; }
 @media (max-width: 639px) {
   h1[style*="clamp(40px, 6vw, 68px)"] { font-size: min(40px, calc((100vw - 48px) * 0.112)) !important; }
 }
+
+/* Code of Conduct hero illustration in the DevFest brand style: a light-grey sticker card with a
+   white sticker edge, pastel braces around an outlined Google-blue shield, and outlined chips. */
+.coc-hero-card.coc-brand {
+  background: #f1f3f4 !important;
+  border: 0 !important;
+  backdrop-filter: none !important;
+  box-shadow: 0 0 0 7px #fff, 0 22px 50px rgba(60, 64, 67, 0.14) !important;
+}
+.coc-b-main { width: 68%; height: auto; display: block; margin-top: 22px; }
+.coc-b-heart { width: 76px; height: 76px; left: -30px; top: 50%; filter: drop-shadow(0 10px 18px rgba(60,64,67,.16)); }
+.coc-b-hash { width: 104px; height: auto; right: -18px; bottom: 26px; animation: cocHashFloat 5.2s ease-in-out 1.2s infinite; filter: drop-shadow(0 10px 18px rgba(60,64,67,.16)); }
+.coc-b-ast { width: 44px; height: auto; right: 22px; top: 18px; animation: cocAstSpin 9s ease-in-out infinite; }
+@keyframes cocHashFloat { 0%,100% { transform: translateY(0) rotate(7deg); } 50% { transform: translateY(-11px) rotate(3deg); } }
+@keyframes cocAstSpin { 0%,100% { transform: rotate(0); } 50% { transform: rotate(-12deg) scale(1.06); } }
+@media (prefers-reduced-motion: reduce) { .coc-b-hash, .coc-b-ast { animation: none; } }

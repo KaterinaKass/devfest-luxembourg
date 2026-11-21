@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 230">
+  <g stroke="#1e1e1e" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round">
+    <!-- braces -->
+    <path fill="#ccf6c5" d="M58 22H44Q30 22 30 36V82Q30 92 20 92H14V112H20Q30 112 30 122V168Q30 182 44 182H58V166H50Q46 166 46 162V124Q46 110 34 102Q46 94 46 80V42Q46 38 50 38H58Z"/>
+    <path fill="#ccf6c5" d="M58 22H44Q30 22 30 36V82Q30 92 20 92H14V112H20Q30 112 30 122V168Q30 182 44 182H58V166H50Q46 166 46 162V124Q46 110 34 102Q46 94 46 80V42Q46 38 50 38H58Z" transform="translate(240 0) scale(-1 1)"/>
+    <!-- shield -->
+    <path fill="#4285f4" d="M120 42Q146 54 172 58V96Q172 134 120 156Q68 134 68 96V58Q94 54 120 42Z"/>
+    <path fill="none" stroke="#fff" stroke-width="9" d="M99 99L114 114L142 85"/>
+    <!-- pill with Google dots -->
+    <rect x="78" y="190" width="84" height="30" rx="15" fill="#c3ecf6"/>
+  </g>
+  <circle cx="99" cy="205" r="5" fill="#ea4335"/>
+  <circle cx="113" cy="205" r="5" fill="#fbbc04"/>
+  <circle cx="127" cy="205" r="5" fill="#34a853"/>
+  <circle cx="141" cy="205" r="5" fill="#4285f4"/>
+</svg>
