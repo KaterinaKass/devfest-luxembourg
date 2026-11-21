@@ -4137,3 +4137,28 @@ img.hero-soft-circle { opacity: 0.75 !important; }
    phones. Give it the same top spacing as the neighbouring sections. */
 .agenda-section { padding-top: 3rem; }
 @media (min-width: 640px) { .agenda-section { padding-top: 6rem; } }
+
+/* Mobile menu language switcher: open sideways as a horizontal row next to the button,
+   so both options are visible right away instead of dropping below the menu. */
+.mt-3.flex.justify-start > .relative > .absolute {
+  left: calc(100% + 8px) !important;
+  right: auto !important;
+  top: 0 !important;
+  margin-top: 0 !important;
+  display: flex !important;
+  min-width: 0 !important;
+  border-radius: 999px !important;
+  padding: 3px;
+  gap: 3px;
+}
+.mt-3.flex.justify-start > .relative > .absolute > button {
+  width: auto !important;
+  height: 34px;
+  padding: 0 12px !important;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+/* "Download agenda" CTA: clearer space between the icon and the label (FR label is longer) */
+a.btn-agenda { gap: 0 !important; }
+a.btn-agenda > svg { flex-shrink: 0; margin-right: 12px; }
