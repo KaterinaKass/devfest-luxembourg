@@ -4132,3 +4132,8 @@ img.hero-soft-circle { opacity: 0.75 !important; }
 @keyframes cocHashFloat { 0%,100% { transform: translateY(0) rotate(7deg); } 50% { transform: translateY(-11px) rotate(3deg); } }
 @keyframes cocAstSpin { 0%,100% { transform: rotate(0); } 50% { transform: rotate(-12deg) scale(1.06); } }
 @media (prefers-reduced-motion: reduce) { .coc-b-hash, .coc-b-ast { animation: none; } }
+
+/* Schedule section: its pt-20 class isn't in the compiled CSS, so the label touched the top on
+   phones. Give it the same top spacing as the neighbouring sections. */
+.agenda-section { padding-top: 3rem; }
+@media (min-width: 640px) { .agenda-section { padding-top: 6rem; } }
