@@ -4162,3 +4162,47 @@ img.hero-soft-circle { opacity: 0.75 !important; }
 /* "Download agenda" CTA: clearer space between the icon and the label (FR label is longer) */
 a.btn-agenda { gap: 0 !important; }
 a.btn-agenda > svg { flex-shrink: 0; margin-right: 12px; }
+
+/* Mobile menu language: a full-width segmented control with a sliding pill (replaces the dropdown) */
+.lang-seg {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 4px;
+  border-radius: 999px;
+  background: #f1f3f4;
+  box-shadow: inset 0 0 0 1px rgba(60, 64, 67, 0.08);
+  isolation: isolate;
+}
+.lang-seg-pill {
+  position: absolute;
+  z-index: -1;
+  top: 4px; bottom: 4px; left: 4px;
+  width: calc(50% - 4px);
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(60, 64, 67, 0.12), 0 4px 14px rgba(60, 64, 67, 0.12);
+  transition: transform 0.38s cubic-bezier(.3, 1.4, .5, 1);
+}
+.lang-seg[data-active="FR"] .lang-seg-pill { transform: translateX(100%); }
+.lang-seg-opt {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 46px;
+  border: 0;
+  background: transparent;
+  border-radius: 999px;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  color: #5f6368;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.lang-seg-opt.is-on { color: #1a1a1a; font-weight: 700; }
+.lang-seg-opt svg { flex-shrink: 0; }
+.lang-seg-opt:focus-visible { outline: 2px solid #4285f4; outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { .lang-seg-pill { transition: none; } }
