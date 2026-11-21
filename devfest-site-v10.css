@@ -4277,3 +4277,7 @@ a.btn-agenda > svg { flex-shrink: 0; margin-right: 12px; }
 /* Register CTA (between Schedule and Venue): less empty space below the card */
 #register { padding-bottom: 40px !important; }
 @media (min-width: 768px) { #register { padding-bottom: 56px !important; } }
+
+/* Organizers → Community Partners: less empty space below the team */
+#organizers { padding-bottom: 24px !important; }
+@media (min-width: 768px) { #organizers { padding-bottom: 40px !important; } }
