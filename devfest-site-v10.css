@@ -4096,3 +4096,23 @@ img.hero-soft-circle { opacity: 0.75 !important; }
 
 /* No Table cards: the CTA is now one full-width button labelled "Contact us for details" */
 .nt-cta { width: 100%; justify-content: center; }
+
+/* Code of Conduct on phones: icon sits beside the title, the text uses the full card width,
+   and the contact button stays on one line. */
+@media (max-width: 639px) {
+  article.scroll-mt-28 { padding: 20px !important; }
+  article.scroll-mt-28 > .flex.items-start {
+    display: grid !important;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    column-gap: 12px;
+  }
+  article.scroll-mt-28 > .flex.items-start > div:last-child { display: contents; }
+  article.scroll-mt-28 > .flex.items-start > div:last-child > h2 { margin-bottom: 0 !important; }
+  article.scroll-mt-28 > .flex.items-start > div:last-child > :not(h2) { grid-column: 1 / -1; margin-top: 14px; }
+  .coc-contact-btn { width: 100%; padding-left: 16px !important; padding-right: 16px !important; white-space: nowrap; }
+}
+/* Code of Conduct hero title on phones: exactly two lines ("A safe, welcoming / event for everyone.") */
+@media (max-width: 639px) {
+  h1[style*="clamp(40px, 6vw, 68px)"] { font-size: min(40px, calc((100vw - 48px) * 0.112)) !important; }
+}
