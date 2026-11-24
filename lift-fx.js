@@ -374,3 +374,36 @@
   new MutationObserver(q).observe(document.body, { childList: true, subtree: true });
   q();
 })();
+
+/* Spotlight hover for partner tiles and the venue photo: the pointer position drives
+   --mx/--my (spotlight + border light) and --rx/--ry (gentle 3D tilt). Mouse/trackpad only. */
+(function () {
+  if (!window.matchMedia || !window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+  var SEL = ".partner-link > div:first-child, .venue-photo";
+  var TILT = { "venue-photo": 3.5 };
+  var cur = null, raf = 0, ev = null;
+  function paint() {
+    raf = 0;
+    if (!cur || !ev) return;
+    var r = cur.getBoundingClientRect();
+    var x = (ev.clientX - r.left) / r.width, y = (ev.clientY - r.top) / r.height;
+    var max = cur.classList.contains("venue-photo") ? TILT["venue-photo"] : 7;
+    cur.style.setProperty("--mx", (x * 100).toFixed(1) + "%");
+    cur.style.setProperty("--my", (y * 100).toFixed(1) + "%");
+    cur.style.setProperty("--rx", ((0.5 - y) * max).toFixed(2) + "deg");
+    cur.style.setProperty("--ry", ((x - 0.5) * max).toFixed(2) + "deg");
+  }
+  document.addEventListener("pointermove", function (e) {
+    var t = e.target.closest && e.target.closest(SEL);
+    if (t !== cur) {
+      if (cur) { cur.classList.remove("is-spot"); cur.style.removeProperty("--rx"); cur.style.removeProperty("--ry"); }
+      cur = t;
+      if (cur) cur.classList.add("is-spot");
+    }
+    ev = e;
+    if (cur && !raf) raf = requestAnimationFrame(paint);
+  }, { passive: true });
+  document.addEventListener("pointerleave", function () {
+    if (cur) { cur.classList.remove("is-spot"); cur.style.removeProperty("--rx"); cur.style.removeProperty("--ry"); cur = null; }
+  });
+})();

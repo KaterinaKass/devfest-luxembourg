@@ -4358,3 +4358,169 @@ a.btn-agenda > svg { flex-shrink: 0; margin-right: 12px; }
 /* Sticky room headers / room tabs sit just below the fixed site header, never under it */
 .agenda-track-head { top: var(--hdr-h, 72px) !important; }
 .room-tabs { top: calc(var(--hdr-h, 64px) + 8px) !important; }
+
+/* ---------- Spotlight hover (partner logos + venue photo) ----------
+   A pink light follows the pointer, a pink→violet gradient border lights up around it,
+   the tile tilts slightly toward the pointer and lifts with a soft magenta glow.
+   Replaces the flat magenta wash. Touch screens keep a simple tap state. */
+@property --spot-a { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+
+.partner-link > div:first-child,
+.venue-photo {
+  --mx: 50%; --my: 50%; --rx: 0deg; --ry: 0deg;
+  transform: perspective(900px) rotateX(var(--rx)) rotateY(var(--ry)) translateY(0);
+  transition: transform 0.45s cubic-bezier(.2, .8, .2, 1), box-shadow 0.45s ease !important;
+  will-change: auto;
+}
+/* the old flat wash: off */
+.partner-link > div:first-child::after,
+.venue-photo::after {
+  background:
+    radial-gradient(220px circle at var(--mx) var(--my), rgba(249, 83, 198, 0.30), rgba(168, 85, 247, 0.12) 45%, transparent 70%) !important;
+  mix-blend-mode: normal !important;
+  opacity: 0 !important;
+  transition: opacity 0.35s ease !important;
+}
+.venue-photo::after {
+  background:
+    radial-gradient(460px circle at var(--mx) var(--my), rgba(255, 105, 210, 0.62), rgba(168, 85, 247, 0.26) 45%, transparent 72%) !important;
+  mix-blend-mode: screen !important;
+}
+/* gradient border that brightens where the pointer is */
+.partner-link > div:first-child::before,
+.venue-photo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border-radius: inherit;
+  padding: 1.5px;
+  background:
+    radial-gradient(160px circle at var(--mx) var(--my), #fff 0%, transparent 60%),
+    conic-gradient(from var(--spot-a), #f953c6, #a855f7, #ff8fd8, #7c3aed, #f953c6);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+  animation: spotSpin 4s linear infinite paused;
+}
+.venue-photo::before { padding: 2px; }
+@keyframes spotSpin { to { --spot-a: 360deg; } }
+
+.partner-link > div:first-child.is-spot,
+.partner-link:focus-visible > div:first-child {
+  transform: perspective(900px) rotateX(var(--rx)) rotateY(var(--ry)) translateY(-4px);
+  box-shadow: 0 18px 40px -14px rgba(249, 83, 198, 0.55), 0 6px 16px -8px rgba(124, 58, 237, 0.35) !important;
+}
+.venue-photo.is-spot {
+  transform: perspective(1400px) rotateX(var(--rx)) rotateY(var(--ry)) translateY(-3px);
+  box-shadow: 0 30px 60px -24px rgba(249, 83, 198, 0.55) !important;
+}
+.partner-link > div:first-child.is-spot::after,
+.partner-link:focus-visible > div:first-child::after,
+.venue-photo.is-spot::after { opacity: 1 !important; }
+.partner-link > div:first-child.is-spot::before,
+.partner-link:focus-visible > div:first-child::before,
+.venue-photo.is-spot::before { opacity: 1; animation-play-state: running; }
+/* the logo itself pops a little */
+.partner-link > div:first-child img { transition: transform 0.45s cubic-bezier(.2, .8, .2, 1); }
+.partner-link > div:first-child.is-spot img { transform: scale(1.05); }
+
+/* touch screens: no pointer to follow — a centred glow while pressed */
+@media (hover: none) {
+  .partner-link:active > div:first-child::after,
+  .venue-photo:active::after { opacity: 1 !important; }
+  .partner-link:active > div:first-child::before,
+  .venue-photo:active::before { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .partner-link > div:first-child, .venue-photo { transform: none !important; }
+  .partner-link > div:first-child::before, .venue-photo::before { animation: none; }
+}
+
+/* ---------- Spotlight hover v2 ----------
+   No outline. The whole tile is flooded with a living pink→magenta→violet gradient
+   (multiply keeps the logo / photo readable), and a bright highlight follows the pointer
+   on top of the colour. The venue photo stays perfectly still. */
+@keyframes spotFlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+
+.partner-link > div:first-child::after,
+.venue-photo::after {
+  background: linear-gradient(115deg, #ff5fc8 0%, #d63fd6 28%, #8b5cf6 52%, #f953c6 76%, #ff8ad8 100%) !important;
+  background-size: 260% 260% !important;
+  mix-blend-mode: multiply !important;
+  opacity: 0 !important;
+  animation: spotFlow 6s ease-in-out infinite paused;
+}
+.partner-link > div:first-child.is-spot::after,
+.partner-link:focus-visible > div:first-child::after,
+.venue-photo.is-spot::after { opacity: 0.85 !important; animation-play-state: running; }
+.venue-photo.is-spot::after { opacity: 0.78 !important; }
+
+/* former outline layer → pointer highlight on top of the colour */
+.partner-link > div:first-child::before,
+.venue-photo::before {
+  padding: 0 !important;
+  -webkit-mask: none !important;
+  mask: none !important;
+  animation: none !important;
+  background: radial-gradient(260px circle at var(--mx) var(--my), rgba(255, 230, 248, 0.85), rgba(255, 150, 220, 0.35) 35%, transparent 65%) !important;
+  mix-blend-mode: screen;
+  z-index: 2;
+}
+.venue-photo::before {
+  background: radial-gradient(520px circle at var(--mx) var(--my), rgba(255, 220, 245, 0.75), rgba(255, 120, 210, 0.3) 35%, transparent 65%) !important;
+}
+.partner-link > div:first-child.is-spot::before,
+.partner-link:focus-visible > div:first-child::before,
+.venue-photo.is-spot::before { opacity: 1; }
+
+/* venue: no tilt, no lift — only the colour and a soft glow */
+.venue-photo,
+.venue-photo.is-spot { transform: none !important; }
+.venue-photo.is-spot { box-shadow: 0 24px 60px -22px rgba(214, 63, 214, 0.6) !important; }
+@media (prefers-reduced-motion: reduce) {
+  .partner-link > div:first-child::after, .venue-photo::after { animation: none; }
+}
+
+/* Partner logos: no white glare at the pointer (it washed the logo out).
+   The spot under the cursor now deepens the colour instead, so the logo stays crisp. */
+.partner-link > div:first-child::before {
+  background: radial-gradient(240px circle at var(--mx) var(--my), rgba(170, 40, 190, 0.55), rgba(214, 63, 214, 0.2) 45%, transparent 70%) !important;
+  mix-blend-mode: multiply !important;
+}
+
+/* Community Partners: the same pink thermal trail as the Speakers Night block follows the
+   pointer across the dark section; the logo tiles sit above it. On a tile: a light
+   pink→violet wash only (no dark spot, no glare), so the logo stays bright and crisp. */
+.partners-trail { position: relative; overflow: hidden; isolation: isolate; }
+.partners-trail > div { position: relative; z-index: 1; }
+.partner-link > div:first-child::before { opacity: 0 !important; }
+.partner-link > div:first-child.is-spot::after,
+.partner-link:focus-visible > div:first-child::after { opacity: 0.6 !important; }
+
+/* Partner tile hover: rich hot-pink → violet in the trail's own colours (was a pale wash) */
+.partner-link > div:first-child::after {
+  background: linear-gradient(115deg, #ff2da0 0%, #e040c8 30%, #a855f7 58%, #ff2da0 85%, #ff69b4 100%) !important;
+  background-size: 260% 260% !important;
+}
+.partner-link > div:first-child.is-spot::after,
+.partner-link:focus-visible > div:first-child::after { opacity: 0.88 !important; }
+.partner-link > div:first-child.is-spot {
+  box-shadow: 0 18px 44px -14px rgba(255, 45, 160, 0.65), 0 0 0 1px rgba(255, 45, 160, 0.25) !important;
+}
+
+/* Partner tiles: stay white on hover — no colour wash. They just lift and the logo zooms in
+   slightly; the pink trail on the section is the only colour. */
+.partner-link > div:first-child::after,
+.partner-link > div:first-child::before { opacity: 0 !important; animation: none !important; }
+.partner-link > div:first-child.is-spot,
+.partner-link:focus-visible > div:first-child {
+  box-shadow: 0 18px 40px -16px rgba(0, 0, 0, 0.55) !important;
+}
+.partner-link > div:first-child.is-spot::after,
+.partner-link > div:first-child.is-spot::before,
+.partner-link:focus-visible > div:first-child::after,
+.partner-link:focus-visible > div:first-child::before { opacity: 0 !important; }
