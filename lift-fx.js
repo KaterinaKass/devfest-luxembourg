@@ -357,3 +357,20 @@
   document.addEventListener("keydown", function (e) { if (e.key === "Tab") root.classList.add("kbd-nav"); });
   document.addEventListener("pointerdown", function () { root.classList.remove("kbd-nav"); }, { passive: true });
 })();
+
+/* Expose the fixed header's current height as --hdr-h so sticky bars can sit right below it */
+(function () {
+  var root = document.documentElement, raf = 0, last = -1;
+  function upd() {
+    raf = 0;
+    var h = document.querySelector("header.fixed");
+    if (!h) return;
+    var v = Math.round(h.getBoundingClientRect().height);
+    if (v !== last) { last = v; root.style.setProperty("--hdr-h", v + "px"); }
+  }
+  function q() { if (!raf) raf = requestAnimationFrame(upd); }
+  window.addEventListener("resize", q, { passive: true });
+  window.addEventListener("scroll", q, { passive: true });
+  new MutationObserver(q).observe(document.body, { childList: true, subtree: true });
+  q();
+})();

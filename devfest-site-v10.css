@@ -4339,3 +4339,22 @@ a.btn-agenda > svg { flex-shrink: 0; margin-right: 12px; }
   .nav-desktop > a,
   .nav-desktop > button { padding-left: 1em !important; padding-right: 1em !important; }
 }
+
+/* Schedule: third track "Digital Skills Academy" (draft) */
+.agenda-session-desc { font-size: 12.5px; line-height: 1.45; color: #5f6368; margin: 0 0 6px; }
+.room-tabs { grid-template-columns: repeat(3, 1fr) !important; }
+.room-tabs-pill { width: calc((100% - 8px) / 3) !important; }
+.room-tabs[data-active="Cozy Circle"] .room-tabs-pill { transform: translateX(100%); }
+.room-tabs[data-active="Academy"] .room-tabs-pill { transform: translateX(200%); }
+.room-tab { padding: 0 6px !important; gap: 4px !important; font-size: clamp(12px, 3.6vw, 15px) !important; }
+.room-tab.is-on[data-k="Academy"] { color: #34a853; }
+@media (max-width: 459px) { .room-tab .material-icons { display: none; } }
+@media (max-width: 767px) {
+  .agenda-section[data-room="Auditorium"] .agenda-session-card[data-room]:not([data-room="Auditorium"]),
+  .agenda-section[data-room="Cozy Circle"] .agenda-session-card[data-room]:not([data-room="Cozy Circle"]),
+  .agenda-section[data-room="Academy"] .agenda-session-card[data-room]:not([data-room="Academy"]) { display: none; }
+}
+
+/* Sticky room headers / room tabs sit just below the fixed site header, never under it */
+.agenda-track-head { top: var(--hdr-h, 72px) !important; }
+.room-tabs { top: calc(var(--hdr-h, 64px) + 8px) !important; }
