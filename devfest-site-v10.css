@@ -4281,3 +4281,49 @@ a.btn-agenda > svg { flex-shrink: 0; margin-right: 12px; }
 /* Organizers → Community Partners: less empty space below the team */
 #organizers { padding-bottom: 24px !important; }
 @media (min-width: 768px) { #organizers { padding-bottom: 40px !important; } }
+
+/* Sponsorship packages: group-rates note under Bronze / Silver / Gold — a full-width,
+   left-aligned info card in the page's card style (icon tile + title + text, no CTA) */
+.pkg-group-note {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-top: 28px;
+  padding: 22px 26px;
+  border-radius: 20px;
+  background: #fff;
+  border: 1px solid #e8eaed;
+  box-shadow: 0 2px 10px rgba(60, 64, 67, 0.05);
+  text-align: left;
+}
+.pkg-group-icon {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(66, 133, 244, 0.1);
+  color: #4285f4;
+}
+.pkg-group-icon .material-icons { font-size: 24px; }
+.pkg-group-text { min-width: 0; }
+.pkg-group-title {
+  margin: 0 0 4px;
+  font-size: 17px;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+.pkg-group-body {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.55;
+  color: #5f6368;
+}
+@media (max-width: 639px) {
+  .pkg-group-note { align-items: flex-start; gap: 14px; padding: 18px; }
+  .pkg-group-icon { width: 42px; height: 42px; border-radius: 12px; }
+  .pkg-group-title { font-size: 16px; }
+  .pkg-group-body { font-size: 14px; }
+}
