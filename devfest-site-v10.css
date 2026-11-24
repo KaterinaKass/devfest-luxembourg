@@ -4524,3 +4524,30 @@ a.btn-agenda > svg { flex-shrink: 0; margin-right: 12px; }
 .partner-link > div:first-child.is-spot::before,
 .partner-link:focus-visible > div:first-child::after,
 .partner-link:focus-visible > div:first-child::before { opacity: 0 !important; }
+
+/* Venue photo: the pink wash is replaced by a cinemagraph (venue-fx.js) — clouds drift and the
+   flags wave on hover; the box itself never moves. */
+.venue-photo::after, .venue-photo::before,
+.venue-photo.is-spot::after, .venue-photo.is-spot::before { opacity: 0 !important; }
+.venue-photo.is-spot { box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important; }
+.venue-fx-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  pointer-events: none;
+  border-radius: inherit;
+}
+.venue-photo.venue-fx-on .venue-fx-canvas { opacity: 1; }
+.venue-photo > div { z-index: 1; }
+/* cross-fade between the photo and the animated version */
+.venue-fx-canvas { transition: opacity 0.6s ease; }
+
+/* Venue photo hover (final): just a gentle zoom of the picture inside its rounded frame.
+   No colour wash, no animation; the frame itself stays put. */
+.venue-photo { -webkit-mask-image: -webkit-radial-gradient(white, black); }
+.venue-photo > img { transition: transform 0.7s cubic-bezier(.2, .8, .2, 1) !important; }
+.venue-photo:hover > img, .venue-photo.is-spot > img { transform: scale(1.05) !important; }
+.venue-fx-canvas { display: none !important; }
+@media (prefers-reduced-motion: reduce) { .venue-photo:hover > img, .venue-photo.is-spot > img { transform: none !important; } }
