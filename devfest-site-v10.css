@@ -4551,3 +4551,21 @@ a.btn-agenda > svg { flex-shrink: 0; margin-right: 12px; }
 .venue-photo:hover > img, .venue-photo.is-spot > img { transform: scale(1.05) !important; }
 .venue-fx-canvas { display: none !important; }
 @media (prefers-reduced-motion: reduce) { .venue-photo:hover > img, .venue-photo.is-spot > img { transform: none !important; } }
+
+/* About heading: DevFest 2026 season theme — big line + light-blue outlined pill (brand style) */
+.about-theme-main { display: block; }
+.about-theme-pill {
+  display: inline-block;
+  margin-top: 0.45em;
+  padding: 0.42em 1.05em 0.48em;
+  font-size: clamp(17px, 0.42em, 24px);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.005em;
+  color: #1e1e1e;
+  background: #c3ecf6;
+  border: 2px solid #1e1e1e;
+  border-radius: 999px;
+  text-wrap: balance;
+}
+.about-theme-pill { text-align: center; max-width: 100%; box-sizing: border-box; }
