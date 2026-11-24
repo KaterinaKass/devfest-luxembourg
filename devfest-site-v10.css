@@ -4327,3 +4327,15 @@ a.btn-agenda > svg { flex-shrink: 0; margin-right: 12px; }
   .pkg-group-title { font-size: 16px; }
   .pkg-group-body { font-size: 14px; }
 }
+
+/* Header menu: more side padding inside the hover/active highlight (gap trimmed to keep the fit) */
+@media (min-width: 1100px) and (max-width: 1279px) {
+  .nav-desktop { gap: 0 !important; }
+  .nav-desktop > a,
+  .nav-desktop > button { padding-left: 0.82em !important; padding-right: 0.82em !important; }
+}
+@media (min-width: 1280px) {
+  .nav-desktop { gap: clamp(0px, 0.2vw, 6px) !important; }
+  .nav-desktop > a,
+  .nav-desktop > button { padding-left: 1em !important; padding-right: 1em !important; }
+}
