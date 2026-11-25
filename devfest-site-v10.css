@@ -4821,3 +4821,9 @@ a.btn-agenda > svg { flex-shrink: 0; margin-right: 12px; }
 .cfp-secondary:hover::before {
   background: linear-gradient(110deg, #4285f4, #ea4335, #fbbc05, #34a853);
 }
+
+/* Early Bird chick: a bit smaller on phones (desktop unchanged); scaled from its bottom edge
+   so it still tucks behind the ticket, and the peek animation keeps working */
+@media (max-width: 639px) {
+  .eb-bird { scale: 0.78; transform-origin: 50% 100%; }
+}
