@@ -5,19 +5,37 @@
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var fine = window.matchMedia && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
+  // The digits get a fixed width (final digit count) and the suffix ("+") is shown from the
+  // start, so nothing jumps while counting. Only one text node's data changes per frame
+  // (a characterData change), which does not wake the page's childList MutationObservers.
   function countUp(el) {
     if (el.dataset.counted) return;
     el.dataset.counted = "1";
     var txt = el.textContent.trim(), m = txt.match(/^(\d+)(.*)$/);
     if (!m || reduce) return;
-    var target = +m[1], suffix = m[2], t0 = 0, dur = 1400 + Math.min(target, 200) * 3;
+    var target = +m[1], suffix = m[2], t0 = 0, last = -1, dur = 1300 + Math.min(target, 200) * 3;
+    var digits = document.createElement("span");
+    digits.className = "stat-digits";
+    var node = document.createTextNode(m[1]);
+    digits.appendChild(node);
+    el.textContent = "";
+    el.appendChild(digits);
+    // reserve exactly the width of the final number (measured, so tight tracking is respected)
+    digits.style.minWidth = digits.getBoundingClientRect().width + "px";
+    node.data = "0";
+    if (suffix) {
+      var s = document.createElement("span");
+      s.className = "stat-suffix";
+      s.textContent = suffix;
+      el.appendChild(s);
+    }
     function tick(t) {
       if (!t0) t0 = t;
-      var p = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - p, 4);
-      el.textContent = Math.round(target * e) + (p === 1 ? suffix : "");
-      if (p < 1) requestAnimationFrame(tick); else el.textContent = txt;
+      var p = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - p, 3);
+      var v = Math.round(target * e);
+      if (v !== last) { node.data = String(v); last = v; }
+      if (p < 1) requestAnimationFrame(tick);
     }
-    el.textContent = "0";
     requestAnimationFrame(tick);
   }
 
@@ -87,6 +105,7 @@
 
   function scan() {
     var g = document.querySelector(".devfest-stat-grid");
+    // keep watching: the grid is re-created when you come back to the home page
     if (g && g.querySelector(".devfest-stat-card")) setup(g);
   }
   // the app renders after load; watch until the grid exists
