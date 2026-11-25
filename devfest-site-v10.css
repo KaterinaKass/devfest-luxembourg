@@ -4792,3 +4792,32 @@ a.btn-agenda > svg { flex-shrink: 0; margin-right: 12px; }
 .hero-meta > div:nth-child(1) > svg,
 .hero-meta > div:nth-child(2) > svg,
 .hero-meta > div:nth-child(3) > svg { color: #fff !important; }
+
+/* View speakers: frosted glass — translucent dark fill that blurs the glow behind it;
+   the Google-colour hairline moves to a masked ::before so it doesn't show through the glass */
+.cfp-secondary,
+.cfp-secondary:hover {
+  position: relative;
+  isolation: isolate;
+  border: 1.5px solid transparent !important;
+  background: rgba(20, 25, 32, 0.42) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(1.5);
+  backdrop-filter: blur(14px) saturate(1.5);
+}
+.cfp-secondary:hover { background: rgba(24, 32, 42, 0.34) !important; }
+.cfp-secondary::before {
+  content: "";
+  position: absolute;
+  inset: -1.5px;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: linear-gradient(110deg, rgba(66, 133, 244, 0.6), rgba(234, 67, 53, 0.5), rgba(251, 188, 5, 0.5), rgba(52, 168, 83, 0.6));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+.cfp-secondary:hover::before {
+  background: linear-gradient(110deg, #4285f4, #ea4335, #fbbc05, #34a853);
+}
