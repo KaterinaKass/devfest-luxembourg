@@ -35,6 +35,7 @@
       var v = Math.round(target * e);
       if (v !== last) { node.data = String(v); last = v; }
       if (p < 1) requestAnimationFrame(tick);
+      else digits.style.minWidth = "";   // done: let the number size itself (rotation, resize)
     }
     requestAnimationFrame(tick);
   }

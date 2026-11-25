@@ -407,3 +407,68 @@
     if (cur) { cur.classList.remove("is-spot"); cur.style.removeProperty("--rx"); cur.style.removeProperty("--ry"); cur = null; }
   });
 })();
+
+/* "Build, Secure and Scale" words in "Who is it for?": play their entrance when visible */
+(function () {
+  var seen = new WeakSet();
+  var io = "IntersectionObserver" in window ? new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("is-in"); io.unobserve(e.target); } });
+  }, { threshold: 0.5 }) : null;
+  function scan() {
+    document.querySelectorAll(".theme-words").forEach(function (el) {
+      if (seen.has(el)) return; seen.add(el);
+      if (io) io.observe(el); else el.classList.add("is-in");
+    });
+  }
+  new MutationObserver(scan).observe(document.body, { childList: true, subtree: true });
+  scan();
+})();
+
+/* "Build, Secure and Scale": split into letters for a flip-board entrance, and size the line
+   so it spans exactly the stat cards' width (desktop) or the full column (mobile). */
+(function () {
+  function split(tw) {
+    if (tw.dataset.split) return;
+    tw.dataset.split = "1";
+    var k = 0;
+    [].forEach.call(tw.querySelectorAll(".theme-word"), function (w, wi) {
+      var txt = w.textContent; w.textContent = "";
+      for (var i = 0; i < txt.length; i++) {
+        var c = document.createElement("span");
+        c.className = "tw-ch" + (txt[i] === " " ? " tw-sp" : "");
+        c.textContent = txt[i] === " " ? " " : txt[i];
+        c.style.setProperty("--d", (k * 45 + wi * 140) + "ms");
+        w.appendChild(c); k++;
+      }
+    });
+  }
+  function fit(tw) {
+    var par = tw.parentElement, grid = document.querySelector(".devfest-stat-grid");
+    if (!par) return;
+    var pr = par.getBoundingClientRect(), target = tw.parentElement.clientWidth, left = 0;
+    var side = getComputedStyle(par).gridTemplateColumns.split(" ").length > 1;
+    if (side && grid) {
+      var gr = grid.getBoundingClientRect(), cr = tw.getBoundingClientRect();
+      target = gr.width;
+      left = Math.max(0, gr.left - (cr.left - (parseFloat(tw.style.marginLeft) || 0)));
+    } else {
+      target = (tw.parentElement === par ? par : tw.parentElement).getBoundingClientRect().width;
+      if (side) target = tw.getBoundingClientRect().width;
+    }
+    tw.style.marginLeft = left ? left + "px" : "";
+    tw.style.fontSize = "100px";
+    var w = tw.scrollWidth;
+    var fs = Math.max(24, Math.min(84, target / w * 100 * 0.995));
+    tw.style.fontSize = fs + "px";
+  }
+  var raf = 0;
+  function all() {
+    raf = 0;
+    document.querySelectorAll(".theme-words").forEach(function (tw) { split(tw); fit(tw); });
+  }
+  function q() { if (!raf) raf = requestAnimationFrame(all); }
+  window.addEventListener("resize", q, { passive: true });
+  new MutationObserver(q).observe(document.body, { childList: true, subtree: true });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(q);
+  q();
+})();
