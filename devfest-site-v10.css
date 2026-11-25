@@ -4841,3 +4841,15 @@ a.btn-agenda > svg { flex-shrink: 0; margin-right: 12px; }
   background: rgba(32, 38, 46, 0.38) !important;
   border-color: rgba(255, 255, 255, 0.14) !important;
 }
+
+/* "Who is it for?" + "Build, Secure and Scale" side by side: same size, weight and tracking */
+h2.tw-pair { font-weight: 800 !important; letter-spacing: -0.035em !important; line-height: 1.05 !important; }
+.audience-heading-grid:has(h2.tw-pair) { align-items: baseline !important; }
+/* glint ends hidden and never adds overflow */
+.theme-words { overflow: visible; }
+@keyframes twGlint {
+  0%   { opacity: 1; transform: translateX(-120%) skewX(-18deg); }
+  90%  { opacity: 1; }
+  100% { opacity: 0; transform: translateX(440%) skewX(-18deg); }
+}
+.theme-words::after { right: auto; }

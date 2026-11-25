@@ -457,8 +457,22 @@
     }
     tw.style.marginLeft = left ? left + "px" : "";
     tw.style.fontSize = "100px";
-    var w = tw.scrollWidth;
+    var w = tw.getBoundingClientRect().width;   // not scrollWidth: the glint overflows
     var fs = Math.max(24, Math.min(84, target / w * 100 * 0.995));
+    var h2 = side ? par.querySelector("h2") : null;
+    if (h2) {
+      // one pair: "Who is it for?" and the theme line share size, weight and baseline.
+      // Type scale: the pair is a sub-heading, ~1.375x smaller than "What is DevFest?",
+      // and never wider than the stat cards.
+      var main = document.querySelector("h2.about-theme");
+      var mainFs = main ? parseFloat(getComputedStyle(main).fontSize) : 55;
+      fs = Math.max(28, Math.min(fs, mainFs / 1.375));
+      h2.style.fontSize = fs + "px";
+      h2.classList.add("tw-pair");
+    } else {
+      var h = par.querySelector("h2.tw-pair");
+      if (h) { h.style.fontSize = ""; h.classList.remove("tw-pair"); }
+    }
     tw.style.fontSize = fs + "px";
   }
   var raf = 0;
