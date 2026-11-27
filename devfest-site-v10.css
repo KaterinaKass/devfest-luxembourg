@@ -4865,3 +4865,13 @@ h2.tw-pair { font-weight: 800 !important; letter-spacing: -0.035em !important; l
 .devfest-faq-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 .devfest-faq-video { margin: -0.75rem 1.5rem 2rem; width: calc(100% - 3rem); }
 @media (max-width: 600px) { .devfest-faq-video { margin: -0.5rem 0.35rem 1.5rem; width: calc(100% - 0.7rem); border-radius: 14px; } }
+
+/* CFP: submission deadline under the buttons */
+.cfp-deadline{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:20px;font-size:15px;line-height:1.4;color:rgba(255,255,255,.6)}
+.cfp-deadline .material-icons{font-size:18px;color:#fbbc05}
+.cfp-deadline strong{color:#fff;font-weight:700}
+@media(min-width:1024px){.cfp-deadline{justify-content:flex-start}}
+
+/* CFP subtitle: centred under the centred heading, left-aligned only in the side-by-side layout */
+.cfp-sub{margin-left:auto!important;margin-right:auto!important}
+@media(min-width:1024px){.cfp-sub{margin-left:0!important}}
